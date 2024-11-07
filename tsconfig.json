@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "ES2022",
+    "moduleResolution": "NodeNext",
+    "removeComments": false,
+    "alwaysStrict": false,
+    "skipLibCheck": true
+  }
+}

@@ -1,0 +1,25 @@
+// ==UserScript==
+// @name         tinyShield
+// @encoding     utf-8
+// @namespace    https://github.com/List-KR/tinyShield
+// @homepageURL  https://github.com/List-KR/tinyShield
+// @supportURL   https://github.com/List-KR/tinyShield/issues
+// @updateURL    https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+// @downloadURL  https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+// @license      MIT
+//
+// @version      1.0.0
+// @author       PiQuark6046 and contributors
+//
+// @match        https://dogdrip.net/*
+// @match        https://*.dogdrip.net/*
+// @match        https://mlbpark.donga.com/*
+// @match        https://inven.co.kr/*
+// @match        https://*.inven.co.kr/*
+//
+// @description        tinyShield is 
+// @description:ko     
+//
+// @grant        unsafeWindow
+// @run-at       document-start
+// ==/UserScript==

@@ -1,0 +1,30 @@
+{
+  "name": "@list-kr/tinyshield",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild sources/src/index.ts --bundle --minify-whitespace --minify-syntax --define:global=window --inject:./sources/esbuild.inject.ts --banner:js=\"$(cat ./sources/banner.txt)\" --target=es2022,chrome109,safari16,firefox115 --outfile=./dist/tinyShield.user.js",
+    "debug": "esbuild sources/src/index.ts --bundle --define:global=window --inject:./sources/esbuild.inject.ts --banner:js=\"$(cat ./sources/banner.txt)\" --target=es2022,chrome109,safari16,firefox115 --outfile=./dist/tinyShield-debug.user.js",
+    "lint": "tsc && eslint sources --ext .ts"
+  },
+  "keywords": [],
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/List-KR/tinyShield"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^20.17.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "eslint": "^9.13.0",
+    "pnpm": "^9.12.3",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.11.0"
+  }
+}
