@@ -1,0 +1,27 @@
+name: Check building and linting
+
+on:
+  push:
+    branches-ignore: [ "main" ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "**" ]
+
+jobs:
+  eslint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Set up NodeJS LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm i
+      - name: Run ESLint
+        run: npm run lint

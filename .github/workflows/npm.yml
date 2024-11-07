@@ -1,0 +1,45 @@
+name: 'Publish to npm'
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Set up NodeJS LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm i
+      - name: Build
+        run: npm run build
+      - name : Publish to npm
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  purge:
+    name: Purge jsdelivr cache
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Set up NodeJS LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - name: Purge jsdelivr cache
+        uses: List-KR/jsdelivr-purge-npm@1.0.5
+        with:
+          package: '@list-kr/tinyshield'
+          disttag: 'latest'
+    needs: [publish]
