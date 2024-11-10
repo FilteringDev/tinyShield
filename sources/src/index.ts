@@ -20,7 +20,7 @@ Win.Function.prototype.toString = new Proxy(Win.Function.prototype.toString, {
 Win.Function.prototype.apply = new Proxy(Win.Function.prototype.apply, {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   apply(Target: typeof Function.prototype.apply, ThisArg: Function, Args: unknown[]) {
-    if (Args.toString().includes('debug,')) {
+    if (ThisArg.toString().includes(',inventoryId:')) {
       throw new Error()
     }
 
