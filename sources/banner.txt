@@ -17,8 +17,8 @@
 // @match        https://inven.co.kr/*
 // @match        https://*.inven.co.kr/*
 //
-// @description        tinyShield is 
-// @description:ko     
+// @description        tinyShield is a tiny weak version of microShield for iOS Safari 
+// @description:ko     tinyShield는 iOS Safari를 위한 microShield의 작고 약한 버전입니다.
 //
 // @grant        unsafeWindow
 // @run-at       document-start
