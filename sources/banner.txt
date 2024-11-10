@@ -8,7 +8,7 @@
 // @downloadURL  https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
 // @license      MIT
 //
-// @version      1.0.3
+// @version      1.0.4
 // @author       PiQuark6046 and contributors
 //
 // @match        https://dogdrip.net/*
@@ -22,6 +22,10 @@
 // @match        https://*.etoland.co.kr/*
 // @match        https://ygosu.com/*
 // @match        https://*.ygosu.com/*
+// @match        *://sportalkorea.com/*
+// @match        *://*.sportalkorea.com/*
+// @match        *://isplus.com/*
+// @match        *://*.isplus.com/*
 //
 // @description        tinyShield is a tiny weak version of microShield for iOS Safari 
 // @description:ko     tinyShield는 iOS Safari를 위한 microShield의 작고 약한 버전입니다.
