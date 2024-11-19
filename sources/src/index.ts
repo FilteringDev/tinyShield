@@ -23,10 +23,23 @@ Win.Function.prototype.toString = new Proxy(Win.Function.prototype.toString, {
 Win.Map.prototype.get = new Proxy(Win.Map.prototype.get, {
   apply(Target: (key: unknown) => unknown, ThisArg: Map<unknown, unknown>, Args: [unknown]) {
     let ArgText = OriginalArrayToString.call(Args) as string
-    console.debug(ThisArg, Args)
     for (const Item of ['{"inventoryId":', '({inventoryId:this']) {
       if (OriginalStringIncludes.call(ArgText, Item)) {
-        console.debug('[tinyShield]:', ThisArg, Args)
+        console.debug('[tinyShield]: Map.prototype.get:', ThisArg, Args)
+        throw new Error()
+      }
+    }
+
+    return Reflect.apply(Target, ThisArg, Args)
+  }
+})
+
+Win.Map.prototype.set = new Proxy(Win.Map.prototype.set, {
+  apply(Target: (key: unknown, value: unknown) => Map<unknown, unknown>, ThisArg: Map<unknown, unknown>, Args: [unknown, unknown]) {
+    let ArgText = OriginalArrayToString.call(Args) as string
+    for (const Item of ['inventory_id']) {
+      if (OriginalStringIncludes.call(ArgText, Item)) {
+        console.debug('[tinyShield]: Map.prototype.set:', ThisArg, Args)
         throw new Error()
       }
     }
