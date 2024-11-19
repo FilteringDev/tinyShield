@@ -25,6 +25,7 @@ Win.Map.prototype.get = new Proxy(Win.Map.prototype.get, {
     let ArgText = OriginalArrayToString.call(Args) as string
     for (const Item of ['{"inventoryId":']) {
       if (OriginalStringIncludes.call(ArgText, Item)) {
+        console.debug('[tinyShield]:', ThisArg, Args)
         throw new Error()
       }
     }
