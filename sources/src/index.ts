@@ -7,7 +7,7 @@ const Win = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window
 const OriginalArrayToString = Win.Array.prototype.toString
 const OriginalStringIncludes = Win.String.prototype.includes
 
-const ProtectedFunctionStrings = ['toString', 'get']
+const ProtectedFunctionStrings = ['toString', 'get', 'set']
 
 Win.Function.prototype.toString = new Proxy(Win.Function.prototype.toString, {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
