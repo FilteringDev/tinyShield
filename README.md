@@ -88,6 +88,23 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
     
     Of course, you can use an alternative temporally.[^2][^3]
 
+    <details>
+    <summary>Detailed description for iOS users</summary>
+
+    1. Install [**Usercripts**](https://apps.apple.com/us/app/userscripts/id1463298887) app
+    2. Enable **Usercripts** extension in Safari settings
+        * iOS 18+: `System settings` => `Apps` => `Safari` => `Extensions`
+        * iOS 17 and older: `System settings` => `Safari` => `Extensions`
+        Find **Usercripts**, enable it and allow `On other sites` permission
+    4. Open the [tinyShield](https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js) userscript URL in browser
+    5. Press the extensions icon in the address bar of Safari and select Userscripts 
+    6. Tap to install
+    7. In opened popup, scroll down and press Install button
+    8. Done.
+
+    </details>
+
+
 
 [^1]: https://github.com/AdguardTeam/AdguardForiOS/issues/1542
 [^2]: https://github.com/quoid/userscripts
