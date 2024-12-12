@@ -2,6 +2,8 @@
 
 [![jsdelivr stat](https://data.jsdelivr.com/v1/package/npm/@list-kr/tinyshield/badge)](https://www.jsdelivr.com/package/npm/@list-kr/tinyshield)
 
+[English](./README.md) [Korean](./README.ko.md)
+
 tinyShieldは、Ad-Shieldで保護された広告のブロックと仮想整合性レイヤーのバイパスをします。
 
 tinyShieldスクリプトは、AdblockコミュニティとAdGuardによって管理されています。
