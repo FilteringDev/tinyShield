@@ -2,6 +2,8 @@
 
 [![jsdelivr stat](https://data.jsdelivr.com/v1/package/npm/@list-kr/tinyshield/badge)](https://www.jsdelivr.com/package/npm/@list-kr/tinyshield)
 
+[English](./README.md) [Japanese](./README.ja.md)
+
 tinyShield 유저스크립트는 애드쉴드 재삽입되는 광고와 애드쉴드의 가상 무결성 레이어를 바이패스합니다
 
 tinyShield 유저스크립트는 AdGuard와 애드블록 커뮤니티에 의해 관리되고 있습니다.
