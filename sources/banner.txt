@@ -8,7 +8,7 @@
 // @downloadURL  https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
 // @license      MIT
 //
-// @version      1.3.16
+// @version      1.3.17
 // @author       PiQuark6046 and contributors
 //
 // @match        https://ygosu.com/*
@@ -178,8 +178,8 @@
 // @match        https://*.dziennik.pl/*
 // @match        https://eurointegration.com.ua/*
 // @match        https://*.eurointegration.com.ua/*
-// @match        https://jin115.com/*
-// @match        https://*.jin115.com/*
+// @match        *://jin115.com/*
+// @match        *://*.jin115.com/*
 // @match        https://onlinegdb.com/*
 // @match        https://*.onlinegdb.com/*
 // @match        https://winfuture.de/*
@@ -190,12 +190,16 @@
 // @match        https://*.pravda.com.ua/*
 // @match        https://freemcserver.net/*
 // @match        https://*.freemcserver.net/*
-// @match        https://esuteru.com/*
-// @match        https://*.esuteru.com/*
+// @match        *://esuteru.com/*
+// @match        *://*.esuteru.com/*
 // @match        https://pressian.com/*
 // @match        https://*.pressian.com/*
 // @match        https://blog.livedoor.jp/kinisoku/*
 // @match        https://blog.livedoor.jp/nanjstu/*
+// @match        *://blog.livedoor.jp/*
+// @match        *://*.blog.jp/*
+// @match        *://*.diary.to/*
+// @match        *://*.officialblog.jp/*
 // @match        https://itainews.com/*
 // @match        https://*.itainews.com/*
 // @match        https://infinityfree.com/*
@@ -233,6 +237,7 @@
 // @match        https://laleggepertutti.it/*
 // @match        https://*.laleggepertutti.it/*
 // @match        https://news4vip.livedoor.biz/*
+// @match        https://*.livedoor.blog/*
 // @match        *://onecall2ch.com/*
 // @match        *://*.onecall2ch.com/*
 // @match        https://ff14net.2chblog.jp/*

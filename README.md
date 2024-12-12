@@ -2,6 +2,8 @@
 
 [![jsdelivr stat](https://data.jsdelivr.com/v1/package/npm/@list-kr/tinyshield/badge)](https://www.jsdelivr.com/package/npm/@list-kr/tinyshield)
 
+[Korean](./README.ko.md) [Japanese](./README.ja.md)
+
 tinyShield blocks Ad-Shield reinstable advertisements and bypasses Ad-Shield's virtual integrity layer.
 
 tinyShield userscript is managed by the adblock community and AdGuard.
