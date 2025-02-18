@@ -236,7 +236,8 @@
 // @match        *://*.oraridiapertura24.it/*
 // @match        *://laleggepertutti.it/*
 // @match        *://*.laleggepertutti.it/*
-// @match        *://news4vip.livedoor.biz/*
+// @match        *://*.livedoor.biz/*
+// @match        *://livedoor.biz/*
 // @match        *://*.livedoor.blog/*
 // @match        *://onecall2ch.com/*
 // @match        *://*.onecall2ch.com/*
