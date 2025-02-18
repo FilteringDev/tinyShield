@@ -240,14 +240,14 @@
 // @match        *://*.livedoor.blog/*
 // @match        *://onecall2ch.com/*
 // @match        *://*.onecall2ch.com/*
-// @match        *://ff14net.2chblog.jp/*
+// @match        *://*.2chblog.jp/*
+// @match        *://2chblog.jp/*
 // @match        *://ondemandkorea.com/*
 // @match        *://*.ondemandkorea.com/*
 // @match        *://economictimes.com/*
 // @match        *://*.economictimes.com/*
 // @match        *://mynet.com/*
 // @match        *://*.mynet.com/*
-// @match        *://rabitsokuhou.2chblog.jp/*
 // @match        *://talkwithstranger.com/*
 // @match        *://*.talkwithstranger.com/*
 // @match        *://petitfute.com/*
@@ -435,7 +435,6 @@
 // @match        *://*.vtubernews.jp/*
 // @match        *://watarukiti.com/*
 // @match        *://*.watarukiti.com/*
-// @match        *://news.2chblog.jp/*
 // @match        *://nana-press.com/*
 // @match        *://*.nana-press.com/*
 // @match        *://animanch.com/*
