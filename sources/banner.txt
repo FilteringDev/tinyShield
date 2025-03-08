@@ -578,6 +578,8 @@
 // @match        *://*.blogo.jp/*
 // @match        *://chaos2ch.com/*
 // @match        *://*.chaos2ch.com/*
+// @match        *://crx7601.com/*
+// @match        *://*.crx7601.com/*
 //
 // @description        tinyShield allows AdGuard, uBlock Origin, Brave and ABP to resist against Ad-Shield quickly.
 // @description:ko     tinyShield는 AdGuard, uBlock Origin, Brave 와 ABP가 애드쉴드에 빠르게 저항할 수 있도록 합니다.
