@@ -8,7 +8,7 @@
 // @downloadURL  https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
 // @license      MIT
 //
-// @version      1.5.0
+// @version      1.5.1
 // @author       PiQuark6046 and contributors
 //
 // @match        *://ygosu.com/*
@@ -662,6 +662,8 @@
 // @match        *://*.footballtransfer.ru/*
 // @match        *://relevantmagazine.com/*
 // @match        *://*.relevantmagazine.com/*
+// @match        *://tbsradio.jp/*
+// @match        *://*.tbsradio.jp/*
 //
 // @description        tinyShield allows AdGuard, uBlock Origin, Brave and ABP to resist against Ad-Shield quickly.
 // @description:ko     tinyShield는 AdGuard, uBlock Origin, Brave 와 ABP가 애드쉴드에 빠르게 저항할 수 있도록 합니다.
