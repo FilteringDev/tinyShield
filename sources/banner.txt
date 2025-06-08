@@ -8,7 +8,7 @@
 // @downloadURL  https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
 // @license      MIT
 //
-// @version      1.5.29
+// @version      1.5.30
 // @author       PiQuark6046 and contributors
 //
 // @match        *://ygosu.com/*
