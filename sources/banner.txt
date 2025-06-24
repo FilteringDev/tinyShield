@@ -814,6 +814,8 @@
 // @match        *://*.mahjongchest.com/*
 // @match        *://meteo60.fr/*
 // @match        *://*.meteo60.fr/*
+// @match        *://minesweeperquest.com/*
+// @match        *://*.minesweeperquest.com/*
 //
 // @description        tinyShield allows AdGuard, uBlock Origin, Brave and ABP to resist against Ad-Shield quickly.
 // @description:ko     tinyShield는 AdGuard, uBlock Origin, Brave 와 ABP가 애드쉴드에 빠르게 저항할 수 있도록 합니다.
