@@ -8,7 +8,7 @@
 // @downloadURL  https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
 // @license      MIT
 //
-// @version      1.5.43
+// @version      1.5.44
 // @author       PiQuark6046 and contributors
 //
 // @match        *://ygosu.com/*
@@ -261,8 +261,6 @@
 // @match        *://*.picrew.me/*
 // @match        *://rostercon.com/*
 // @match        *://*.rostercon.com/*
-// @match        *://woxikon.de/*
-// @match        *://*.woxikon.de/*
 // @match        *://suzusoku.blog.jp/*
 // @match        *://kreuzwortraetsel.de/*
 // @match        *://*.kreuzwortraetsel.de/*
@@ -350,16 +348,10 @@
 // @match        *://*.quefaire.be/*
 // @match        *://dailydot.com/*
 // @match        *://*.dailydot.com/*
-// @match        *://watchdocumentaries.com/*
-// @match        *://*.watchdocumentaries.com/*
 // @match        *://jablickar.cz/*
 // @match        *://*.jablickar.cz/*
 // @match        *://jmty.jp/*
 // @match        *://*.jmty.jp/*
-// @match        *://dolldivine.com/*
-// @match        *://*.dolldivine.com/*
-// @match        *://powerpyx.com/*
-// @match        *://*.powerpyx.com/*
 // @match        *://nikkansports.com/*
 // @match        *://*.nikkansports.com/*
 // @match        *://bleepingcomputer.com/*
@@ -706,8 +698,6 @@
 // @match        *://*.motor-talk.de/*
 // @match        *://niketalk.com/*
 // @match        *://*.niketalk.com/*
-// @match        *://minkou.jp/*
-// @match        *://*.minkou.jp/*
 // @match        *://gutefrage.net/*
 // @match        *://*.gutefrage.net/*
 // @match        *://langenscheidt.com/*
@@ -818,8 +808,6 @@
 // @match        *://*.minesweeperquest.com/*
 // @match        *://moin.de/*
 // @match        *://*.moin.de/*
-// @match        *://nouvelobs.com/*
-// @match        *://*.nouvelobs.com/*
 // @match        *://puzzlegarage.com/*
 // @match        *://*.puzzlegarage.com/*
 // @match        *://solitairehut.com/*
@@ -834,8 +822,6 @@
 // @match        *://*.hotcopper.co.nz/*
 // @match        *://vimm.net/*
 // @match        *://*.vimm.net/*
-// @match        *://nyitvatartas24.hu/*
-// @match        *://*.nyitvatartas24.hu/*
 // @match        *://cesoirtv.com/*
 // @match        *://*.cesoirtv.com/*
 // @match        *://kurashinista.jp/*
