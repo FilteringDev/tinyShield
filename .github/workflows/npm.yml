@@ -16,6 +16,8 @@ jobs:
         with:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
+      - name: Update npm package manager
+        run: npm install -g npm@latest
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
