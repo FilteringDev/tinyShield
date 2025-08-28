@@ -98,11 +98,11 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
         * iOS 18+: `System settings` => `Apps` => `Safari` => `Extensions`
         * iOS 17 and older: `System settings` => `Safari` => `Extensions`
         Find **Usercripts**, enable it and allow `On other sites` permission
-    4. Open the [tinyShield](https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js) userscript URL in browser
-    5. Press the extensions icon in the address bar of Safari and select Userscripts 
-    6. Tap to install
-    7. In opened popup, scroll down and press Install button
-    8. Done.
+    3. Open the [tinyShield](https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js) userscript URL in browser
+    4. Press the extensions icon in the address bar of Safari and select Userscripts 
+    5. Tap to install
+    5. In opened popup, scroll down and press Install button
+    7. Done.
 
     </details>
 
