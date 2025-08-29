@@ -25,7 +25,6 @@ Win.Map.prototype.get = new Proxy(Win.Map.prototype.get, {
     let ArgText = ''
     try {
       ArgText = OriginalArrayToString.call(Args) as string
-      
     } catch {
       console.warn('[tinyShield]: Map.prototype.get:', ThisArg, Args)
     }
