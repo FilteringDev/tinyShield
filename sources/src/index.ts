@@ -41,7 +41,7 @@ Win.Map.prototype.get = new Proxy(Win.Map.prototype.get, {
 })
 
 const ASReinsertedAdvInvenPositiveRegExps: RegExp[][] = [[
-  new RegExp('inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+')
+  /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/
 ]]
 Win.Map.prototype.set = new Proxy(Win.Map.prototype.set, {
   apply(Target: (key: unknown, value: unknown) => Map<unknown, unknown>, ThisArg: Map<unknown, unknown>, Args: [unknown, unknown]) {
