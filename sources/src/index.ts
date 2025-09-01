@@ -5,6 +5,7 @@ declare const unsafeWindow: unsafeWindow
 const Win = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window
 
 const OriginalArrayToString = Win.Array.prototype.toString
+const OriginalRegExpTest = Win.RegExp.prototype.test
 
 const ProtectedFunctionStrings = ['toString', 'get', 'set']
 
@@ -31,7 +32,7 @@ Win.Map.prototype.get = new Proxy(Win.Map.prototype.get, {
     }
 
     let ArgText = OriginalArrayToString.call(Args) as string
-    if (ASInitPositiveRegExps.filter(ASInitPositiveRegExp => ASInitPositiveRegExp.filter(Index => Index.test(ArgText)).length >= 2).length === 1) {
+    if (ASInitPositiveRegExps.filter(ASInitPositiveRegExp => ASInitPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 2).length === 1) {
       console.debug('[tinyShield]: Map.prototype.get:', ThisArg, Args)
       throw new Error()
     }
@@ -51,7 +52,7 @@ Win.Map.prototype.set = new Proxy(Win.Map.prototype.set, {
     } catch {
       console.warn('[tinyShield]: Map.prototype.get:', ThisArg, Args)
     }
-    if (ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.filter(Index => Index.test(ArgText)).length >= 1).length === 1) {
+    if (ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 1).length === 1) {
       console.debug('[tinyShield]: Map.prototype.set:', ThisArg, Args)
       throw new Error()
     }
