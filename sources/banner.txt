@@ -876,8 +876,6 @@
 // @match        *://*.wattedoen.be/*
 // @match        *://uscreditcardguide.com/*
 // @match        *://*.uscreditcardguide.com/*
-// @match        *://yumhusk.com/*
-// @match        *://*.yumhusk.com/*
 // @match        *://quizlet.com/*
 // @match        *://*.quizlet.com/*
 //
