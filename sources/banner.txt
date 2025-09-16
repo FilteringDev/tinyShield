@@ -890,8 +890,6 @@
 // @match        *://*.90min.com/*
 // @match        *://fansided.com/*
 // @match        *://*.fansided.com/*
-// @match        *://90min.de/*
-// @match        *://*.90min.de/*
 // @match        *://12thmanrising.com/*
 // @match        *://*.12thmanrising.com/*
 // @match        *://1428elm.com/*
