@@ -1,6 +1,6 @@
 {
   "name": "@list-kr/tinyshield",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "description": "",
   "type": "module",
   "scripts": {
@@ -18,12 +18,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^22.18.3"
+    "@types/node": "^22.18.5"
   },
   "devDependencies": {
     "esbuild": "^0.25.9",
     "eslint": "^9.35.0",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.43.0"
+    "typescript-eslint": "^8.44.0"
   }
 }
