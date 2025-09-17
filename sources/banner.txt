@@ -194,8 +194,6 @@
 // @match        *://*.esuteru.com/*
 // @match        *://pressian.com/*
 // @match        *://*.pressian.com/*
-// @match        *://blog.livedoor.jp/kinisoku/*
-// @match        *://blog.livedoor.jp/nanjstu/*
 // @match        *://blog.livedoor.jp/*
 // @match        *://*.blog.jp/*
 // @match        *://*.diary.to/*
