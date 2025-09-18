@@ -4,11 +4,11 @@
 // @namespace    https://github.com/List-KR/tinyShield
 // @homepageURL  https://github.com/List-KR/tinyShield
 // @supportURL   https://github.com/List-KR/tinyShield/issues
-// @updateURL    https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
-// @downloadURL  https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+// @updateURL    https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
+// @downloadURL  https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 // @license      MIT
 //
-// @version      1.8.0
+// @version      1.8.1
 // @author       PiQuark6046 and contributors
 //
 // @match        *://ygosu.com/*
