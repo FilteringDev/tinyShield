@@ -1,6 +1,6 @@
 {
-  "name": "@list-kr/tinyshield",
-  "version": "1.8.1",
+  "name": "@filteringdev/tinyshield",
+  "version": "1.8.2",
   "description": "",
   "type": "module",
   "scripts": {
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/List-KR/tinyShield.git"
+    "url": "git+https://github.com/FilteringDev/tinyShield.git"
   },
   "license": "MIT",
   "dependencies": {

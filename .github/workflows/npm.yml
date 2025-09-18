@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: 'lts/*'
       - name: Purge jsdelivr cache
-        uses: List-KR/jsdelivr-purge-npm@1.0.6
+        uses: FilteringDev/jsdelivr-purge-npm@1.0.7
         with:
           package: '@list-kr/tinyshield'
           disttag: 'latest'
