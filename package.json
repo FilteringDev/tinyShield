@@ -18,7 +18,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^22.18.6"
+    "@types/node": "^24.5.2"
   },
   "devDependencies": {
     "esbuild": "^0.25.10",
