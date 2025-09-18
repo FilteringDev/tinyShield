@@ -1,6 +1,6 @@
 ## tinyShield
 
-[![jsdelivr stat](https://data.jsdelivr.com/v1/package/npm/@list-kr/tinyshield/badge)](https://www.jsdelivr.com/package/npm/@list-kr/tinyshield)
+[![jsdelivr stat](https://data.jsdelivr.com/v1/package/npm/@filteringdev/tinyshield/badge)](https://www.jsdelivr.com/package/npm/@filteringdev/tinyshield)
 
 [English](./README.md) [Japanese](./README.ja.md)
 
@@ -24,7 +24,7 @@ tinyShield 유저스크립트는 AdGuard와 애드블록 커뮤니티에 의해 
 ### 빠른 시작
 아래 URL를 클릭하여 설치해주세요:
 
-https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
 ### 설치하는 법
 - [Violentmonkey](https://addons.mozilla.org/ko/firefox/addon/violentmonkey/) (AdGuard 프리미엄이 없다면 권장됨) - 브라우저 확장
@@ -33,7 +33,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
   3. `Install from URL` 버튼을 누르십시오.
   4. 다음 URL를 누르십시오:
   ```
-  https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+  https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
   ```
   5. `OK` 버튼을 누르십시오.
   6. 유저스크립트의 메타데이터를 확인하시고 `Confirm installation`를 누르십시오.
@@ -59,7 +59,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
     * iOS 18 이상: `시스템 설정` => `앱` => `Safari` => `확장 프로그램`
     * iOS 17 이하: `시스템 설정` => `Safari` => `확장 프로그램`
     **Userscripts**을 찾으시고 활성화하신 후 `기타 웹 사이트` 권한을 허용하십시오.
-  3. Safari에서 [빠른 시작 세션에 있는 URL](https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js)을 클릭하십시오.
+  3. Safari에서 [빠른 시작 세션에 있는 URL](https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js)을 클릭하십시오.
   4. Safari의 주소바에 있는 확장 아이콘을 클릭하시고 **Userscripts**을 선택하십시오.
   5. 설치하는 버튼을 누르십시오.
   6. 열린 팝업을 스크롤하신 후에 설치하는 버튼을 누르십시오.

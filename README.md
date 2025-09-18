@@ -1,6 +1,6 @@
 ## tinyShield
 
-[![jsdelivr stat](https://data.jsdelivr.com/v1/package/npm/@list-kr/tinyshield/badge)](https://www.jsdelivr.com/package/npm/@list-kr/tinyshield)
+[![jsdelivr stat](https://data.jsdelivr.com/v1/package/npm/@filteringdev/tinyshield/badge)](https://www.jsdelivr.com/package/npm/@filteringdev/tinyshield)
 
 [Korean](./README.ko.md) [Japanese](./README.ja.md)
 
@@ -24,7 +24,7 @@ If you believe this userscript is causing issues while in use, please use GitHub
 ### Quick Start
 Just click the following URL to detect this userscript.
 
-https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
 ### How to install
 - [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/) (Recommended if you cannot access AdGuard Premium) - Browser extension
@@ -33,7 +33,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
     3. Click `Install from URL` button.
     4. Input the following URL:
     ```
-    https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+    https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
     ```
     5. Click `OK` button.
     6. Confirm metadata of the userscript and click `Confirm installation`.
@@ -44,7 +44,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
     2. Go to `Utilities` tab.
     3. Input the following URL into `Install from URL`:
         ```
-        https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+        https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
         ```
     4. Click `Install` button.
     5. Confirm metadata of the userscript and click `Install`.
@@ -67,7 +67,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
     3. Click `Add extension`.
     4. Input the following URL:
         ```
-        https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+        https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
         ```
     5. Click `Install`.
     6. Confirm metadata of the userscript and click `Install`.
@@ -79,7 +79,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
     2. Touch `New extension`.
     3. Input the following URL:
         ```
-        https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+        https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
         ```
     4. Touch `Next`.
     5. Confirm metadata of the userscript and touch `Add`.
@@ -101,7 +101,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
         * iOS 18+: `System settings` => `Apps` => `Safari` => `Extensions`
         * iOS 17 and older: `System settings` => `Safari` => `Extensions`
         Find **Usercripts**, enable it and allow `On other sites` permission
-    3. Open the [tinyShield](https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js) userscript URL in browser
+    3. Open the [tinyShield](https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js) userscript URL in browser
     4. Press the extensions icon in the address bar of Safari and select Userscripts 
     5. Tap to install
     5. In opened popup, scroll down and press Install button

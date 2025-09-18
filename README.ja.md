@@ -1,6 +1,6 @@
 ## tinyShield
 
-[![jsdelivr stat](https://data.jsdelivr.com/v1/package/npm/@list-kr/tinyshield/badge)](https://www.jsdelivr.com/package/npm/@list-kr/tinyshield)
+[![jsdelivr stat](https://data.jsdelivr.com/v1/package/npm/@filteringdev/tinyshield/badge)](https://www.jsdelivr.com/package/npm/@filteringdev/tinyshield)
 
 [English](./README.md) [Korean](./README.ko.md)
 
@@ -21,7 +21,7 @@ tinyShieldスクリプトは、AdblockコミュニティとAdGuardによって�
 ### クイックスタート
 このユーザースクリプトを検出するには、次のURLをクリックしてください。
 
-https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
 ### インストールのやり方
 - [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/) (AdGuard Premiumにアクセスできない場合に推奨) - ブラウザー拡張
@@ -30,7 +30,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
     3. `URLからインストール`ボタンをクリックします。
     4. 以下のURLを入力します:
     ```
-    https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+    https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
     ```
     5. `OK`ボタンをクリックします。
     6. メタデータの内容を確認後に`インストール`ボタンをクリックします。
@@ -41,7 +41,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
     2. `ユーティリティ`のタブを開きます。
     3. `URLからインストール`で以下のURLを入力します:
         ```
-        https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+        https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
         ```
     4. `インストール`をクリック。
     5. メタデータとユーザースクリプトを確認後に`インストール`をクリック。
@@ -64,7 +64,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
     3. `拡張機能を追加する`をクリック。
     4. 以下のURLを入力:
         ```
-        https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+        https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
         ```
     5. `インストール`をクリック。
     6. メタデータとユーザースクリプトを確認後に`インストール`をクリック。
@@ -76,7 +76,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
     2. `拡張機能を追加`をタッチ。
     3. 以下のURLを入力:
         ```
-        https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
+        https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
         ```
     4. `次へ`をタッチ。
     5. メタデータとユーザースクリプトを確認後に`追加`をタッチ。
@@ -98,7 +98,7 @@ https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js
         * iOS 18+: `システム設定` => `アプリ` => `Safari` => `拡張機能`
         * iOS 17 とそれ以下: `システム設定` => `Safari` => `拡張機能`
         **Usercripts**を見つけて有効化後に`他のサイト`の権限を許可します。
-    4. [tinyShield](https://cdn.jsdelivr.net/npm/@list-kr/tinyshield@latest/dist/tinyShield.user.js)のURLをブラウザで開きます。
+    4. [tinyShield](https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js)のURLをブラウザで開きます。
     5. Safariのアドレスバーにある拡張機能アイコンを押して、Userscriptsを選択します。
     6. タップでインストールします。
     7. 開いたポップアップを下にスクロールでインストールボタンを押します。
