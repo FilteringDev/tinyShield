@@ -50,7 +50,7 @@ Win.Map.prototype.set = new Proxy(Win.Map.prototype.set, {
     try {
       ArgText = OriginalArrayToString.call(Args) as string
     } catch {
-      console.warn('[tinyShield]: Map.prototype.get:', ThisArg, Args)
+      console.warn('[tinyShield]: Map.prototype.set:', ThisArg, Args)
     }
     if (ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 1).length === 1) {
       console.debug('[tinyShield]: Map.prototype.set:', ThisArg, Args)
