@@ -22,8 +22,8 @@ Win.Function.prototype.toString = new Proxy(Win.Function.prototype.toString, {
 
 const ASInitPositiveRegExps: RegExp[][] = [[
   /[a-zA-Z0-9]+ *=> *{ *const *[a-zA-Z0-9]+ *= *[a-zA-Z0-9]+ *; *if/,
-  /===? *[a-zA-Z0-9]+ *\[ *[a-zA-Z0-9]+\( *[0-9]+ *\) *\] *\) *return *[a-zA-Z0-9]+ *\( *{ *inventoryId *:/,
-  /{ *inventoryId *: *this *\[[a-zA-Z0-9]+ *\( *[0-9]+ *\) *\] *, *\.\.\. *[a-zA-Z0-9]+ *\[ *[a-zA-Z0-9]+ *\( *[0-9]+ * *\) *\] *} *\)/
+  /===? *[a-zA-Z0-9]+ *\[ *[a-zA-Z0-9]+\( *[0-9a-z]+ *\) *\] *\) *return *[a-zA-Z0-9]+ *\( *{ *('|")?inventoryId('|")? *:/,
+  /{ *('|")?inventoryId('|")? *: *this *\[[a-zA-Z0-9]+ *\( *[0-9a-z]+ *\) *\] *, *\.\.\. *[a-zA-Z0-9]+ *\[ *[a-zA-Z0-9]+ *\( *[0-9a-z]+ * *\) *\] *} *\)/
 ]]
 Win.Map.prototype.get = new Proxy(Win.Map.prototype.get, {
   apply(Target: (key: unknown) => unknown, ThisArg: Map<unknown, unknown>, Args: [unknown]) {
