@@ -12,7 +12,7 @@ jobs:
       id-token: write
     steps:
       - name: Set up NodeJS LTS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
@@ -34,7 +34,7 @@ jobs:
       actions: read
     steps:
       - name: Set up NodeJS LTS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 'lts/*'
       - name: Purge jsdelivr cache
