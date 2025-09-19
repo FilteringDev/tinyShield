@@ -4,8 +4,10 @@ declare const unsafeWindow: unsafeWindow
 
 const Win = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window
 
+import { CheckDepthInASWeakMap } from './as-weakmap.js'
+
 const OriginalArrayToString = Win.Array.prototype.toString
-const OriginalRegExpTest = Win.RegExp.prototype.test
+export const OriginalRegExpTest = Win.RegExp.prototype.test
 
 const ProtectedFunctionStrings = ['toString', 'get', 'set']
 
@@ -42,7 +44,13 @@ Win.Map.prototype.get = new Proxy(Win.Map.prototype.get, {
 })
 
 const ASReinsertedAdvInvenPositiveRegExps: RegExp[][] = [[
+  /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/,
+  /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/,
   /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/
+], [
+  /[a-z0-9A-Z]+\.setAttribute\( *('|")onload('|") *, *('|")! *async *function\( *\) *\{ *let */,
+  /confirm\( *[A-Za-z0-9]+ *\) *\) *{ *const *[A-Za-z0-9]+ *= *new *[A-Za-z0-9]+\.URL\(('|")https:\/\/report\.error-report\.com\//,
+  /\.forEach *\( *\( *[A-Za-z0-9]+ *=> *[A-Za-z0-9]+\.remove *\( *\) *\) *\) *\) *, *[0-9a-f]+ *\) *; *const *[A-Za-z0-9]+ *= *await *\( *await *fetch *\(/
 ]]
 Win.Map.prototype.set = new Proxy(Win.Map.prototype.set, {
   apply(Target: (key: unknown, value: unknown) => Map<unknown, unknown>, ThisArg: Map<unknown, unknown>, Args: [unknown, unknown]) {
@@ -52,11 +60,45 @@ Win.Map.prototype.set = new Proxy(Win.Map.prototype.set, {
     } catch {
       console.warn('[tinyShield]: Map.prototype.set:', ThisArg, Args)
     }
-    if (ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 1).length === 1) {
+    if (ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 3).length === 1) {
       console.debug('[tinyShield]: Map.prototype.set:', ThisArg, Args)
       throw new Error()
     }
+    return Reflect.apply(Target, ThisArg, Args)
+  }
+})
 
+Win.WeakMap.prototype.set = new Proxy(Win.WeakMap.prototype.set, {
+  apply(Target: (key: object, value: unknown) => WeakMap<object, unknown>, ThisArg: WeakMap<object, unknown>, Args: [object, unknown]) {
+    if (CheckDepthInASWeakMap(Args)) {
+      console.debug('[tinyShield]: WeakMap.prototype.set:', ThisArg, Args)
+      throw new Error()
+    }
+
+    return Reflect.apply(Target, ThisArg, Args)
+  }
+})
+
+let ASTimerRegExps: RegExp[][] = [[
+  /function *\( *\) *{ *const *[a-zA-Z0-9]+ *= *[a-zA-Z0-9]+ *; *for *\( *var *[a-zA-Z0-9]+ *= *[a-zA-Z0-9]+ *\[ *[a-zA-Z0-9]+ *\( *0x[a-f0-9]+ *\) *\] *,/,
+  / *,[a-zA-Z0-9]+ *= *new *Array *\( *[A-Za-z0-9]+ *\) *, *[A-Za-z0-9]+ *= *0x[a-f0-9]+ *; *[A-Za-z0-9]+ *< *[A-Za-z0-9]+ *; *[A-Za-z0-9]+ *\+\+ *\)/,
+  /\) *\? *[A-Za-z0-9]+ *\[ *[A-Za-z0-9]+ *\( *0x[a-f0-9]+ *\) *\] *\[ *[A-Za-z0-9]+ *\( *0x[a-f0-9]+ *\) *\] * *\([A-Za-z0-9]+ *, *\.\.\. *[A-Za-z0-9]+ *\) *: *void *0x[a-f0-9]+/
+]]
+Win.setTimeout = new Proxy(Win.setTimeout, {
+  apply(Target: typeof Win.setTimeout, ThisArg: undefined, Args: Parameters<typeof setTimeout>) {
+    if (ASTimerRegExps.filter(ASTimerRegExp => ASTimerRegExp.filter(Index => Index.test(Args[0].toString())).length >= 3).length === 1) {
+      console.debug('[tinyShield]: setTimeout:', Args)
+      return
+    }
+    return Reflect.apply(Target, ThisArg, Args)
+  }
+})
+Win.setInterval = new Proxy(Win.setInterval, {
+  apply(Target: typeof Win.setInterval, ThisArg: undefined, Args: Parameters<typeof setInterval>) {
+    if (ASTimerRegExps.filter(ASTimerRegExp => ASTimerRegExp.filter(Index => Index.test(Args[0].toString())).length >= 3).length === 1) {
+      console.debug('[tinyShield]: setInterval:', Args)
+      return
+    }
     return Reflect.apply(Target, ThisArg, Args)
   }
 })
