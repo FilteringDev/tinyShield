@@ -40,6 +40,6 @@ jobs:
       - name: Purge jsdelivr cache
         uses: FilteringDev/jsdelivr-purge-npm@1.0.7
         with:
-          package: '@list-kr/tinyshield'
+          package: '@filteringdev/tinyshield'
           disttag: 'latest'
     needs: [publish]
