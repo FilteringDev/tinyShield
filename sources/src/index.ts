@@ -80,10 +80,6 @@ Win.WeakMap.prototype.set = new Proxy(Win.WeakMap.prototype.set, {
 })
 
 let ASTimerRegExps: RegExp[][] = [[
-  /function *\( *\) *{ *const *[a-zA-Z0-9]+ *= *[a-zA-Z0-9]+ *; *for *\( *var *[a-zA-Z0-9]+ *= *[a-zA-Z0-9]+ *\[ *[a-zA-Z0-9]+ *\( *0x[a-f0-9]+ *\) *\] *,/,
-  / *,[a-zA-Z0-9]+ *= *new *Array *\( *[A-Za-z0-9]+ *\) *, *[A-Za-z0-9]+ *= *0x[a-f0-9]+ *; *[A-Za-z0-9]+ *< *[A-Za-z0-9]+ *; *[A-Za-z0-9]+ *\+\+ *\)/,
-  /\) *\? *[A-Za-z0-9]+ *\[ *[A-Za-z0-9]+ *\( *0x[a-f0-9]+ *\) *\] *\[ *[A-Za-z0-9]+ *\( *0x[a-f0-9]+ *\) *\] * *\([A-Za-z0-9]+ *, *\.\.\. *[A-Za-z0-9]+ *\) *: *void *0x[a-f0-9]+/
-], [
   /async *\( *\) *=> *{ *const *[A-Za-z0-9]+ *= *[A-Za-z0-9]+ *; *await *[A-Za-z0-9]+ *\( *\)/,
   /; *await *[A-Za-z0-9]+ *\( *\) *, *[A-Za-z0-9]+ *\( *! *1 *, *new *Error *\( *[A-Za-z0-9]+ *\( *[0-9a-f]+ *\) *\) *\) *}/,
   / *\) *\) *\) *}/
