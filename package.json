@@ -1,17 +1,27 @@
 {
   "name": "@filteringdev/tinyshield",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "",
   "type": "module",
   "scripts": {
-    "build": "esbuild sources/src/index.ts --bundle --minify-whitespace --minify-syntax --define:global=window --inject:./sources/esbuild.inject.ts --banner:js=\"$(cat ./sources/banner.txt)\" --target=es2024,chrome119,safari17,firefox121 --outfile=./dist/tinyShield.user.js",
+    "build:interface": "esbuild sources/interface.ts --bundle --format=esm --splitting --sourcemap --target=es2024 --external:/node_modules --outdir=dist && tsc sources/interface.ts --outDir dist/types --declaration --emitDeclarationOnly",
+    "build:userscript": "esbuild sources/src/index.ts --bundle --minify-whitespace --minify-syntax --define:global=window --inject:./sources/esbuild.inject.ts --banner:js=\"$(cat ./sources/banner.txt)\" --target=es2024,chrome119,safari17,firefox121 --outfile=./dist/tinyShield.user.js",
+    "build": "npm run build:interface && npm run build:userscript",
     "debug": "esbuild sources/src/index.ts --bundle --define:global=window --inject:./sources/esbuild.inject.ts --banner:js=\"$(cat ./sources/banner.txt)\" --target=es2024,chrome119,safari17,firefox121 --outfile=./dist/tinyShield-debug.user.js",
     "lint": "tsc --noEmit && eslint sources/**/*.ts"
   },
-  "keywords": [],
-  "files": [
-    "dist"
+  "keywords": [
+    "Ad-Shield"
   ],
+  "files": [
+    "dist/**/*"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/interface.js",
+      "types": "./dist/types/interface.d.ts"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FilteringDev/tinyShield.git"

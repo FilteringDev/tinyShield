@@ -1,0 +1,1 @@
+export { RunTinyShieldUserscript } from './src/index.js'
