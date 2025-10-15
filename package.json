@@ -1,6 +1,6 @@
 {
   "name": "@filteringdev/tinyshield",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "",
   "type": "module",
   "scripts": {
@@ -32,9 +32,9 @@
     "@types/node": "^24.7.2"
   },
   "devDependencies": {
-    "esbuild": "^0.25.10",
+    "esbuild": "^0.25.11",
     "eslint": "^9.37.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.0"
+    "typescript-eslint": "^8.46.1"
   }
 }
