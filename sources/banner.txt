@@ -886,7 +886,6 @@
 // @match        *://*.mentalfloss.com/*
 // @match        *://90min.com/*
 // @match        *://*.90min.com/*
-// @match        *://fansided.com/*
 // @match        *://*.fansided.com/*
 // @match        *://12thmanrising.com/*
 // @match        *://*.12thmanrising.com/*
