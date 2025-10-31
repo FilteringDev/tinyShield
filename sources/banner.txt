@@ -1542,7 +1542,6 @@
 // @match        *://*.superhonda.com/*
 // @match        *://thefirearmblog.com/*
 // @match        *://*.thefirearmblog.com/*
-// @match        *://newatlas.com/*
 // @match        *://*.newatlas.com/*
 // @match        *://weldingweb.com/*
 // @match        *://*.weldingweb.com/*
