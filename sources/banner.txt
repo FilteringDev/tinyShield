@@ -882,8 +882,8 @@
 // @match        *://*.notebookcheck.com/*
 // @match        *://wetter.com/*
 // @match        *://*.wetter.com/*
-// @match        *://mentalfloss.com/*
 // @match        *://*.mentalfloss.com/*
+
 // @match        *://90min.com/*
 // @match        *://*.90min.com/*
 // @match        *://*.fansided.com/*
