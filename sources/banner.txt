@@ -838,8 +838,6 @@
 // @match        *://*.wisevoter.com/*
 // @match        *://hang.hu/*
 // @match        *://*.hang.hu/*
-// @match        *://wisevoter.com/*
-// @match        *://*.wisevoter.com/*
 // @match        *://dreamchance.net/*
 // @match        *://*.dreamchance.net/*
 // @match        *://raider.io/*
