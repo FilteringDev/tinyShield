@@ -849,6 +849,7 @@
 // @match        *://gbatemp.net/*
 // @match        *://*.gbatemp.net/*
 // @match        *://jiji.com/*
+// @match        *://*.jiji.com/*
 // @match        *://itmedia.co.jp/*
 // @match        *://*.itmedia.co.jp/*
 // @match        *://boredpanda.com/*
@@ -879,11 +880,8 @@
 // @match        *://*.notebookcheck.com/*
 // @match        *://wetter.com/*
 // @match        *://*.wetter.com/*
-// @match        *://*.mentalfloss.com/*
-
 // @match        *://90min.com/*
 // @match        *://*.90min.com/*
-// @match        *://*.fansided.com/*
 // @match        *://12thmanrising.com/*
 // @match        *://*.12thmanrising.com/*
 // @match        *://1428elm.com/*
@@ -1537,8 +1535,7 @@
 // @match        *://superhonda.com/*
 // @match        *://*.superhonda.com/*
 // @match        *://thefirearmblog.com/*
-// @match        *://*.thefirearmblog.com/*
-// @match        *://*.newatlas.com/*
+// @match        *://*.thefirearmblog.com/*\
 // @match        *://weldingweb.com/*
 // @match        *://*.weldingweb.com/*
 // @match        *://odyclub.com/*
