@@ -15,11 +15,8 @@ tinyShield 유저스크립트는 AdGuard와 애드블록 커뮤니티에 의해 
 > tinyShield 유저스크립트 유지보수자는 tinyShield 유저스크립트와 함께 아래 애드블록들 중 하나를 사용하실 것을 권장합니다:
 > - AdGuard
 > - uBlock Origin
-> - Brave 웹 브라우저의 Shield
-> - AdBlock Plus
-> - Ghostery
 >
-> 다른 애드블록 지원은 보장되지 않습니다.
+> 다른 애드블록 지원은 보장되지 않고 요청되어도 거부될 수 있습니다.
 
 ### 빠른 시작
 아래 URL를 클릭하여 설치해주세요:

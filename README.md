@@ -15,11 +15,8 @@ If you believe this userscript is causing issues while in use, please use GitHub
 > tinyShield userscript maintainer recommends using one of the following adblockers with tinyShield userscript:
 > - AdGuard
 > - uBlock Origin
-> - Brave web browser's Shield
-> - AdBlock Plus
-> - Ghostery
 >
-> Supporting other adblockers is not guaranteed.
+> Supporting other adblockers is not guaranteed and even if requested, it may be refused.
 
 ### Quick Start
 Just click the following URL to detect this userscript.
