@@ -12,9 +12,6 @@ tinyShieldスクリプトは、AdblockコミュニティとAdGuardによって�
 > tinyShieldユーザースクリプトのメンテナは、tinyShieldユーザースクリプトといずれかの広告ブロッカーを使用することを推奨します:
 > - AdGuard
 > - uBlock Origin
-> - Brave Web Browser Shield
-> - AdBlock Plus
-> - Ghostery
 >
 > 他の広告ブロッカーのサポートは保証されておらず、依頼があってもお断りする場合があります。
 
