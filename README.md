@@ -16,7 +16,7 @@ If you believe this userscript is causing issues while in use, please use GitHub
 > - AdGuard
 > - uBlock Origin
 >
-> Supporting other adblockers is not guaranteed and even if requested, it may be refused.
+> Supporting other adblockers is not guaranteed and even if requested, it may be rejected.
 
 ### Quick Start
 Just click the following URL to detect this userscript.
