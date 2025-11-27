@@ -27,7 +27,7 @@
     "type": "git",
     "url": "git+https://github.com/FilteringDev/tinyShield.git"
   },
-  "license": "MIT",
+  "license": "MPL-2.0",
   "dependencies": {
     "@types/node": "^24.9.2"
   },
