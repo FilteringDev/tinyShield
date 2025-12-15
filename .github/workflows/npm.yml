@@ -19,7 +19,7 @@ jobs:
       - name: Update npm package manager
         run: npm install -g npm@latest
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install dependencies
         run: npm i
       - name: Build
