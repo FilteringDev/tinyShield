@@ -110,7 +110,7 @@ await ESBuild.build({
     js: Fs.readFileSync(AttachHeaderPath, 'utf-8')
   },
   target: ['es2024', 'chrome119', 'firefox117', 'safari121'],
-  outfile: BuildType === 'production' ? './dist/tinyshield.user.js' : './dist/tinyshield.dev.user.js',
+  outfile: BuildType === 'production' ? './dist/tinyShield.user.js' : './dist/tinyShield.dev.user.js',
 })
 console.log('Build completed')
 Fs.rmSync(AttachHeaderPath)
