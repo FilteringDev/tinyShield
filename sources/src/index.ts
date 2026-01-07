@@ -117,8 +117,8 @@ export function RunTinyShieldUserscript(BrowserWindow: typeof window, Userscript
   })
 }
 
-const TargetedDomains: string[] = []
-if (TargetedDomains.some(Domain => new URLPattern(`*://${Domain}/*`).test(window.location.href) || new URLPattern(`*://*.${Domain}/*`).test(window.location.href))) {
+const TargetedDomains: Set<string> = new Set([])
+if (TargetedDomains.has(location.hostname.replaceAll(/^www\./g, ''))) {
   console.debug('[tinyShield]: Targeted domain matched, running userscript')
   RunTinyShieldUserscript(Win)
 }

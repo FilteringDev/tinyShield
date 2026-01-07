@@ -84,7 +84,7 @@ Fs.copyFileSync('./sources/src/index.ts', IndexFilePath)
 Fs.chmodSync(IndexFilePath, 0o700)
 const Project = new TsMorph.Project({ tsConfigFilePath: './tsconfig.json' })
 const IndexFile = Project.getSourceFileOrThrow(IndexFilePath)
-const TargetedDomainsArray = IndexFile.getVariableDeclaration('TargetedDomains').getInitializerIfKindOrThrow(TsMorph.SyntaxKind.ArrayLiteralExpression)
+const TargetedDomainsArray = IndexFile.getVariableDeclarationOrThrow('TargetedDomains').getInitializerIfKindOrThrow(TsMorph.SyntaxKind.NewExpression).getArguments()[0]?.asKindOrThrow(TsMorph.SyntaxKind.ArrayLiteralExpression)
 for (const Domain of DomainsList) {
   TargetedDomainsArray.addElement(`'${Domain}'`)
 }
