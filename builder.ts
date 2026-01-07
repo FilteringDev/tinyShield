@@ -6,11 +6,12 @@ import * as ESBuild from 'esbuild'
 import * as Zod from 'zod'
 import PackageJson from '@npmcli/package-json'
 import * as Semver from 'semver'
+import * as TsMorph from 'ts-morph'
 import * as Fs from 'node:fs'
 import * as NodeHttps from 'node:https'
 import * as Process from 'node:process'
 
-let BuildType: 'production' | 'development' = Zod.string().refine(BT => BT === 'production' || BT === 'development').default('production').parse(Process.argv[4] ?? 'production')
+let BuildType: 'production' | 'development' = Zod.string().refine(BT => BT === 'production' || BT === 'development').default('production').parse(Process.argv[3] ?? 'production')
 console.log('Build type set to:', BuildType)
 
 let Version: string = (await PackageJson.load('./')).content.version
@@ -78,6 +79,17 @@ for (const SellerEntry of IABSellersJsonData.sellers) {
 }
 console.log('Collected', DomainsList.size, 'unique domains from IAB Sellers.json')
 
+const IndexFilePath = `./sources/src/#generated-${crypto.randomUUID()}.ts`
+Fs.copyFileSync('./sources/src/index.ts', IndexFilePath)
+const Project = new TsMorph.Project({ tsConfigFilePath: './tsconfig.json' })
+const IndexFile = Project.getSourceFileOrThrow(IndexFilePath)
+const TargetedDomainsArray = IndexFile.getVariableDeclaration('TargetedDomains').getInitializerIfKindOrThrow(TsMorph.SyntaxKind.ArrayLiteralExpression)
+for (const Domain of DomainsList) {
+  TargetedDomainsArray.addElement(`'${Domain}'`)
+}
+await Project.save()
+console.log('Updated targeted domains in', IndexFilePath, '; total domains:', DomainsList.size)
+
 const HeaderLocation = './sources/banner.txt'
 let ConvertedHeader: string = ''
 for (const Line of Fs.readFileSync(HeaderLocation, 'utf-8').split('\n')) {
@@ -85,23 +97,18 @@ for (const Line of Fs.readFileSync(HeaderLocation, 'utf-8').split('\n')) {
     ConvertedHeader += Line.replaceAll('%%VERSION_VALUE%%', Version) + '\n'
   } else if (Line.includes('%%NAME%%')) {
     ConvertedHeader += Line.replaceAll('%%NAME%%', BuildType === 'production' ? 'tinyShield' : 'tinyShield (Development)') + '\n'
-  } else if (Line === '%%DOMAIN_INJECTION%%') {
-    for (const DomainEntry of DomainsList) {
-      ConvertedHeader += `// @match        *://${DomainEntry}/*\n`
-      ConvertedHeader += `// @match        *://*.${DomainEntry}/*\n`
-    }
   } else {
     ConvertedHeader += Line + '\n'
   }
 }
-console.log('Generated header with domain injections and processing')
+console.log('Generated header with userscript name and version')
 let AttachHeaderPath = `/tmp/${crypto.randomUUID()}`
 Fs.writeFileSync(AttachHeaderPath, ConvertedHeader, 'utf-8')
 console.log('Written temporary header file to:', AttachHeaderPath)
 await ESBuild.build({
-  entryPoints: ['./sources/src/index.ts'],
+  entryPoints: [IndexFilePath],
   bundle: true,
-  minify: true,
+  minify: BuildType === 'production',
   define: {
     global: 'window'
   },
@@ -109,9 +116,11 @@ await ESBuild.build({
   banner: {
     js: Fs.readFileSync(AttachHeaderPath, 'utf-8')
   },
-  target: ['es2024', 'chrome119', 'firefox117', 'safari121'],
+  target: ['es2024', 'chrome119', 'firefox142', 'safari26'],
   outfile: BuildType === 'production' ? './dist/tinyShield.user.js' : './dist/tinyShield.dev.user.js',
 })
 console.log('Build completed')
 Fs.rmSync(AttachHeaderPath)
 console.log('Temporary header file removed')
+Fs.rmSync(IndexFilePath)
+console.log('Temporary source file removed')
