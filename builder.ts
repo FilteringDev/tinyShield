@@ -81,6 +81,7 @@ console.log('Collected', DomainsList.size, 'unique domains from IAB Sellers.json
 
 const IndexFilePath = `./sources/src/#generated-${crypto.randomUUID()}.ts`
 Fs.copyFileSync('./sources/src/index.ts', IndexFilePath)
+Fs.chmodSync(IndexFilePath, 700)
 const Project = new TsMorph.Project({ tsConfigFilePath: './tsconfig.json' })
 const IndexFile = Project.getSourceFileOrThrow(IndexFilePath)
 const TargetedDomainsArray = IndexFile.getVariableDeclaration('TargetedDomains').getInitializerIfKindOrThrow(TsMorph.SyntaxKind.ArrayLiteralExpression)
@@ -103,7 +104,7 @@ for (const Line of Fs.readFileSync(HeaderLocation, 'utf-8').split('\n')) {
 }
 console.log('Generated header with userscript name and version')
 let AttachHeaderPath = `/tmp/${crypto.randomUUID()}`
-Fs.writeFileSync(AttachHeaderPath, ConvertedHeader, 'utf-8')
+Fs.writeFileSync(AttachHeaderPath, ConvertedHeader, { encoding: 'utf-8', mode: 700 })
 console.log('Written temporary header file to:', AttachHeaderPath)
 await ESBuild.build({
   entryPoints: [IndexFilePath],
