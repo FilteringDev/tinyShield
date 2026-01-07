@@ -6,7 +6,6 @@ import * as ESBuild from 'esbuild'
 import * as Zod from 'zod'
 import PackageJson from '@npmcli/package-json'
 import * as Semver from 'semver'
-import * as TsMorph from 'ts-morph'
 import * as Fs from 'node:fs'
 import * as NodeHttps from 'node:https'
 import * as Process from 'node:process'
@@ -79,18 +78,6 @@ for (const SellerEntry of IABSellersJsonData.sellers) {
 }
 console.log('Collected', DomainsList.size, 'unique domains from IAB Sellers.json')
 
-const IndexFilePath = `./sources/src/#generated-${crypto.randomUUID()}.ts`
-Fs.copyFileSync('./sources/src/index.ts', IndexFilePath)
-Fs.chmodSync(IndexFilePath, 0o700)
-const Project = new TsMorph.Project({ tsConfigFilePath: './tsconfig.json' })
-const IndexFile = Project.getSourceFileOrThrow(IndexFilePath)
-const TargetedDomainsArray = IndexFile.getVariableDeclaration('TargetedDomains').getInitializerIfKindOrThrow(TsMorph.SyntaxKind.ArrayLiteralExpression)
-for (const Domain of DomainsList) {
-  TargetedDomainsArray.addElement(`'${Domain}'`)
-}
-await Project.save()
-console.log('Updated targeted domains in', IndexFilePath, '; total domains:', DomainsList.size)
-
 const HeaderLocation = './sources/banner.txt'
 let ConvertedHeader: string = ''
 for (const Line of Fs.readFileSync(HeaderLocation, 'utf-8').split('\n')) {
@@ -98,16 +85,21 @@ for (const Line of Fs.readFileSync(HeaderLocation, 'utf-8').split('\n')) {
     ConvertedHeader += Line.replaceAll('%%VERSION_VALUE%%', Version) + '\n'
   } else if (Line.includes('%%NAME%%')) {
     ConvertedHeader += Line.replaceAll('%%NAME%%', BuildType === 'production' ? 'tinyShield' : 'tinyShield (Development)') + '\n'
+  } else if (Line === '%%DOMAIN_INJECTION%%') {
+    for (const DomainEntry of DomainsList) {
+      ConvertedHeader += `// @match        *://${DomainEntry}/*\n`
+      ConvertedHeader += `// @match        *://*.${DomainEntry}/*\n`
+    }
   } else {
     ConvertedHeader += Line + '\n'
   }
 }
-console.log('Generated header with userscript name and version')
+console.log('Generated header with domain injections and processing')
 let AttachHeaderPath = `/tmp/${crypto.randomUUID()}`
 Fs.writeFileSync(AttachHeaderPath, ConvertedHeader, { encoding: 'utf-8', mode: 0o700 })
 console.log('Written temporary header file to:', AttachHeaderPath)
 await ESBuild.build({
-  entryPoints: [IndexFilePath],
+  entryPoints: ['./sources/src/index.ts'],
   bundle: true,
   minify: BuildType === 'production',
   define: {
@@ -123,5 +115,3 @@ await ESBuild.build({
 console.log('Build completed')
 Fs.rmSync(AttachHeaderPath)
 console.log('Temporary header file removed')
-Fs.rmSync(IndexFilePath)
-console.log('Temporary source file removed')
