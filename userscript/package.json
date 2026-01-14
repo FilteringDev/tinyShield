@@ -2,6 +2,9 @@
   "name": "@filteringdev/tinyshield-userscript",
   "private": true,
   "type": "module",
+  "scripts": {
+    "lint": "tsc --noEmit && eslint source/**/*.ts"
+  },
   "devDependencies": {
     "@types/web": "^0.0.317"
   }

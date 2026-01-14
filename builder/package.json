@@ -2,6 +2,9 @@
   "name": "@filteringdev/tinyshield-builder",
   "private": true,
   "type": "module",
+  "scripts": {
+    "lint": "tsc --noEmit && eslint source/**/*.ts"
+  },
   "dependencies": {
     "@types/node": "^24.9.2"
   },

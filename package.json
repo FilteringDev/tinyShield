@@ -8,7 +8,7 @@
     "build:userscript": "tsx builder.ts -- production",
     "build": "npm run build:interface && npm run build:userscript",
     "debug": "tsx builder.ts -- development",
-    "lint": "tsc --noEmit && eslint sources/**/*.ts"
+    "lint": "npm run lint -w builder && npm run lint -w userscript"
   },
   "keywords": [
     "Ad-Shield"
