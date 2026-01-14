@@ -99,7 +99,7 @@ let AttachHeaderPath = `/tmp/${crypto.randomUUID()}`
 Fs.writeFileSync(AttachHeaderPath, ConvertedHeader, { encoding: 'utf-8', mode: 0o700 })
 console.log('Written temporary header file to:', AttachHeaderPath)
 await ESBuild.build({
-  entryPoints: ['./sources/src/index.ts'],
+  entryPoints: ['./sources/index.ts'],
   bundle: true,
   minify: BuildType === 'production',
   define: {

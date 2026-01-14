@@ -1,0 +1,8 @@
+{
+  "name": "@filteringdev/tinyshield-userscript",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@types/web": "^0.0.317"
+  }
+}

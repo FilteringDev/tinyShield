@@ -7,3 +7,5 @@
  * Contributors:
  *   - See Git history at https://github.com/FilteringDev/tinyShield for detailed authorship information.
  */
+
+export { RunTinyShieldUserscript } from './index.js'
