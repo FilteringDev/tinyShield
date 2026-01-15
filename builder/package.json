@@ -3,21 +3,27 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "tsc --noEmit && eslint **/*.ts"
+    "lint": "tsc --noEmit && eslint **/*.ts",
+    "build": "tsx source/build.ts",
+    "debug": "tsx source/debug.ts"
   },
   "dependencies": {
-    "@types/node": "^24.9.2"
+    "@types/node": "^24.10.8",
+    "simple-git": "^3.30.0",
+    "tldts": "^7.0.19"
   },
   "devDependencies": {
     "@npmcli/package-json": "^7.0.4",
     "@types/npmcli__package-json": "^4.0.4",
     "@types/semver": "^7.7.1",
-    "esbuild": "^0.27.0",
-    "eslint": "^9.38.0",
+    "@typescriptprime/securereq": "^1.0.1",
+    "chokidar": "^5.0.0",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
     "semver": "^7.7.3",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.2",
+    "typescript-eslint": "^8.53.0",
     "zod": "^4.3.5"
   }
 }
