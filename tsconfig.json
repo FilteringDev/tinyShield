@@ -7,11 +7,10 @@
     "alwaysStrict": false,
     "skipLibCheck": true,
     "paths": {
-      "@builder/*": ["./builder/sources/*"],
-      "@userscript/*": ["./userscript/sources/*"],
-      "@root/*": ["./sources/*"],
+      "@builder/*": ["./builder/source/*"],
+      "@userscript/*": ["./userscript/source/*"],
+      "@root/*": ["./source/*"],
       "@reporoot/*": ["./*"]
-    },
-    "baseUrl": "."
+    }
   }
 }
