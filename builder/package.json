@@ -4,13 +4,12 @@
   "type": "module",
   "scripts": {
     "lint": "tsc --noEmit && eslint **/*.ts",
-    "build": "tsx source/build.ts",
+    "build": "tsx source/buildci.ts",
     "debug": "tsx source/debug.ts",
-    "cache": "tsx source/cache.ts",
     "clean": "rm -rf dist && rm -rf .buildcache"
   },
   "dependencies": {
-    "@types/node": "^24.10.8"
+    "@types/node": "^24.10.9"
   },
   "devDependencies": {
     "@adguard/agtree": "^3.4.3",
@@ -18,7 +17,7 @@
     "@types/npmcli__package-json": "^4.0.4",
     "@types/semver": "^7.7.1",
     "@typescriptprime/parsing": "^1.0.4",
-    "@typescriptprime/securereq": "^1.0.1",
+    "@typescriptprime/securereq": "^1.1.0",
     "chokidar": "^5.0.0",
     "esbuild": "^0.27.2",
     "eslint": "^9.39.2",
