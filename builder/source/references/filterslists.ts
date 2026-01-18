@@ -1,7 +1,7 @@
 import { IndexAdShieldDomainsFromAG } from './filterslists/ADG.js'
 import { IndexAdShieldDomainsFromUBO } from './filterslists/uBO.js'
 
-export async function FetchAdShieldDomains(): Promise<Set<string>> {
+export async function FetchAdShieldDomainsFromFiltersLists(): Promise<Set<string>> {
   const [AGDomains, UBODomains] = await Promise.all([
     IndexAdShieldDomainsFromAG(),
     IndexAdShieldDomainsFromUBO()
