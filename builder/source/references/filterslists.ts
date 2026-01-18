@@ -1,4 +1,3 @@
-import { HTTPSRequest } from '@typescriptprime/securereq'
 import { IndexAdShieldDomainsFromAG } from './filterslists/ADG.js'
 import { IndexAdShieldDomainsFromUBO } from './filterslists/uBO.js'
 
