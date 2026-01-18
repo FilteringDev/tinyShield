@@ -1,5 +1,6 @@
 import * as HTTP from 'node:http'
 import * as Fs from 'node:fs'
+import * as Process from 'node:process'
 import * as Path from 'node:path'
 
 function IsLoopBack(IP: string) {
@@ -8,10 +9,13 @@ function IsLoopBack(IP: string) {
 
 export function RunDebugServer(Port: number, FileName: string[], ShouldPreventHTTPResponse: boolean) {
   const HTTPServer = HTTP.createServer((Req, Res) => {
-    const DistRoot = Path.resolve(process.cwd(), 'dist')
+    let ProjectRoot = Process.cwd()
+    if (Process.cwd().endsWith('/builder')) {
+      ProjectRoot = Process.cwd() + '/..'
+    }
     const RequestPath = Req.url?.substring(1) || ''
-    const ResolvedPath = Path.resolve(DistRoot, RequestPath)
-    const RelativePath = Path.relative(DistRoot, ResolvedPath)
+    const ResolvedPath = Path.resolve(ProjectRoot + '/dist', RequestPath)
+    const RelativePath = Path.relative(ProjectRoot + '/dist', ResolvedPath)
 
     // Ensure the resolved path stays within the dist root to prevent directory traversal
     if (RelativePath.startsWith('..') || Path.isAbsolute(RelativePath)) {
