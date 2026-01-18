@@ -1,5 +1,6 @@
 import { HTTPS2Request } from '@typescriptprime/securereq'
 import * as AGTree from '@adguard/agtree'
+import { AdShieldCDNDomains } from './keywords.js'
 
 const AGBaseFilterListSpecificURL = 'https://adguardteam.github.io/AdguardFilters/BaseFilter/sections/specific.txt'
 const AGBaseFilterListAdShieldKeys = {
@@ -43,7 +44,7 @@ export async function IndexAdShieldDomainsFromAG(): Promise<Set<string>> {
     } catch {
       return false
     }
-    return true
+    return !AdShieldCDNDomains.has(Domain)
   })
 
   return new Set(FilteredDomains)
