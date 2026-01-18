@@ -8,18 +8,18 @@ function IsLoopBack(IP: string) {
 
 export function RunDebugServer(Port: number, FileName: string[], ShouldPreventHTTPResponse: boolean) {
   const HTTPServer = HTTP.createServer((Req, Res) => {
-    const distRoot = Path.join(process.cwd(), 'dist')
-    const requestPath = Req.url?.substring(1) || ''
-    const resolvedPath = Path.resolve(distRoot, requestPath)
+    const DistRoot = Path.join(process.cwd(), 'dist')
+    const RequestPath = Req.url?.substring(1) || ''
+    const ResolvedPath = Path.resolve(DistRoot, RequestPath)
 
     // Ensure the resolved path stays within the dist root to prevent directory traversal
-    if (!resolvedPath.startsWith(distRoot + Path.sep) && resolvedPath !== distRoot) {
+    if (!ResolvedPath.startsWith(DistRoot + Path.sep) && ResolvedPath !== DistRoot) {
       Res.writeHead(403)
       Res.end()
       return
     }
 
-    if (!FileName.includes(requestPath)) {
+    if (!FileName.includes(RequestPath)) {
       Res.writeHead(404)
       Res.end()
       return
@@ -27,13 +27,13 @@ export function RunDebugServer(Port: number, FileName: string[], ShouldPreventHT
       Res.writeHead(403)
       Res.end()
       return
-    } else if (ShouldPreventHTTPResponse || !Fs.existsSync(resolvedPath)) {
+    } else if (ShouldPreventHTTPResponse || !Fs.existsSync(ResolvedPath)) {
       Res.writeHead(503)
       Res.end('File not built yet.')
       return
     }
 
-    const Content = Fs.readFileSync(resolvedPath, 'utf-8')
+    const Content = Fs.readFileSync(ResolvedPath, 'utf-8')
     Res.writeHead(200, {
       'content-type': 'application/javascript; charset=utf-8',
       'content-length': new TextEncoder().encode(Content).byteLength.toString()
