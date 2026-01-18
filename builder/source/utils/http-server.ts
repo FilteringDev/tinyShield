@@ -8,12 +8,13 @@ function IsLoopBack(IP: string) {
 
 export function RunDebugServer(Port: number, FileName: string[], ShouldPreventHTTPResponse: boolean) {
   const HTTPServer = HTTP.createServer((Req, Res) => {
-    const DistRoot = Path.join(process.cwd(), 'dist')
+    const DistRoot = Path.resolve(process.cwd(), 'dist')
     const RequestPath = Req.url?.substring(1) || ''
     const ResolvedPath = Path.resolve(DistRoot, RequestPath)
+    const RelativePath = Path.relative(DistRoot, ResolvedPath)
 
     // Ensure the resolved path stays within the dist root to prevent directory traversal
-    if (!ResolvedPath.startsWith(DistRoot + Path.sep) && ResolvedPath !== DistRoot) {
+    if (RelativePath.startsWith('..') || Path.isAbsolute(RelativePath)) {
       Res.writeHead(403)
       Res.end()
       return
