@@ -13,7 +13,8 @@ export type BuildOptions = {
   Minify: boolean
   UseCache: boolean
   BuildType: 'production' | 'development',
-  SubscriptionUrl: string
+  SubscriptionUrl: string,
+  Version?: string
 }
 
 export async function Build(OptionsParam?: BuildOptions): Promise<void> {
@@ -21,7 +22,8 @@ export async function Build(OptionsParam?: BuildOptions): Promise<void> {
     Minify: Zod.boolean(),
     UseCache: Zod.boolean(),
     BuildType: Zod.enum(['production', 'development']),
-    SubscriptionUrl: Zod.string().transform(Value => new URL(Value)).default(new URL('https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js'))
+    SubscriptionUrl: Zod.string().transform(Value => new URL(Value)).default(new URL('https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js')),
+    Version: Zod.string().optional()
   }).parseAsync(OptionsParam)
 
   let MatchingDomains: Set<string> = new Set<string>()
@@ -46,7 +48,7 @@ export async function Build(OptionsParam?: BuildOptions): Promise<void> {
   }
   
   const Banner = CreateBanner({
-    Version: (await PackageJson.load(ProjectRoot)).content.version ?? '0.0.0',
+    Version: Options.Version ?? (await PackageJson.load(ProjectRoot)).content.version ?? '0.0.0',
     BuildType: Options.BuildType ?? 'production',
     Domains: MatchingDomains,
     Name: 'tinyShield',
