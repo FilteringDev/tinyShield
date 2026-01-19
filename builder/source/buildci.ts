@@ -7,7 +7,8 @@ let ParsedArgv = (await PostProcessing<BuildOptions>(PreProcessing(Process.argv)
 let Options = await Zod.strictObject({
   Minify: Zod.string().pipe(Zod.enum(['true', 'false'])).transform(Value => Value === 'true').default(true),
   UseCache: Zod.string().pipe(Zod.enum(['true', 'false'])).transform(Value => Value === 'true').default(true),
-  BuildType: Zod.enum(['production', 'development'])
+  BuildType: Zod.enum(['production', 'development']),
+  SubscriptionUrl: Zod.string()
 }).parseAsync(ParsedArgv)
 
 await Build(Options)

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build:interface": "esbuild userscript/source/interface.ts --bundle --format=esm --splitting --sourcemap --target=es2024 --external:/node_modules --outdir=dist && tsc userscript/source/interface.ts --outDir dist/types --declaration --emitDeclarationOnly --skipLibCheck",
-    "build:userscript": "npm run build -w builder -- --minify true --use-cache false --build-type production",
+    "build:userscript": "npm run build -w builder -- --minify true --use-cache false --build-type production --SubscriptionUrl https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js",
     "build": "npm run build:interface && npm run build:userscript",
     "debug": "npm run debug -w builder",
     "lint": "npm run lint -w builder && npm run lint -w userscript"

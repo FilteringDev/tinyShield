@@ -12,14 +12,16 @@ import { CreateBanner } from './banner/index.js'
 export type BuildOptions = {
   Minify: boolean
   UseCache: boolean
-  BuildType: 'production' | 'development'
+  BuildType: 'production' | 'development',
+  SubscriptionUrl: string
 }
 
 export async function Build(OptionsParam?: BuildOptions): Promise<void> {
   const Options = await Zod.strictObject({
     Minify: Zod.boolean(),
     UseCache: Zod.boolean(),
-    BuildType: Zod.enum(['production', 'development'])
+    BuildType: Zod.enum(['production', 'development']),
+    SubscriptionUrl: Zod.string().transform(Value => new URL(Value)).default(new URL('https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js'))
   }).parseAsync(OptionsParam)
 
   let MatchingDomains: Set<string> = new Set<string>()
@@ -37,15 +39,20 @@ export async function Build(OptionsParam?: BuildOptions): Promise<void> {
       ConvertWildcardSuffixToRegexPattern(Domain).forEach(GeneratedPattern => MatchingDomains.add(GeneratedPattern))
     }
   }
+
+  let ProjectRoot = Process.cwd()
+  if (Process.cwd().endsWith('/builder')) {
+    ProjectRoot = Process.cwd() + '/..'
+  }
   
   const Banner = CreateBanner({
-    Version: (await PackageJson.load(Process.cwd())).content.version ?? '0.0.0',
+    Version: (await PackageJson.load(ProjectRoot)).content.version ?? '0.0.0',
     BuildType: Options.BuildType ?? 'production',
     Domains: MatchingDomains,
     Name: 'tinyShield',
     Namespace: 'https://github.com/FilteringDev/tinyShield',
-    DownloadURL: new URL('https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js'),
-    UpdateURL: new URL('https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js'),
+    DownloadURL: Options.SubscriptionUrl,
+    UpdateURL: Options.SubscriptionUrl,
     HomepageURL: new URL('https://github.com/FilteringDev/tinyShield'),
     SupportURL: new URL('https://github.com/FilteringDev/tinyShield/issues'),
     License: 'MPL-2.0',
@@ -57,10 +64,6 @@ export async function Build(OptionsParam?: BuildOptions): Promise<void> {
     }
   })
 
-  let ProjectRoot = Process.cwd()
-  if (Process.cwd().endsWith('/builder')) {
-    ProjectRoot = Process.cwd() + '/..'
-  }
   await ESBuild.build({
     entryPoints: [ProjectRoot + '/userscript/source/index.ts'],
     bundle: true,
