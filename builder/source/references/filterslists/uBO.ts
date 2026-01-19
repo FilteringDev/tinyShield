@@ -11,20 +11,20 @@ const UBOFilterListAdShieldKeys = {
 export async function IndexAdShieldDomainsFromUBO(): Promise<Set<string>> {
   const FiltersListContent = await HTTPS2Request(new URL(UBOFilterListSpecificURL), { ExpectedAs: 'String' })
   const AGTreeFiltersList = AGTree.FilterListParser.parse(FiltersListContent.Body)
-  let StatrtingLine = -1
+  let StartingLine = -1
   let EndingLine = -1
   for (const [Index, Filter] of AGTreeFiltersList.children.entries()) {
     if (Filter.category === 'Comment' && typeof Filter.raws.text === 'string' && Filter.raws.text.includes(UBOFilterListAdShieldKeys.Starting)) {
-      StatrtingLine = Index
+      StartingLine = Index
     } else if (Filter.category === 'Comment' && typeof Filter.raws.text === 'string' && Filter.raws.text.includes(UBOFilterListAdShieldKeys.Ending)) {
       EndingLine = Index
-    } else if (StatrtingLine !== -1 && EndingLine !== -1) {
+    } else if (StartingLine !== -1 && EndingLine !== -1) {
       break
     } else if (Index === AGTreeFiltersList.children.length - 1) {
       throw new Error('Could not find Ad-Shield ad reinsertion section in ' + UBOFilterListSpecificURL)
     }
   }
-  const AdShieldFilters = AGTreeFiltersList.children.filter((Filter, Index) => Index > StatrtingLine && Index < EndingLine)
+  const AdShieldFilters = AGTreeFiltersList.children.filter((Filter, Index) => Index > StartingLine && Index < EndingLine)
 
   const AdShieldDomains = new Set<string>()
   for (const Filter of AdShieldFilters) {
