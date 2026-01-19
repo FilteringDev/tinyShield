@@ -2,7 +2,7 @@ name: Check building and linting
 
 on:
   push:
-    branches-ignore: [ "main" ]
+    branches: [ "**" ]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "**" ]

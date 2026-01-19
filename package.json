@@ -4,11 +4,11 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build:interface": "esbuild sources/interface.ts --bundle --format=esm --splitting --sourcemap --target=es2024 --external:/node_modules --outdir=dist && tsc sources/interface.ts --outDir dist/types --declaration --emitDeclarationOnly",
-    "build:userscript": "tsx builder.ts -- production",
+    "build:interface": "esbuild userscript/source/interface.ts --bundle --format=esm --splitting --sourcemap --target=es2024 --external:/node_modules --outdir=dist && tsc userscript/source/interface.ts --outDir dist/types --declaration --emitDeclarationOnly --skipLibCheck",
+    "build:userscript": "npm run build -w builder -- --minify true --use-cache false --build-type production --SubscriptionUrl https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js",
     "build": "npm run build:interface && npm run build:userscript",
-    "debug": "tsx builder.ts -- development",
-    "lint": "tsc --noEmit && eslint sources/**/*.ts"
+    "debug": "npm run debug -w builder",
+    "lint": "npm run lint -w builder && npm run lint -w userscript"
   },
   "keywords": [
     "Ad-Shield"
@@ -28,20 +28,9 @@
     "url": "git+https://github.com/FilteringDev/tinyShield.git"
   },
   "license": "MPL-2.0",
-  "dependencies": {
-    "@types/node": "^24.9.2"
-  },
-  "devDependencies": {
-    "@npmcli/package-json": "^7.0.4",
-    "@types/npmcli__package-json": "^4.0.4",
-    "@types/semver": "^7.7.1",
-    "esbuild": "^0.27.0",
-    "eslint": "^9.38.0",
-    "semver": "^7.7.3",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.2",
-    "zod": "^4.3.5"
-  },
-  "packageManager": "npm@11.5.1+"
+  "packageManager": "npm@11.5.1+",
+  "workspaces": [
+    "userscript",
+    "builder"
+  ]
 }

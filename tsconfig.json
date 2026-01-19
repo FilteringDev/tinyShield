@@ -5,6 +5,12 @@
     "moduleResolution": "NodeNext",
     "removeComments": false,
     "alwaysStrict": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@builder/*": ["./builder/source/*"],
+      "@userscript/*": ["./userscript/source/*"],
+      "@root/*": ["./source/*"],
+      "@reporoot/*": ["./*"]
+    }
   }
 }

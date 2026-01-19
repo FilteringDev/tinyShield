@@ -1,0 +1,31 @@
+{
+  "name": "@filteringdev/tinyshield-builder",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "tsc --noEmit && eslint **/*.ts",
+    "build": "tsx source/buildci.ts",
+    "debug": "tsx source/debug.ts",
+    "clean": "rm -rf dist && rm -rf .buildcache"
+  },
+  "dependencies": {
+    "@types/node": "^24.10.9"
+  },
+  "devDependencies": {
+    "@adguard/agtree": "^3.4.3",
+    "@npmcli/package-json": "^7.0.4",
+    "@types/npmcli__package-json": "^4.0.4",
+    "@types/semver": "^7.7.1",
+    "@typescriptprime/parsing": "^1.0.4",
+    "@typescriptprime/securereq": "^1.1.0",
+    "chokidar": "^5.0.0",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
+    "semver": "^7.7.3",
+    "tldts": "^7.0.19",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.0",
+    "zod": "^4.3.5"
+  }
+}
