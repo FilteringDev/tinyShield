@@ -16,7 +16,7 @@
     "@npmcli/package-json": "^7.0.4",
     "@types/npmcli__package-json": "^4.0.4",
     "@types/semver": "^7.7.1",
-    "@typescriptprime/parsing": "^1.0.4",
+    "@typescriptprime/parsing": "^1.1.0",
     "@typescriptprime/securereq": "^1.1.0",
     "chokidar": "^5.0.0",
     "esbuild": "^0.27.2",
@@ -25,7 +25,7 @@
     "tldts": "^7.0.19",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.53.0",
-    "zod": "^4.3.5"
+    "typescript-eslint": "^8.54.0",
+    "zod": "^4.3.6"
   }
 }
