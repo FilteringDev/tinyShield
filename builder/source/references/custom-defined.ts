@@ -1,1 +1,1 @@
-export const CustomDefinedMatches: Set<string> = new Set()
+export const CustomDefinedMatches: Set<string> = new Set(['nicovideo.jp'])
