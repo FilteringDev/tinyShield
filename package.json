@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build:interface": "esbuild userscript/source/interface.ts --bundle --format=esm --splitting --sourcemap --target=es2024 --external:/node_modules --outdir=dist && tsc userscript/source/interface.ts --outDir dist/types --declaration --emitDeclarationOnly --skipLibCheck",
+    "build:interface": "tsc -p userscript/tsconfig.json",
     "build:userscript": "npm run build -w builder -- --minify true --use-cache false --build-type production --SubscriptionUrl https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js",
     "build": "npm run build:interface && npm run build:userscript",
     "debug": "npm run debug -w builder",
@@ -18,11 +18,10 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/interface.js",
-      "types": "./dist/types/interface.d.ts"
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
-  "types": "./dist/types/interface.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FilteringDev/tinyShield.git"
