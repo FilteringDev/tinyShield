@@ -6,6 +6,6 @@
     "lint": "tsc --noEmit && eslint **/*.ts"
   },
   "devDependencies": {
-    "@types/web": "^0.0.325"
+    "@types/web": "^0.0.330"
   }
 }
