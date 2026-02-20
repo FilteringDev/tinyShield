@@ -15,12 +15,15 @@ declare const unsafeWindow: unsafeWindow
 const Win = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window
 
 import { CheckDepthInASWeakMap } from './as-weakmap.js'
+import { SafeArrayToString } from './safe-ArrayToString.js'
 
 export const OriginalRegExpTest = Win.RegExp.prototype.test
 
 export function RunTinyShieldUserscript(BrowserWindow: typeof window, UserscriptName: string = 'tinyShield'): void {
-  const OriginalArrayToString = BrowserWindow.Array.prototype.toString
   const OriginalRegExpTest = BrowserWindow.RegExp.prototype.test
+  const OriginalArrayMap = BrowserWindow.Array.prototype.map
+  const OriginalString = BrowserWindow.String
+  const OriginalArrayJoin = BrowserWindow.Array.prototype.join
 
   const ProtectedFunctionStrings = ['toString', 'get', 'set']
 
@@ -46,7 +49,7 @@ export function RunTinyShieldUserscript(BrowserWindow: typeof window, Userscript
         return Reflect.apply(Target, ThisArg, Args)
       }
 
-      let ArgText = OriginalArrayToString.call(Args) as string
+      let ArgText = SafeArrayToString(Args, { OriginalArrayMap, OriginalString, OriginalArrayJoin })
       if (ASInitPositiveRegExps.filter(ASInitPositiveRegExp => ASInitPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 2).length === 1) {
         console.debug(`[${UserscriptName}]: Map.prototype.get:`, ThisArg, Args)
         throw new Error()
@@ -68,11 +71,7 @@ export function RunTinyShieldUserscript(BrowserWindow: typeof window, Userscript
   BrowserWindow.Map.prototype.set = new Proxy(BrowserWindow.Map.prototype.set, {
     apply(Target: (key: unknown, value: unknown) => Map<unknown, unknown>, ThisArg: Map<unknown, unknown>, Args: [unknown, unknown]) {
       let ArgText = ''
-      try {
-        ArgText = OriginalArrayToString.call(Args) as string
-      } catch {
-        console.warn(`[${UserscriptName}]: Map.prototype.set:`, ThisArg, Args)
-      }
+      ArgText = SafeArrayToString(Args, { OriginalArrayMap, OriginalString, OriginalArrayJoin })
       if (ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 3).length === 1) {
         console.debug(`[${UserscriptName}]: Map.prototype.set:`, ThisArg, Args)
         throw new Error()
