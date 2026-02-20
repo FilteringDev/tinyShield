@@ -27,7 +27,6 @@
     "url": "git+https://github.com/FilteringDev/tinyShield.git"
   },
   "license": "MPL-2.0",
-  "packageManager": "npm@11.5.1+",
   "workspaces": [
     "userscript",
     "builder"
