@@ -12,20 +12,22 @@
     "@types/node": "^24.10.12"
   },
   "devDependencies": {
-    "@adguard/agtree": "^3.4.3",
+    "@adguard/agtree": "^4.0.1",
     "@npmcli/package-json": "^7.0.4",
     "@types/npmcli__package-json": "^4.0.4",
     "@types/semver": "^7.7.1",
+    "@typescript-eslint/eslint-plugin": "^8.56.0",
+    "@typescript-eslint/parser": "^8.56.0",
     "@typescriptprime/parsing": "^1.1.0",
     "@typescriptprime/securereq": "^1.1.0",
     "chokidar": "^5.0.0",
     "esbuild": "^0.27.3",
-    "eslint": "^9.39.2",
+    "eslint": "10",
     "semver": "^7.7.4",
     "tldts": "^7.0.23",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.55.0",
+    "typescript-eslint": "^8.56.0",
     "zod": "^4.3.6"
   }
 }
