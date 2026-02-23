@@ -12,7 +12,7 @@
     "@types/node": "^24.10.12"
   },
   "devDependencies": {
-    "@adguard/agtree": "^3.4.3",
+    "@adguard/agtree": "^4.0.1",
     "@npmcli/package-json": "^7.0.4",
     "@types/npmcli__package-json": "^4.0.4",
     "@types/semver": "^7.7.1",
