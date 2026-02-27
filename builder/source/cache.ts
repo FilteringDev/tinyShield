@@ -3,7 +3,7 @@ import * as Fs from 'node:fs'
 import * as Process from 'node:process'
 import { FetchAdShieldDomains } from './references/index.js'
 
-const CachePath = Process.cwd() + '/.buildcache'
+const CachePath = (Process.env.INIT_CWD ? Process.env.INIT_CWD : Process.cwd()) + '/.buildcache'
 const CacheDomainsPath = CachePath + '/domains.json'
 
 export function CreateCache(Domains: Set<string>) {

@@ -42,10 +42,7 @@ export async function Build(OptionsParam?: BuildOptions): Promise<void> {
     }
   }
 
-  let ProjectRoot = Process.cwd()
-  if (Process.cwd().endsWith('/builder')) {
-    ProjectRoot = Process.cwd() + '/..'
-  }
+  let ProjectRoot = Process.env.INIT_CWD ? Process.env.INIT_CWD : Process.cwd()
   
   const Banner = CreateBanner({
     Version: Options.Version ?? (await PackageJson.load(ProjectRoot)).content.version ?? '0.0.0',

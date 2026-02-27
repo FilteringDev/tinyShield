@@ -6,10 +6,7 @@ import * as Fs from 'node:fs'
 import { RunDebugServer } from './utils/http-server.js'
 import { Build } from './build.js'
 
-let ProjectRoot = Process.cwd()
-if (Process.cwd().endsWith('/builder')) {
-  ProjectRoot = Process.cwd().replaceAll(/\/builder$/g, '')
-}
+let ProjectRoot = Process.env.INIT_CWD ? Process.env.INIT_CWD : Process.cwd()
 const WatchingGlob = [];
 ['builder/', 'userscript/', ''].forEach(Dir => {
   WatchingGlob.push(...Fs.globSync(`${ProjectRoot}/${Dir}source/**/*.ts`))

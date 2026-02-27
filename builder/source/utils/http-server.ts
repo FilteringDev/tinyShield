@@ -9,10 +9,7 @@ function IsLoopBack(IP: string) {
 
 export function RunDebugServer(Port: number, FileName: string[], ShouldPreventHTTPResponse: boolean) {
   const HTTPServer = HTTP.createServer((Req, Res) => {
-    let ProjectRoot = Process.cwd()
-    if (Process.cwd().endsWith('/builder')) {
-      ProjectRoot = Process.cwd() + '/..'
-    }
+    let ProjectRoot = Process.env.INIT_CWD ? Process.env.INIT_CWD : Process.cwd()
     const RequestPath = Req.url?.substring(1) || ''
     const ResolvedPath = Path.resolve(ProjectRoot + '/dist', RequestPath)
     const RelativePath = Path.relative(ProjectRoot + '/dist', ResolvedPath)
