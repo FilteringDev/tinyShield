@@ -7,9 +7,9 @@
   },
   "devDependencies": {
     "@types/web": "^0.0.338",
-    "@typescript-eslint/eslint-plugin": "^8.56.0",
-    "@typescript-eslint/parser": "^8.56.0",
-    "eslint": "^10.0.1",
-    "typescript-eslint": "^8.56.0"
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "eslint": "^10.0.2",
+    "typescript-eslint": "^8.56.1"
   }
 }
