@@ -9,25 +9,25 @@
     "clean": "rm -rf dist && rm -rf .buildcache"
   },
   "dependencies": {
-    "@types/node": "^24.10.15"
+    "@types/node": "^24.12.0"
   },
   "devDependencies": {
     "@adguard/agtree": "^4.0.1",
     "@npmcli/package-json": "^7.0.5",
     "@types/npmcli__package-json": "^4.0.4",
     "@types/semver": "^7.7.1",
-    "@typescript-eslint/eslint-plugin": "^8.56.1",
-    "@typescript-eslint/parser": "^8.56.1",
-    "@typescriptprime/parsing": "^1.1.0",
-    "@typescriptprime/securereq": "^1.1.1",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "@typescriptprime/parsing": "^2.0.0",
+    "@typescriptprime/securereq": "^1.2.0",
     "chokidar": "^5.0.0",
     "esbuild": "^0.27.3",
-    "eslint": "^10.0.2",
+    "eslint": "^10.0.3",
     "semver": "^7.7.4",
-    "tldts": "^7.0.23",
+    "tldts": "^7.0.25",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.56.1",
+    "typescript-eslint": "^8.57.0",
     "zod": "^4.3.6"
   }
 }
