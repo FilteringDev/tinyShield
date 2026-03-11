@@ -4,10 +4,14 @@ import * as Process from 'node:process'
 import * as Path from 'node:path'
 import { FetchAdShieldDomains } from './references/index.js'
 
-const BaseCacheDir = (Process.env.INIT_CWD && Path.isAbsolute(Process.env.INIT_CWD))
-  ? Process.env.INIT_CWD
-  : Process.cwd()
-const CachePath = Path.join(Path.resolve(BaseCacheDir), '.buildcache')
+const ProjectRoot = Path.resolve(Process.cwd())
+const EnvInitCwd = Process.env.INIT_CWD && Path.isAbsolute(Process.env.INIT_CWD)
+  ? Path.resolve(Process.env.INIT_CWD)
+  : null
+const BaseCacheDir = (EnvInitCwd && (EnvInitCwd === ProjectRoot || EnvInitCwd.startsWith(ProjectRoot + Path.sep)))
+  ? EnvInitCwd
+  : ProjectRoot
+const CachePath = Path.join(BaseCacheDir, '.buildcache')
 const CacheDomainsPath = Path.join(CachePath, 'domains.json')
 
 export function CreateCache(Domains: Set<string>) {
