@@ -5,8 +5,9 @@ import * as Crypto from 'node:crypto'
 import * as Fs from 'node:fs'
 import { RunDebugServer } from './utils/http-server.js'
 import { Build } from './build.js'
+import { SafeInitCwd } from './utils/safe-init-cwd.js'
 
-let ProjectRoot = Process.env.INIT_CWD ? Process.env.INIT_CWD : Process.cwd()
+let ProjectRoot = SafeInitCwd({ Cwd: Process.cwd(), InitCwd: Process.env.INIT_CWD })
 const WatchingGlob = [];
 ['builder/', 'userscript/', ''].forEach(Dir => {
   WatchingGlob.push(...Fs.globSync(`${ProjectRoot}/${Dir}source/**/*.ts`))

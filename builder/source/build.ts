@@ -8,6 +8,7 @@ import { FetchAdShieldDomains } from './references/index.js'
 import { CustomDefinedMatches } from './references/custom-defined.js'
 import { ConvertWildcardSuffixToRegexPattern } from './utils/wildcard-suffix-converter.js'
 import { CreateBanner } from './banner/index.js'
+import { SafeInitCwd } from './utils/safe-init-cwd.js'
 
 export type BuildOptions = {
   Minify: boolean
@@ -42,7 +43,7 @@ export async function Build(OptionsParam?: BuildOptions): Promise<void> {
     }
   }
 
-  let ProjectRoot = Process.env.INIT_CWD ? Process.env.INIT_CWD : Process.cwd()
+  let ProjectRoot = SafeInitCwd({ Cwd: Process.cwd(), InitCwd: Process.env.INIT_CWD })
   
   const Banner = CreateBanner({
     Version: Options.Version ?? (await PackageJson.load(ProjectRoot)).content.version ?? '0.0.0',

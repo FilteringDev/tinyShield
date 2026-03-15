@@ -2,6 +2,7 @@ import * as HTTP from 'node:http'
 import * as Fs from 'node:fs'
 import * as Process from 'node:process'
 import * as Path from 'node:path'
+import { SafeInitCwd } from './safe-init-cwd.js'
 
 function IsLoopBack(IP: string) {
   return IP === '127.0.0.1' || IP === '::1' || IP === '::ffff:127.0.0.1'
@@ -9,7 +10,7 @@ function IsLoopBack(IP: string) {
 
 export function RunDebugServer(Port: number, FileName: string[], ShouldPreventHTTPResponse: boolean) {
   const HTTPServer = HTTP.createServer((Req, Res) => {
-    let ProjectRoot = Process.env.INIT_CWD ? Process.env.INIT_CWD : Process.cwd()
+    let ProjectRoot = SafeInitCwd({ Cwd: Process.cwd(), InitCwd: Process.env.INIT_CWD })
     const RequestPath = Req.url?.substring(1) || ''
     const ResolvedPath = Path.resolve(ProjectRoot + '/dist', RequestPath)
     const RelativePath = Path.relative(ProjectRoot + '/dist', ResolvedPath)

@@ -1,10 +1,12 @@
 import * as Zod from 'zod'
 import * as Fs from 'node:fs'
+import * as Path from 'node:path'
 import * as Process from 'node:process'
 import { FetchAdShieldDomains } from './references/index.js'
+import { SafeInitCwd } from './utils/safe-init-cwd.js'
 
-const CachePath = (Process.env.INIT_CWD ? Process.env.INIT_CWD : Process.cwd()) + '/.buildcache'
-const CacheDomainsPath = CachePath + '/domains.json'
+const CachePath = Path.resolve(SafeInitCwd({ Cwd: Process.cwd(), InitCwd: Process.env.INIT_CWD }), '.buildcache')
+const CacheDomainsPath = Path.join(CachePath, 'domains.json')
 
 export function CreateCache(Domains: Set<string>) {
   if (!Fs.existsSync(CachePath)) {
