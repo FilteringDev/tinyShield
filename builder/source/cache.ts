@@ -9,40 +9,72 @@ const CachePath = Path.resolve(SafeInitCwd({ Cwd: Process.cwd(), InitCwd: Proces
 const CacheDomainsPath = Path.join(CachePath, 'domains.json')
 
 export function CreateCache(Domains: Set<string>) {
-  if (!Fs.existsSync(CachePath)) {
-    Fs.mkdirSync(CachePath)
-  } else if (!Fs.statSync(CachePath).isDirectory()) {
+  Fs.mkdirSync(CachePath, { recursive: true })
+
+  if (!Fs.statSync(CachePath).isDirectory()) {
     throw new Error('.buildcache exists and is not a directory!')
   }
-  if (Fs.existsSync(CacheDomainsPath)) {
-    throw new Error('Cache already exists!')
+
+  try {
+    Fs.writeFileSync(
+      CacheDomainsPath,
+      JSON.stringify([...Domains], null, 2),
+      { encoding: 'utf-8', flag: 'wx' },
+    )
+  } catch (Err) {
+    if ((Err as NodeJS.ErrnoException).code === 'EEXIST') {
+      throw new Error('Cache already exists!')
+    }
+    throw Err
   }
-  Fs.writeFileSync(CacheDomainsPath, JSON.stringify([...Domains], null, 2), { encoding: 'utf-8' })
 }
 
 export async function LoadCache(): Promise<Set<string>> {
-  if (!Fs.existsSync(CacheDomainsPath)) {
-    throw new Error('Cache does not exist!')
-  }
-  const DomainsRaw = Fs.readFileSync(CacheDomainsPath, { encoding: 'utf-8' })
-  const DomainsArray: string[] = JSON.parse(DomainsRaw)
-  await Zod.array(Zod.string().refine((Value) => {
-    try {
-      new URLPattern(`https://${Value}/`)
-      return true
-    } catch {
-      return false
+  let DomainsRaw: string
+
+  try {
+    DomainsRaw = Fs.readFileSync(CacheDomainsPath, { encoding: 'utf-8' })
+  } catch (error: unknown) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      throw new Error('Cache does not exist!')
     }
-  })).parseAsync(DomainsArray)
-  return new Set(DomainsArray)
+    throw error
+  }
+
+  let DomainsArray: unknown
+  try {
+    DomainsArray = JSON.parse(DomainsRaw)
+  } catch {
+    throw new Error('Cache is corrupted!')
+  }
+
+  const ParsedDomains = await Zod.array(
+    Zod.string().refine((Value) => {
+      try {
+        new URLPattern(`https://${Value}/`)
+        return true
+      } catch {
+        return false
+      }
+    }),
+  ).parseAsync(DomainsArray)
+
+  return new Set(ParsedDomains)
 }
 
 export async function LoadDomainsFromCache(): Promise<Set<string>> {
-  if (!Fs.existsSync(CacheDomainsPath)) {
-    const Domains = await FetchAdShieldDomains()
-    CreateCache(Domains)
-    return Domains
-  } else {
+  try {
     return await LoadCache()
+  } catch {
+    const Domains = await FetchAdShieldDomains()
+    try {
+      CreateCache(Domains)
+      return Domains
+    } catch (Err: unknown) {
+      if ((Err as NodeJS.ErrnoException).code === 'EEXIST') {
+        return await LoadCache()
+      }
+      throw Err
+    }
   }
 }
