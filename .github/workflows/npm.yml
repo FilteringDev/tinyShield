@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Bump package.json version from tag
-        uses: TypescriptPrime/bump-packagejson-version@54f070f17064015698684ae9dfd4d72d98ffe59e
+        uses: TypescriptPrime/bump-packagejson-version@cedd67a09090f3ad9334349d3d0bc1a795a1a149
       - name: Build
         run: npm run build
       - name : Publish to npm
@@ -51,7 +51,7 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Bump package.json version from tag
-        uses: TypescriptPrime/bump-packagejson-version@54f070f17064015698684ae9dfd4d72d98ffe59e
+        uses: TypescriptPrime/bump-packagejson-version@cedd67a09090f3ad9334349d3d0bc1a795a1a149
       - name: Build
         run: npm run build
       - name : Publish to npm
@@ -76,7 +76,7 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Bump package.json version from tag
-        uses: TypescriptPrime/bump-packagejson-version@54f070f17064015698684ae9dfd4d72d98ffe59e
+        uses: TypescriptPrime/bump-packagejson-version@cedd67a09090f3ad9334349d3d0bc1a795a1a149
       - name: Build
         run: npm run build
       - name : Publish to npm
