@@ -3,5 +3,8 @@
   "include": [
     "source/**/*.ts",
     "test/**/*.ts"
-  ]
+  ],
+  "compilerOptions": {
+    "types": ["node"]
+  }
 }

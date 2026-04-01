@@ -4,7 +4,7 @@ import * as Process from 'node:process'
 import * as Path from 'node:path'
 import { SafeInitCwd } from './safe-init-cwd.js'
 
-function IsLoopBack(IP: string) {
+function IsLoopBack(IP?: string) {
   return IP === '127.0.0.1' || IP === '::1' || IP === '::ffff:127.0.0.1'
 }
 

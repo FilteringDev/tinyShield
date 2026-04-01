@@ -8,7 +8,7 @@ import { Build } from './build.js'
 import { SafeInitCwd } from './utils/safe-init-cwd.js'
 
 let ProjectRoot = SafeInitCwd({ Cwd: Process.cwd(), InitCwd: Process.env.INIT_CWD })
-const WatchingGlob = [];
+const WatchingGlob: string[] = [];
 ['builder/', 'userscript/', ''].forEach(Dir => {
   WatchingGlob.push(...Fs.globSync(`${ProjectRoot}/${Dir}source/**/*.ts`))
   WatchingGlob.push(...Fs.globSync(`${ProjectRoot}/${Dir}source/**/*.json`))
@@ -18,11 +18,13 @@ const Watcher = Chokidar.watch([...WatchingGlob], {
   ignored: '**/node_modules/**',
 })
 
-let BuildCooldownTimer: NodeJS.Timeout = null
+let BuildCooldownTimer: NodeJS.Timeout | null = null
 let ShouldPreventHTTPResponse = false
 let Version: number = 0
 Watcher.on('all', async (WatcherEvent, WatcherPath) => {
-  clearTimeout(BuildCooldownTimer)
+  if (BuildCooldownTimer) {
+    clearTimeout(BuildCooldownTimer)
+  }
   BuildCooldownTimer = setTimeout(async () => {
     console.log(`Detected file change (${WatcherEvent}):`, WatcherPath)
     ShouldPreventHTTPResponse = true

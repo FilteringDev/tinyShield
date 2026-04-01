@@ -5,8 +5,8 @@ import { HTTPSRequest } from '@typescriptprime/securereq'
 const IABSellersJsonURL = 'https://info.ad-shield.io/sellers.json'
 
 export async function FetchIABSellersJsonData(): Promise<string[]> {
-  const IABSellersJsonResponse: { StatusCode: number, Headers: Record<string, string | string[]>, Body: unknown } = await HTTPSRequest(new URL(IABSellersJsonURL), { ExpectedAs: 'JSON' })
-  let IABSellersJsonData =IABSellersJsonResponse.Body as {
+  const IABSellersJsonResponse = await HTTPSRequest(new URL(IABSellersJsonURL), { ExpectedAs: 'JSON' })
+  let IABSellersJsonData = IABSellersJsonResponse.Body as {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     sellers: Array<{
       // eslint-disable-next-line @typescript-eslint/naming-convention

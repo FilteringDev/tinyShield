@@ -30,7 +30,7 @@ export function RunTinyShieldUserscript(BrowserWindow: typeof window, Userscript
 
   BrowserWindow.Function.prototype.toString = new Proxy(BrowserWindow.Function.prototype.toString, {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-    apply(Target: () => string, ThisArg: Function, Args: null) {
+    apply(Target: () => string, ThisArg: Function, Args: []) {
       if (ProtectedFunctionStrings.includes(ThisArg.name)) {
         return `function ${ThisArg.name}() { [native code] }`
       } else {

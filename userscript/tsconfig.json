@@ -4,6 +4,7 @@
     "source/**/*.ts"
   ],
   "compilerOptions": {
+    "rootDir": "./source",
     "outDir": "../dist/",
     "declaration": true,
     "skipLibCheck": true

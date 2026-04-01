@@ -14,9 +14,9 @@ export async function IndexAdShieldDomainsFromUBO(): Promise<Set<string>> {
   let StartingLine = -1
   let EndingLine = -1
   for (const [Index, Filter] of AGTreeFiltersList.children.entries()) {
-    if (Filter.category === 'Comment' && typeof Filter.raws.text === 'string' && Filter.raws.text.includes(UBOFilterListAdShieldKeys.Starting)) {
+    if (Filter.category === 'Comment' && typeof Filter.raws?.text === 'string' && Filter.raws.text.includes(UBOFilterListAdShieldKeys.Starting)) {
       StartingLine = Index
-    } else if (Filter.category === 'Comment' && typeof Filter.raws.text === 'string' && Filter.raws.text.includes(UBOFilterListAdShieldKeys.Ending)) {
+    } else if (Filter.category === 'Comment' && typeof Filter.raws?.text === 'string' && Filter.raws.text.includes(UBOFilterListAdShieldKeys.Ending)) {
       EndingLine = Index
     } else if (StartingLine !== -1 && EndingLine !== -1) {
       break
@@ -33,8 +33,10 @@ export async function IndexAdShieldDomainsFromUBO(): Promise<Set<string>> {
     } else if (Filter.category === 'Cosmetic' && Filter.type === 'JsInjectionRule') {
       Filter.domains.children.forEach(Domain => AdShieldDomains.add(Domain.value))
     } else if (Filter.category === 'Network' && Filter.type === 'NetworkRule' && typeof Filter.modifiers !== 'undefined' && Filter.modifiers.children.some(M => M.name.value === 'domain')) {
-      let DomainValue = Filter.modifiers.children.find(M => M.name.value === 'domain').value.value
-      DomainValue.split('|').forEach(Domain => AdShieldDomains.add(Domain))
+      const DomainModifier = Filter.modifiers.children.find(M => M.name.value === 'domain')
+      if (typeof DomainModifier?.value?.value === 'string') {
+        DomainModifier.value.value.split('|').forEach(Domain => AdShieldDomains.add(Domain))
+      }
     }
   }
 
