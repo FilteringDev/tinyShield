@@ -9,7 +9,7 @@
     "clean": "rm -rf dist && rm -rf .buildcache"
   },
   "dependencies": {
-    "@types/node": "^24.12.0"
+    "@types/node": "^24.12.2"
   },
   "devDependencies": {
     "@adguard/agtree": "^4.0.4",
@@ -19,10 +19,10 @@
     "@typescript-eslint/eslint-plugin": "^8.58.0",
     "@typescript-eslint/parser": "^8.58.0",
     "@typescriptprime/parsing": "^2.0.1",
-    "@typescriptprime/securereq": "^1.2.1",
+    "@typescriptprime/securereq": "^2.0.0",
     "chokidar": "^5.0.0",
-    "esbuild": "^0.27.4",
-    "eslint": "^10.1.0",
+    "esbuild": "^0.28.0",
+    "eslint": "^10.2.0",
     "semver": "^7.7.4",
     "tldts": "^7.0.27",
     "tsx": "^4.21.0",

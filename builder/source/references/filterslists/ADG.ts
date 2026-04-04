@@ -1,4 +1,4 @@
-import { HTTPS2Request } from '@typescriptprime/securereq'
+import { SimpleSecureReq } from '@typescriptprime/securereq'
 import * as AGTree from '@adguard/agtree'
 import { AdShieldCDNDomains } from './keywords.js'
 
@@ -9,7 +9,7 @@ const AGBaseFilterListAdShieldKeys = {
 }
 
 export async function IndexAdShieldDomainsFromAG(): Promise<Set<string>> {
-  const FiltersListContent = await HTTPS2Request(new URL(AGBaseFilterListSpecificURL), { ExpectedAs: 'String' })
+  const FiltersListContent = await SimpleSecureReq.Request(new URL(AGBaseFilterListSpecificURL), { ExpectedAs: 'String' })
   const AGTreeFiltersList = AGTree.FilterListParser.parse(FiltersListContent.Body)
   let StartingLine = -1
   let EndingLine = -1

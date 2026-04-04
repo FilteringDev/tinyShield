@@ -1,11 +1,11 @@
 import * as Zod from 'zod'
-import { HTTPSRequest } from '@typescriptprime/securereq'
+import { SimpleSecureReq } from '@typescriptprime/securereq'
 
 
 const IABSellersJsonURL = 'https://info.ad-shield.io/sellers.json'
 
 export async function FetchIABSellersJsonData(): Promise<string[]> {
-  const IABSellersJsonResponse = await HTTPSRequest(new URL(IABSellersJsonURL), { ExpectedAs: 'JSON' })
+  const IABSellersJsonResponse = await SimpleSecureReq.Request(new URL(IABSellersJsonURL), { ExpectedAs: 'JSON' })
   let IABSellersJsonData = IABSellersJsonResponse.Body as {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     sellers: Array<{
