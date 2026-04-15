@@ -15,17 +15,17 @@
     "@adguard/agtree": "^4.0.4",
     "@npmcli/package-json": "^7.0.5",
     "@types/npmcli__package-json": "^4.0.4",
-    "@typescript-eslint/eslint-plugin": "^8.58.0",
-    "@typescript-eslint/parser": "^8.58.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
+    "@typescript-eslint/parser": "^8.58.2",
     "@typescriptprime/parsing": "^2.0.1",
     "@typescriptprime/securereq": "^2.0.0",
     "chokidar": "^5.0.0",
     "esbuild": "^0.28.0",
     "eslint": "^10.2.0",
-    "tldts": "^7.0.27",
+    "tldts": "^7.0.28",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.0",
+    "typescript-eslint": "^8.58.2",
     "zod": "^4.3.6"
   }
 }
