@@ -40,6 +40,7 @@
     "chokidar": "^5.0.0",
     "esbuild": "^0.28.0",
     "eslint": "^10.2.1",
+    "piscina": "^5.1.4",
     "tldts": "^7.0.28",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",

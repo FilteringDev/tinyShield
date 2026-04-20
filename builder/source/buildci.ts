@@ -1,7 +1,10 @@
 import * as Zod from 'zod'
 import * as Process from 'node:process'
 import { ParseArgumentsAndOptions, FilterArgumentsForOptions } from '@typescriptprime/parsing'
-import { Build, BuildOptions } from './build.js'
+import { StandardBuild } from './build.js'
+import { GroupedBuild } from './build-grouped.js'
+import { Build } from './build-core.js'
+import type { BuildOptions } from './build-core.js'
 
 let ParsedArgv = (await ParseArgumentsAndOptions<BuildOptions>(FilterArgumentsForOptions(Process.argv))).Options
 let Options = await Zod.strictObject({
@@ -10,4 +13,9 @@ let Options = await Zod.strictObject({
   SubscriptionUrl: Zod.string()
 }).parseAsync(ParsedArgv)
 
-await Build(Options)
+const CoreBuildInstance = new Build(Options)
+await CoreBuildInstance.Init()
+await new StandardBuild(CoreBuildInstance, Options).Build()
+console.log('StandardBuild completed successfully.')
+await new GroupedBuild(CoreBuildInstance, Options).Build()
+console.log('GroupedBuild completed successfully.')

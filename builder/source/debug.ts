@@ -4,8 +4,9 @@ import * as Process from 'node:process'
 import * as Crypto from 'node:crypto'
 import * as Fs from 'node:fs'
 import { RunDebugServer } from './utils/http-server.js'
-import { Build } from './build.js'
+import { StandardBuild } from './build.js'
 import { SafeInitCwd } from './utils/safe-init-cwd.js'
+import { Build } from './build-core.js'
 
 let ProjectRoot = SafeInitCwd({ Cwd: Process.cwd(), InitCwd: Process.env.INIT_CWD })
 const WatchingGlob: string[] = [];
@@ -21,6 +22,9 @@ const Watcher = Chokidar.watch([...WatchingGlob], {
 let BuildCooldownTimer: NodeJS.Timeout | null = null
 let ShouldPreventHTTPResponse = false
 let Version: number = 0
+let RandomPort = Crypto.randomInt(8000, 8999)
+const CoreBuildInstance = new Build({ Version: `0.0.${Version}`, Minify: false, BuildType: 'development', SubscriptionUrl: `http://localhost:${RandomPort}/tinyShield.dev.user.js` })
+await CoreBuildInstance.Init()
 Watcher.on('all', async (WatcherEvent, WatcherPath) => {
   if (BuildCooldownTimer) {
     clearTimeout(BuildCooldownTimer)
@@ -28,12 +32,11 @@ Watcher.on('all', async (WatcherEvent, WatcherPath) => {
   BuildCooldownTimer = setTimeout(async () => {
     console.log(`Detected file change (${WatcherEvent}):`, WatcherPath)
     ShouldPreventHTTPResponse = true
-    await Build({ Version: `0.0.${Version}`, Minify: false, BuildType: 'development', SubscriptionUrl: `http://localhost:${RandomPort}/tinyShield.dev.user.js` })
+    await new StandardBuild(CoreBuildInstance, { Version: `0.0.${Version}`, Minify: false, BuildType: 'development', SubscriptionUrl: `http://localhost:${RandomPort}/tinyShield.dev.user.js` }).Build()
     Version++
     ShouldPreventHTTPResponse = false
   }, 1500)
 })
 
-let RandomPort = Crypto.randomInt(8000, 8999)
 RunDebugServer(RandomPort, ['tinyShield.dev.user.js'], ShouldPreventHTTPResponse)
 console.log(`Debug HTTP server running on http://localhost:${RandomPort}/tinyShield.dev.user.js`)
