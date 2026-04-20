@@ -12,14 +12,16 @@ type WorkerData = {
 export default async function Worker({ FileName, Domains }: { FileName: Set<string>, Domains: Set<string> }) {
   const WorkerData: WorkerData = Piscina.workerData as WorkerData
 
+  let DownloadURL = new URL(WorkerData.Config.SubscriptionUrl.replaceAll('/tinyShield.user.js', `/grouped/tinyShield-${[...FileName][0]}.user.js`))
+
   const Banner = CreateBanner({
       Version: WorkerData.Config.Version!,
       BuildType: WorkerData.Config.BuildType ?? 'production',
       Domains: Domains,
-      Name: 'tinyShield',
+      Name: `tinyShield for Safari and ${[...FileName][0]}`,
       Namespace: 'https://github.com/FilteringDev/tinyShield',
-      DownloadURL: new URL(WorkerData.Config.SubscriptionUrl),
-      UpdateURL: new URL(WorkerData.Config.SubscriptionUrl),
+      DownloadURL: DownloadURL,
+      UpdateURL: DownloadURL,
       HomepageURL: new URL('https://github.com/FilteringDev/tinyShield'),
       SupportURL: new URL('https://github.com/FilteringDev/tinyShield/issues'),
       License: 'MPL-2.0',
