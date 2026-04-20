@@ -3,7 +3,6 @@ import * as Zod from 'zod'
 import * as Process from 'node:process'
 import * as TLDTS from 'tldts'
 import PackageJson from '@npmcli/package-json'
-import { LoadDomainsFromCache } from './cache.js'
 import { FetchAdShieldDomains } from './references/index.js'
 import { CustomDefinedMatches } from './references/custom-defined.js'
 import { ConvertWildcardSuffixToRegexPattern } from './utils/wildcard-suffix-converter.js'
@@ -12,7 +11,6 @@ import { SafeInitCwd } from './utils/safe-init-cwd.js'
 
 export type BuildOptions = {
   Minify: boolean
-  UseCache: boolean
   BuildType: 'production' | 'development',
   SubscriptionUrl: string,
   Version?: string
@@ -21,18 +19,13 @@ export type BuildOptions = {
 export async function Build(OptionsParam?: BuildOptions): Promise<void> {
   const Options = await Zod.strictObject({
     Minify: Zod.boolean(),
-    UseCache: Zod.boolean(),
     BuildType: Zod.enum(['production', 'development']),
     SubscriptionUrl: Zod.string().transform(Value => new URL(Value)).default(new URL('https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js')),
     Version: Zod.string().optional()
   }).parseAsync(OptionsParam)
 
   let MatchingDomains: Set<string> = new Set<string>()
-  if (Options.UseCache) {
-    MatchingDomains = await LoadDomainsFromCache()
-  } else {
-    MatchingDomains = await FetchAdShieldDomains()
-  }
+  MatchingDomains = await FetchAdShieldDomains()
   CustomDefinedMatches.forEach(Domain => MatchingDomains.add(Domain))
 
   MatchingDomains = new Set<string>([...MatchingDomains].map(Domain => TLDTS.parse(Domain).domain ?? Domain).filter((D): D is string => D !== null))

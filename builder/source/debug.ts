@@ -28,7 +28,7 @@ Watcher.on('all', async (WatcherEvent, WatcherPath) => {
   BuildCooldownTimer = setTimeout(async () => {
     console.log(`Detected file change (${WatcherEvent}):`, WatcherPath)
     ShouldPreventHTTPResponse = true
-    await Build({ Version: `0.0.${Version}`, Minify: false, UseCache: true, BuildType: 'development', SubscriptionUrl: `http://localhost:${RandomPort}/tinyShield.dev.user.js` })
+    await Build({ Version: `0.0.${Version}`, Minify: false, BuildType: 'development', SubscriptionUrl: `http://localhost:${RandomPort}/tinyShield.dev.user.js` })
     Version++
     ShouldPreventHTTPResponse = false
   }, 1500)

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build:interface": "tsc -p userscript/tsconfig.json",
-    "build:userscript": "npm run build -w builder -- --minify true --use-cache false --build-type production --SubscriptionUrl https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js",
+    "build:userscript": "npm run build -w builder -- --minify true --build-type production --SubscriptionUrl https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js",
     "build": "npm run build:interface && npm run build:userscript",
     "debug": "npm run debug -w builder",
     "lint": "npm run lint -w builder && npm run lint -w userscript"
