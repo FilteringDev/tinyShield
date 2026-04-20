@@ -5,8 +5,7 @@
   "scripts": {
     "lint": "tsc --noEmit && eslint **/*.ts",
     "build": "tsx source/buildci.ts",
-    "debug": "tsx source/debug.ts",
-    "clean": "rm -rf dist && rm -rf .buildcache"
+    "debug": "tsx source/debug.ts"
   },
   "dependencies": {
     "@types/node": "^24.12.2"
