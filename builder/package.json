@@ -5,19 +5,38 @@
   "scripts": {
     "lint": "tsc --noEmit && eslint **/*.ts",
     "build": "tsx source/buildci.ts",
-    "debug": "tsx source/debug.ts"
+    "debug": "tsx source/debug.ts",
+    "test": "npm run test:utils",
+    "test:utils": "ava test/utils/**/*.test.ts"
   },
   "dependencies": {
     "@types/node": "^24.12.2"
   },
+  "ava": {
+    "files": [
+      "test/**/*.test.ts"
+    ],
+    "nodeArguments": [
+      "--import=tsx"
+    ],
+    "workerThreads": false,
+    "typescript": {
+      "rewritePaths": {
+        "@builder/": "./sources/"
+      },
+      "compile": false
+    }
+  },
   "devDependencies": {
     "@adguard/agtree": "^4.0.4",
+    "@ava/typescript": "^7.0.0",
     "@npmcli/package-json": "^7.0.5",
     "@types/npmcli__package-json": "^4.0.4",
     "@typescript-eslint/eslint-plugin": "^8.58.2",
     "@typescript-eslint/parser": "^8.58.2",
     "@typescriptprime/parsing": "^2.0.1",
     "@typescriptprime/securereq": "^2.0.0",
+    "ava": "^7.0.0",
     "chokidar": "^5.0.0",
     "esbuild": "^0.28.0",
     "eslint": "^10.2.1",

@@ -7,7 +7,8 @@
     "build:userscript": "npm run build -w builder -- --minify true --build-type production --SubscriptionUrl https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js",
     "build": "npm run build:userscript",
     "debug": "npm run debug -w builder",
-    "lint": "npm run lint -w builder && npm run lint -w userscript"
+    "lint": "npm run lint -w builder && npm run lint -w userscript",
+    "test": "npm run test -w builder"
   },
   "keywords": [
     "Ad-Shield"
