@@ -24,8 +24,8 @@ export async function Build(OptionsParam?: BuildOptions): Promise<void> {
     Version: Zod.string().optional()
   }).parseAsync(OptionsParam)
 
-  let MatchingDomains: Set<string> = new Set<string>()
-  MatchingDomains = await FetchAdShieldDomains()
+  const FetchedDomains = await FetchAdShieldDomains()
+  let MatchingDomains: Set<string> = new Set<string>(FetchedDomains.get('Normal'))
   CustomDefinedMatches.forEach(Domain => MatchingDomains.add(Domain))
 
   MatchingDomains = new Set<string>([...MatchingDomains].map(Domain => TLDTS.parse(Domain).domain ?? Domain).filter((D): D is string => D !== null))
