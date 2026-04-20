@@ -18,7 +18,7 @@ const UserscriptName = 'tinyShield'
 import { CheckDepthInASWeakMap } from './as-weakmap.js'
 import { SafeArrayToString } from './safe-ArrayToString.js'
 
-const OriginalRegExpTest = BrowserWindow.RegExp.prototype.test
+export const OriginalRegExpTest = BrowserWindow.RegExp.prototype.test
 const OriginalArrayMap = BrowserWindow.Array.prototype.map
 const OriginalString = BrowserWindow.String
 const OriginalArrayJoin = BrowserWindow.Array.prototype.join
