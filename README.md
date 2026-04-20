@@ -23,6 +23,22 @@ Just click the following URL to detect this userscript.
 
 https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
+### Domain Group Subscription Guide (Apple Safari Extension Only)
+> [!IMPORTANT]
+> The grouped subscription URLs below are only for Apple Safari Extension users.
+> If you use AdGuard's userscript support, keep using the default URL (`dist/tinyShield.user.js`).
+
+- Build output structure:
+    - Default script: `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js`
+    - Domain-grouped scripts: `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/tinyShield-<domain-group>.user.js`
+- How to choose the subscription file for your domain group:
+    1. Open `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/`.
+    2. Select one `tinyShield-<domain-group>.user.js` file for the website you use.
+    3. Open that file once and confirm its metadata `@match` includes your target domain.
+    4. Subscribe to that exact grouped file URL in your Safari userscript extension.
+
+This domain-group split is intended to reduce the impact scope of issue #38 as much as possible.
+
 ### How to install
 - [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/) (Recommended if you cannot access AdGuard Premium) - Browser extension
     1. Open `Dashboard`.
@@ -98,7 +114,7 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
         * iOS 18+: `System settings` => `Apps` => `Safari` => `Extensions`
         * iOS 17 and older: `System settings` => `Safari` => `Extensions`
         Find **Usercripts**, enable it and allow `On other sites` permission
-    3. Open the [tinyShield](https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js) userscript URL in browser
+    3. Open `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/` in browser and select the grouped userscript URL for your domain (`tinyShield-<domain-group>.user.js`)
     4. Press the extensions icon in the address bar of Safari and select Userscripts 
     5. Tap to install
     5. In opened popup, scroll down and press Install button
