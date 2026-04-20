@@ -5,7 +5,26 @@ import { RegroupDomainTldLevel } from '@builder/utils/regroup-domain-tldlevel.js
 import { ConvertWildcardSuffixToRegexPattern } from '@builder/utils/wildcard-suffix-converter.js'
 import { CustomDefinedMatches, CustomExcludeMatches } from './custom-defined.js'
 
-type TASDomainContainer = Map<'Normal', Set<string>> & Map<'Full', Set<string>> & Map<'EachDomain', Set<Set<string>>> & Map<'EachDomainFull', Set<Set<string>>>
+export type TASDomainContainer = Map<'Normal', Set<string>> & Map<'Full', Set<string>> & Map<'EachDomain', Set<Set<string>>> & Map<'EachDomainFull', Set<Set<string>>>
+
+function ConvertToFlatFullDomains(Origin: Set<string>): Set<string> {
+  return new Set<string>([...Origin].flatMap(Domain => ConvertWildcardSuffixToRegexPattern(Domain)))
+}
+
+function IsGroupedDomains(Origin: Set<string> | Set<Set<string>>): Origin is Set<Set<string>> {
+  const FirstValue = Origin.values().next().value
+  return typeof FirstValue !== 'string' && typeof FirstValue !== 'undefined'
+}
+
+function ConvertToFullDomains(Origin: Set<string>): Set<string>
+function ConvertToFullDomains(Origin: Set<Set<string>>): Set<Set<string>>
+function ConvertToFullDomains(Origin: Set<string> | Set<Set<string>>): Set<string> | Set<Set<string>> {
+  if (IsGroupedDomains(Origin)) {
+    return new Set<Set<string>>([...Origin].map(DomainGroup => ConvertToFlatFullDomains(DomainGroup)))
+  }
+
+  return ConvertToFlatFullDomains(Origin)
+}
 
 export async function FetchAdShieldDomains(): Promise<TASDomainContainer> {
   const [IABSellersDomains, FiltersListsDomains] = await Promise.all([
@@ -18,12 +37,14 @@ export async function FetchAdShieldDomains(): Promise<TASDomainContainer> {
   const NormalDomains = DiscardResolvedDupWildcard(CombinedDomains)
   CustomDefinedMatches.forEach(Match => NormalDomains.add(Match))
   CustomExcludeMatches.forEach(Match => NormalDomains.delete(Match))
-  const FullDomains = new Set<string>([...NormalDomains].flatMap(Domain => ConvertWildcardSuffixToRegexPattern(Domain)))
+  const FullDomains = ConvertToFullDomains(NormalDomains)
+  const EachDomain = RegroupDomainTldLevel(NormalDomains)
+  const EachDomainFull = ConvertToFullDomains(EachDomain)
 
   Result.set('Normal', NormalDomains)
   Result.set('Full', FullDomains)
-  Result.set('EachDomain', RegroupDomainTldLevel(NormalDomains))
-  Result.set('EachDomainFull', RegroupDomainTldLevel(FullDomains))
+  Result.set('EachDomain', EachDomain)
+  Result.set('EachDomainFull', EachDomainFull)
 
   return Result
 }
