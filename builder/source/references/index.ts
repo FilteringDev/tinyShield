@@ -1,3 +1,4 @@
+import * as TLD from 'tldts'
 import { FetchAdShieldDomainsFromFiltersLists } from './filterslists.js'
 import { FetchIABSellersJsonData } from './iabsellers.js'
 import { DiscardResolvedDupWildcard } from '@builder/utils/discard-resolved-dup-wildcard.js'
@@ -33,10 +34,14 @@ export async function FetchAdShieldDomains(): Promise<TASDomainContainer> {
   ])
 
   const CombinedDomains = new Set<string>([...IABSellersDomains, ...FiltersListsDomains])
+  CombinedDomains.forEach(Domain => {
+    const Parsed = TLD.parse(Domain)
+    if (Domain.startsWith('~') && !Parsed.domain?.startsWith('~')) CombinedDomains.delete(Domain)
+  })
+  CustomDefinedMatches.forEach(Match => CombinedDomains.add(Match))
+  CustomExcludeMatches.forEach(Match => CombinedDomains.delete(Match))
   const Result: TASDomainContainer = new Map()
   const NormalDomains = DiscardResolvedDupWildcard(CombinedDomains)
-  CustomDefinedMatches.forEach(Match => NormalDomains.add(Match))
-  CustomExcludeMatches.forEach(Match => NormalDomains.delete(Match))
   const FullDomains = ConvertToFullDomains(NormalDomains)
   const EachDomain = RegroupDomainTldLevel(NormalDomains)
   const EachDomainFull = ConvertToFullDomains(EachDomain)
