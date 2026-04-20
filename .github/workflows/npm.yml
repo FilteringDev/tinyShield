@@ -23,10 +23,14 @@ jobs:
         run: npm install -g npm@latest
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Set pnpm store path
+        run: mkdir -p ~/.pnpm-store && pnpm config set store ~/.pnpm-store
       - name: Install dependencies
-        run: npm i
+        run: pnpm install --no-lockfile
       - name: Bump package.json version from tag
-        uses: TypescriptPrime/bump-packagejson-version@cedd67a09090f3ad9334349d3d0bc1a795a1a149
+        uses: TypescriptPrime/bump-packagejson-version@bfa9fbc7176cebc015d1b5fdd44876fb3a8feb83
       - name: Build
         run: npm run build
       - name : Publish to npm
@@ -48,10 +52,14 @@ jobs:
         run: npm install -g npm@latest
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Set pnpm store path
+        run: mkdir -p ~/.pnpm-store && pnpm config set store ~/.pnpm-store
       - name: Install dependencies
-        run: npm i
+        run: pnpm install --no-lockfile
       - name: Bump package.json version from tag
-        uses: TypescriptPrime/bump-packagejson-version@cedd67a09090f3ad9334349d3d0bc1a795a1a149
+        uses: TypescriptPrime/bump-packagejson-version@bfa9fbc7176cebc015d1b5fdd44876fb3a8feb83
       - name: Build
         run: npm run build
       - name : Publish to npm
@@ -73,10 +81,14 @@ jobs:
         run: npm install -g npm@latest
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Set pnpm store path
+        run: mkdir -p ~/.pnpm-store && pnpm config set store ~/.pnpm-store
       - name: Install dependencies
-        run: npm i
+        run: pnpm install --no-lockfile
       - name: Bump package.json version from tag
-        uses: TypescriptPrime/bump-packagejson-version@cedd67a09090f3ad9334349d3d0bc1a795a1a149
+        uses: TypescriptPrime/bump-packagejson-version@bfa9fbc7176cebc015d1b5fdd44876fb3a8feb83
       - name: Build
         run: npm run build
       - name : Publish to npm
