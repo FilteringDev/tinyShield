@@ -1,4 +1,4 @@
-name: Check building and linting
+name: Check testing building linting
 
 on:
   push:
@@ -41,4 +41,19 @@ jobs:
         run: npm i
       - name: Build the project
         run: npm run build
-    
+  test:
+    name: Run ava tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Set up NodeJS LTS
+        uses: actions/setup-node@v6
+        with:
+          node-version: 'lts/*'
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Install dependencies
+        run: npm i
+      - name: Run tests
+        run: npm run test
