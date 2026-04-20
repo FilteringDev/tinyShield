@@ -20,3 +20,24 @@ Test('DiscardResolvedDupWildcard does not remove non-duplicate wildcards with mu
   
   return T.deepEqual(DiscardResolvedDupWildcard(Input), Input)
 })
+
+Test('DiscardResolvedDupWildcard removes resolved duplicate wildcards with multiple subdomains', T => {
+  const Input = new Set(['google.*', 'access.google.*', 'google.com', 'google.co.kr'])
+  const Expected = new Set(['google.*'])
+  
+  return T.deepEqual(DiscardResolvedDupWildcard(Input), Expected)
+})
+
+Test('DiscardResolvedDupWildcard handles nested wildcard scenarios', T => {
+  const Input = new Set(['token.google.*', 'access.google.*', 'tools.google.com', 'google.google.co.kr'])
+  const Expected = new Set(['token.google.*', 'access.google.*', 'tools.google.*', 'google.google.*'])
+
+  return T.deepEqual(DiscardResolvedDupWildcard(Input), Expected)
+})
+
+Test('DiscardResolvedDupWildcard handles complex wildcard scenarios', T => {
+  const Input = new Set(['token.google.*', 'access.google.*', 'tools.google.com', 'google.google.co.kr', 'example.*', 'example.com', 'rust-lang.org'])
+  const Expected = new Set(['token.google.*', 'access.google.*', 'tools.google.*', 'google.google.*','example.*', 'rust-lang.org'])
+
+  return T.deepEqual(DiscardResolvedDupWildcard(Input), Expected)
+})
