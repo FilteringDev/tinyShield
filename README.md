@@ -38,7 +38,7 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
     4. Open that file once and confirm its metadata `@match` includes your target domain.
     5. Subscribe to that exact grouped file URL in your Safari userscript extension.
 
-This domain-group split is intended to reduce the impact scope of issue #38 as much as possible.
+This domain-group split is intended to reduce the impact scope of https://github.com/FilteringDev/tinyShield/issues/38 as much as possible.
 
 ### How to install
 - [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/) (Recommended if you cannot access AdGuard Premium) - Browser extension

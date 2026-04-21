@@ -35,7 +35,7 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
     4. そのファイルを一度開き、メタデータ `@match` に対象ドメインが含まれていることを確認します。
     5. Safari のユーザースクリプト拡張には、そのファイルURLをそのまま購読URLとして登録します。
 
-このドメイングループ分割は、issue #38 の影響範囲を可能な限り最小化することを目的としています。
+このドメイングループ分割は、https://github.com/FilteringDev/tinyShield/issues/38 の影響範囲を可能な限り最小化することを目的としています。
 
 ### インストールのやり方
 - [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/) (AdGuard Premiumにアクセスできない場合に推奨) - ブラウザー拡張

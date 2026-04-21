@@ -38,7 +38,7 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
   4. 해당 파일을 한 번 열어 메타데이터 `@match`에 대상 도메인이 포함되어 있는지 확인합니다.
   5. Safari 유저스크립트 확장에 그 파일 URL을 그대로 구독 URL로 등록합니다.
 
-이 도메인 그룹 분리는 issue #38의 영향 범위를 가능한 한 최소화하기 위한 목적입니다.
+이 도메인 그룹 분리는 https://github.com/FilteringDev/tinyShield/issues/38 의 영향 범위를 가능한 한 최소화하기 위한 목적입니다.
 
 ### 설치하는 법
 - [Violentmonkey](https://addons.mozilla.org/ko/firefox/addon/violentmonkey/) (AdGuard 프리미엄이 없다면 권장됨) - 브라우저 확장
