@@ -12,7 +12,7 @@ type WorkerData = {
 export default async function Worker({ FileName, Domains }: { FileName: Set<string>, Domains: Set<string> }) {
   const WorkerData: WorkerData = Piscina.workerData as WorkerData
 
-  let DownloadURL = new URL(WorkerData.Config.SubscriptionUrl.replaceAll('/tinyShield.user.js', `/grouped/tinyShield-${[...FileName][0]}.user.js`))
+  let DownloadURL = new URL(WorkerData.Config.SubscriptionUrl.replaceAll('/tinyShield.user.js', `/grouped/${[...FileName][0][0]}/tinyShield-${[...FileName][0]}.user.js`))
 
   const Banner = CreateBanner({
       Version: WorkerData.Config.Version!,
@@ -37,7 +37,7 @@ export default async function Worker({ FileName, Domains }: { FileName: Set<stri
       entryPoints: [WorkerData.ProjectRoot + '/userscript/source/index.ts'],
       bundle: true,
       minify: WorkerData.Config.Minify,
-      outfile: `${WorkerData.ProjectRoot}/dist/grouped/tinyShield-${[...FileName][0]}.user.js`,
+      outfile: `${WorkerData.ProjectRoot}/dist/grouped/${[...FileName][0][0]}/tinyShield-${[...FileName][0]}.user.js`,
       banner: {
         js: Banner
       },
