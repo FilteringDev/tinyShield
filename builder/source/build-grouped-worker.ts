@@ -15,32 +15,32 @@ export default async function Worker({ FileName, Domains }: { FileName: Set<stri
   let DownloadURL = new URL(WorkerData.Config.SubscriptionUrl.replaceAll('/tinyShield.user.js', `/grouped/${[...FileName][0][0]}/tinyShield-${[...FileName][0]}.user.js`))
 
   const Banner = CreateBanner({
-      Version: WorkerData.Config.Version!,
-      BuildType: WorkerData.Config.BuildType ?? 'production',
-      Domains: Domains,
-      Name: `tinyShield for Safari and ${[...FileName][0]}`,
-      Namespace: 'https://github.com/FilteringDev/tinyShield',
-      DownloadURL: DownloadURL,
-      UpdateURL: DownloadURL,
-      HomepageURL: new URL('https://github.com/FilteringDev/tinyShield'),
-      SupportURL: new URL('https://github.com/FilteringDev/tinyShield/issues'),
-      License: 'MPL-2.0',
-      Author: 'PiQuark6046 and contributors',
-      Description: {
-        en: 'tinyShield allows AdGuard, uBlock Origin, Brave and ABP to resist against Ad-Shield quickly.',
-        ko: 'tinyShield는 AdGuard, uBlock Origin, Brave 와 ABP가 애드쉴드에 빠르게 저항할 수 있도록 합니다.',
-        ja: 'tinyShieldを使うと、AdGuard, uBlock Origin, Brave, およびABPがAd-Shieldに素早く対抗できます。'
-      }
-    })
+    Version: WorkerData.Config.Version!,
+    BuildType: WorkerData.Config.BuildType ?? 'production',
+    Domains: Domains,
+    Name: `tinyShield for Safari and ${[...FileName][0]}`,
+    Namespace: 'https://github.com/FilteringDev/tinyShield',
+    DownloadURL: DownloadURL,
+    UpdateURL: DownloadURL,
+    HomepageURL: new URL('https://github.com/FilteringDev/tinyShield'),
+    SupportURL: new URL('https://github.com/FilteringDev/tinyShield/issues'),
+    License: 'MPL-2.0',
+    Author: 'PiQuark6046 and contributors',
+    Description: {
+      en: 'tinyShield allows AdGuard, uBlock Origin, Brave and ABP to resist against Ad-Shield quickly.',
+      ko: 'tinyShield는 AdGuard, uBlock Origin, Brave 와 ABP가 애드쉴드에 빠르게 저항할 수 있도록 합니다.',
+      ja: 'tinyShieldを使うと、AdGuard, uBlock Origin, Brave, およびABPがAd-Shieldに素早く対抗できます。'
+    }
+  })
 
-    await ESBuild.build({
-      entryPoints: [WorkerData.ProjectRoot + '/userscript/source/index.ts'],
-      bundle: true,
-      minify: WorkerData.Config.Minify,
-      outfile: `${WorkerData.ProjectRoot}/dist/grouped/${[...FileName][0][0]}/tinyShield-${[...FileName][0]}.user.js`,
-      banner: {
-        js: Banner
-      },
-      target: ['es2024', 'chrome119', 'firefox142', 'safari26']
-    })
+  await ESBuild.build({
+    entryPoints: [WorkerData.ProjectRoot + '/userscript/source/index.ts'],
+    bundle: true,
+    minify: WorkerData.Config.Minify,
+    outfile: `${WorkerData.ProjectRoot}/dist/grouped/${[...FileName][0][0]}/tinyShield-${[...FileName][0]}.user.js`,
+    banner: {
+      js: Banner
+    },
+    target: ['es2024', 'chrome119', 'firefox142', 'safari26']
+  })
 }
