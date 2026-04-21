@@ -27,12 +27,13 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
 
 - ビルド出力のファイル構成:
     - 基本スクリプト: `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js`
-    - ドメイングループ別スクリプト: `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/tinyShield-<domain-group>.user.js`
+    - ドメイングループ別スクリプト: `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/<initial>/tinyShield-<domain-group>.user.js`
 - ドメイングループごとの購読ファイル選択手順:
     1. `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/` を開きます。
-    2. 利用しているサイトに対応する `tinyShield-<domain-group>.user.js` を1つ選びます。
-    3. そのファイルを一度開き、メタデータ `@match` に対象ドメインが含まれていることを確認します。
-    4. Safari のユーザースクリプト拡張には、そのファイルURLをそのまま購読URLとして登録します。
+    2. 対象グループのファイル名先頭文字に対応する `<initial>/` サブディレクトリを開きます。
+    3. 利用しているサイトに対応する `tinyShield-<domain-group>.user.js` を1つ選びます。
+    4. そのファイルを一度開き、メタデータ `@match` に対象ドメインが含まれていることを確認します。
+    5. Safari のユーザースクリプト拡張には、そのファイルURLをそのまま購読URLとして登録します。
 
 このドメイングループ分割は、issue #38 の影響範囲を可能な限り最小化することを目的としています。
 
@@ -111,7 +112,7 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
         * iOS 18+: `システム設定` => `アプリ` => `Safari` => `拡張機能`
         * iOS 17 とそれ以下: `システム設定` => `Safari` => `拡張機能`
         **Usercripts**を見つけて有効化後に`他のサイト`の権限を許可します。
-    4. `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/` をブラウザで開き、対象ドメインに対応するグループスクリプトURL (`tinyShield-<domain-group>.user.js`) を選択します。
+    4. `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/` をブラウザで開き、`<initial>/` サブディレクトリに移動してから、対象ドメインに対応するグループスクリプトURL (`tinyShield-<domain-group>.user.js`) を選択します。
     5. Safariのアドレスバーにある拡張機能アイコンを押して、Userscriptsを選択します。
     6. タップでインストールします。
     7. 開いたポップアップを下にスクロールでインストールボタンを押します。

@@ -30,12 +30,13 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
 
 - Build output structure:
     - Default script: `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js`
-    - Domain-grouped scripts: `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/tinyShield-<domain-group>.user.js`
+    - Domain-grouped scripts: `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/<initial>/tinyShield-<domain-group>.user.js`
 - How to choose the subscription file for your domain group:
     1. Open `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/`.
-    2. Select one `tinyShield-<domain-group>.user.js` file for the website you use.
-    3. Open that file once and confirm its metadata `@match` includes your target domain.
-    4. Subscribe to that exact grouped file URL in your Safari userscript extension.
+    2. Open the `<initial>/` subdirectory that matches the first character of your target grouped file name.
+    3. Select one `tinyShield-<domain-group>.user.js` file for the website you use.
+    4. Open that file once and confirm its metadata `@match` includes your target domain.
+    5. Subscribe to that exact grouped file URL in your Safari userscript extension.
 
 This domain-group split is intended to reduce the impact scope of issue #38 as much as possible.
 
@@ -114,7 +115,7 @@ This domain-group split is intended to reduce the impact scope of issue #38 as m
         * iOS 18+: `System settings` => `Apps` => `Safari` => `Extensions`
         * iOS 17 and older: `System settings` => `Safari` => `Extensions`
         Find **Usercripts**, enable it and allow `On other sites` permission
-    3. Open `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/` in browser and select the grouped userscript URL for your domain (`tinyShield-<domain-group>.user.js`)
+    3. Open `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/` in browser, move to the `<initial>/` subdirectory, and select your grouped userscript URL (`tinyShield-<domain-group>.user.js`)
     4. Press the extensions icon in the address bar of Safari and select Userscripts 
     5. Tap to install
     5. In opened popup, scroll down and press Install button
