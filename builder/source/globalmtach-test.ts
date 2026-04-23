@@ -52,7 +52,7 @@ export class GlobalMatchBuild extends Build {
     }
 
     const DomainListElements = Array.from(MatchingDomains).map(Domain => JSON.stringify(Domain)).join(', ')
-    const ExecutionCondition = `(() => {\n  const DomainList: string[] = [${DomainListElements}]\n  const CurrentURL = new URL(BrowserWindow.location.href)\n  if (!DomainList.some(Domain => BrowserWindow.location.href.includes(\`://\${Domain}/\`) || CurrentURL.hostname.endsWith(\`.\${Domain}\`))) {\n    return\n  }\n\n`
+    const ExecutionCondition = `;(() => {\n  const DomainList: string[] = [${DomainListElements}]\n  const CurrentURL = new URL(BrowserWindow.location.href)\n  if (!DomainList.some(Domain => BrowserWindow.location.href.includes(\`://\${Domain}/\`) || CurrentURL.hostname.endsWith(\`.\${Domain}\`))) {\n    return\n  }\n\n`
 
     const Head = SourceText.slice(0, AnchorLineEndIndex + 1)
     const Tail = SourceText.slice(AnchorLineEndIndex + 1)
