@@ -5,6 +5,7 @@ import { StandardBuild } from './build.js'
 import { GroupedBuild } from './build-grouped.js'
 import { Build } from './build-core.js'
 import type { BuildOptions } from './build-core.js'
+import { GlobalMatchBuild } from './globalmtach-test.js'
 
 let ParsedArgv = (await ParseArgumentsAndOptions<BuildOptions>(FilterArgumentsForOptions(Process.argv))).Options
 let Options = await Zod.strictObject({
@@ -22,3 +23,4 @@ await GroupedBuildInstance.Build()
 console.log('GroupedBuild completed successfully.')
 await GroupedBuildInstance.MakeGroupMetadata()
 console.log('Group metadata creation completed successfully.')
+await new GlobalMatchBuild(CoreBuildInstance, Options).Build()
