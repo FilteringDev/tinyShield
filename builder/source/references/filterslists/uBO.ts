@@ -32,6 +32,8 @@ export async function IndexAdShieldDomainsFromUBO(): Promise<Set<string>> {
       Filter.domains.children.forEach(Domain => AdShieldDomains.add(Domain.value))
     } else if (Filter.category === 'Cosmetic' && Filter.type === 'JsInjectionRule') {
       Filter.domains.children.forEach(Domain => AdShieldDomains.add(Domain.value))
+    } else if (Filter.category === 'Cosmetic' && Filter.type === 'HtmlFilteringRule') {
+      Filter.domains.children.forEach(Domain => AdShieldDomains.add(Domain.value))
     } else if (Filter.category === 'Network' && Filter.type === 'NetworkRule' && typeof Filter.modifiers !== 'undefined' && Filter.modifiers.children.some(M => M.name.value === 'domain')) {
       const DomainModifier = Filter.modifiers.children.find(M => M.name.value === 'domain')
       if (typeof DomainModifier?.value?.value === 'string') {
