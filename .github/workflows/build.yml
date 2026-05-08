@@ -21,8 +21,12 @@ jobs:
           node-version: 'lts/*'
       - name: Checkout repository
         uses: actions/checkout@v6
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Set pnpm store-dir path
+        run: mkdir -p ~/.pnpm-store && pnpm config set store-dir ~/.pnpm-store
       - name: Install dependencies
-        run: npm i
+        run: pnpm install --no-lockfile
       - name: Run ESLint
         run: npm run lint
   build:
@@ -37,8 +41,12 @@ jobs:
           node-version: 'lts/*'
       - name: Checkout repository
         uses: actions/checkout@v6
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Set pnpm store-dir path
+        run: mkdir -p ~/.pnpm-store && pnpm config set store-dir ~/.pnpm-store
       - name: Install dependencies
-        run: npm i
+        run: pnpm install --no-lockfile
       - name: Build the project
         run: npm run build
   test:
@@ -53,7 +61,11 @@ jobs:
           node-version: 'lts/*'
       - name: Checkout repository
         uses: actions/checkout@v6
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Set pnpm store-dir path
+        run: mkdir -p ~/.pnpm-store && pnpm config set store-dir ~/.pnpm-store
       - name: Install dependencies
-        run: npm i
+        run: pnpm install --no-lockfile
       - name: Run tests
         run: npm run test
