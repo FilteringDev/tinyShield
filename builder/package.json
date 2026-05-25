@@ -30,7 +30,7 @@
   "devDependencies": {
     "@adguard/agtree": "^4.1.1",
     "@ava/typescript": "^7.0.0",
-    "@npmcli/package-json": "^7.0.5",
+    "@npmcli/package-json": "^8.0.0",
     "@types/npmcli__package-json": "^4.0.4",
     "@typescript-eslint/eslint-plugin": "^8.59.2",
     "@typescript-eslint/parser": "^8.59.2",
