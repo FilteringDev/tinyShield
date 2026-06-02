@@ -8,31 +8,132 @@
  *   - See Git history at https://github.com/FilteringDev/tinyShield for detailed authorship information.
  */
 
-import * as Utils from './utils.js'
 import { OriginalRegExpTest } from './index.js'
 
-export function CheckDepthInASWeakMap(Args: [object, unknown]) {
-  const FirstArg = Args[0] as Record<string, unknown>
-  if (Utils.CountCommonStrings(['device', 'id', 'imp', 'regs', 'site', 'source'], Object.keys(FirstArg)) < 5) {
-    return false
-  }
+type CheckDepthResult = { Status: 'matched' } | { Status: 'not-matched' } | { Status: 'too-expensive' } | { Status: 'unsafe-object'; Reason: unknown }
 
-  const ASBannerFrameIdRegExp = /^[0-9]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+\/[a-z0-9-\(\)]+\/[a-zA-Z0-9_]+_slot[0-9]+_+/
-  const ASBannerFrameKey = Object.keys(FirstArg).find(Arg => {
-    const Candidate = FirstArg[Arg]
-    if (!Array.isArray(Candidate)) {
-      return false
+type CheckBudget = {
+  MaxTopLevelKeys: number;
+  MaxArrayItems: number;
+  MaxInnerKeysPerObject: number;
+  MaxOperations: number;
+};
+
+const DefaultBudget: CheckBudget = {
+  MaxTopLevelKeys: 300,
+  MaxArrayItems: 1_000,
+  MaxInnerKeysPerObject: 100,
+  MaxOperations: 10_000,
+}
+
+const ImportantKeys = ['device', 'id', 'imp', 'regs', 'site', 'source'] as const
+const PropertyIsEnumerable = Object.prototype.propertyIsEnumerable
+
+function HasOwnEnumerableStringKey(Obj: object, Key: string): boolean {
+  return PropertyIsEnumerable.call(Obj, Key)
+}
+
+function CountCommonKnownKeys(Obj: object): number {
+  let Count = 0
+
+  for (const Key of ImportantKeys) {
+    if (HasOwnEnumerableStringKey(Obj, Key)) {
+      Count++
     }
-    return Candidate.filter(SubArg => {
-      if (typeof SubArg !== 'object' || SubArg === null) {
-        return false
-      }
-      return Object.keys(SubArg).some(InnerArg => OriginalRegExpTest.call(ASBannerFrameIdRegExp, InnerArg) as boolean)
-    }).length >= 1
-  })
-  if (typeof ASBannerFrameKey === 'undefined') {
-    return false
   }
 
-  return true
+  return Count
+}
+
+export function CheckDepthInASWeakMapBudgeted(
+  Args: [object, unknown],
+  Budget: CheckBudget = DefaultBudget,
+): CheckDepthResult {
+  let Operations = 0
+
+  const Tick = (Amount = 1): boolean => {
+    Operations += Amount
+    return Operations <= Budget.MaxOperations
+  }
+
+  try {
+    const FirstArg = Args[0] as Record<string, unknown>
+
+    if (!Tick(ImportantKeys.length)) {
+      return { Status: 'too-expensive' }
+    }
+
+    if (CountCommonKnownKeys(FirstArg) < 5) {
+      return { Status: 'not-matched' }
+    }
+
+    const AsBannerFrameIdRegExp =
+      /^[0-9]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+\/[a-z0-9-\(\)]+\/[a-zA-Z0-9_]+_slot[0-9]+_+/
+
+    let TopLevelKeyCount = 0
+
+    for (const Arg in FirstArg) {
+      if (!HasOwnEnumerableStringKey(FirstArg, Arg)) {
+        continue
+      }
+
+      TopLevelKeyCount++
+
+      if (
+        TopLevelKeyCount > Budget.MaxTopLevelKeys ||
+        !Tick()
+      ) {
+        return { Status: 'too-expensive' }
+      }
+
+      const Candidate = FirstArg[Arg]
+
+      if (!Array.isArray(Candidate)) {
+        continue
+      }
+
+      const MaxArrayIndex = Math.min(Candidate.length, Budget.MaxArrayItems)
+
+      for (let I = 0; I < MaxArrayIndex; I++) {
+        if (!Tick()) {
+          return { Status: 'too-expensive' }
+        }
+
+        const SubArg = Candidate[I]
+
+        if (typeof SubArg !== 'object' || SubArg === null) {
+          continue
+        }
+
+        let InnerKeyCount = 0
+
+        for (const InnerArg in SubArg as Record<string, unknown>) {
+          if (!HasOwnEnumerableStringKey(SubArg, InnerArg)) {
+            continue
+          }
+
+          InnerKeyCount++
+
+          if (
+            InnerKeyCount > Budget.MaxInnerKeysPerObject ||
+            !Tick()
+          ) {
+            return { Status: 'too-expensive' }
+          }
+
+          if (OriginalRegExpTest.call(AsBannerFrameIdRegExp, InnerArg) as boolean) {
+            return { Status: 'matched' }
+          }
+        }
+      }
+
+      if (Candidate.length > Budget.MaxArrayItems) {
+        return { Status: 'too-expensive' }
+      }
+    }
+
+    return { Status: 'not-matched' }
+  } catch (error) {
+    return { Status: 'unsafe-object', Reason: error }
+  }
 }

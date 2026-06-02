@@ -15,7 +15,8 @@ declare const unsafeWindow: unsafeWindow
 const BrowserWindow = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window
 const UserscriptName = 'tinyShield'
 
-import { CheckDepthInASWeakMap } from './as-weakmap.js'
+import { CheckDepthInASWeakMapBudgeted } from './as-weakmap.js'
+import { ShouldSkipRegExpTest } from './regexp-cheap-guard.js'
 import { SafeArrayToString } from './safe-ArrayToString.js'
 
 export const OriginalRegExpTest = BrowserWindow.RegExp.prototype.test
@@ -49,7 +50,8 @@ BrowserWindow.Map.prototype.get = new Proxy(BrowserWindow.Map.prototype.get, {
     }
 
     let ArgText = SafeArrayToString(Args, { OriginalArrayMap, OriginalString, OriginalArrayJoin, OriginalObjectGetPrototypeOf })
-    if (ASInitPositiveRegExps.filter(ASInitPositiveRegExp => ASInitPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 2).length === 1) {
+    
+    if (!ShouldSkipRegExpTest(ArgText) && ASInitPositiveRegExps.filter(ASInitPositiveRegExp => ASInitPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 2).length === 1) {
       console.debug(`[${UserscriptName}]: Map.prototype.get:`, ThisArg, Args)
       throw new Error()
     }
@@ -71,7 +73,8 @@ BrowserWindow.Map.prototype.set = new Proxy(BrowserWindow.Map.prototype.set, {
   apply(Target: (key: unknown, value: unknown) => Map<unknown, unknown>, ThisArg: Map<unknown, unknown>, Args: [unknown, unknown]) {
     let ArgText = ''
     ArgText = SafeArrayToString(Args, { OriginalArrayMap, OriginalString, OriginalArrayJoin, OriginalObjectGetPrototypeOf })
-    if (ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 3).length === 1) {
+    
+    if (!ShouldSkipRegExpTest(ArgText) && ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 3).length === 1) {
       console.debug(`[${UserscriptName}]: Map.prototype.set:`, ThisArg, Args)
       throw new Error()
     }
@@ -81,9 +84,19 @@ BrowserWindow.Map.prototype.set = new Proxy(BrowserWindow.Map.prototype.set, {
 
 BrowserWindow.WeakMap.prototype.set = new Proxy(BrowserWindow.WeakMap.prototype.set, {
   apply(Target: (key: object, value: unknown) => WeakMap<object, unknown>, ThisArg: WeakMap<object, unknown>, Args: [object, unknown]) {
-    if (CheckDepthInASWeakMap(Args)) {
-      console.debug(`[${UserscriptName}]: WeakMap.prototype.set:`, ThisArg, Args)
-      throw new Error()
+    let CheckResult = CheckDepthInASWeakMapBudgeted(Args)
+    switch (CheckResult.Status) {
+      case 'matched':
+        console.debug(`[${UserscriptName}]: WeakMap.prototype.set:`, ThisArg, Args)
+        throw new Error()
+      case 'not-matched':
+        break
+      case 'too-expensive':
+        console.warn(`[${UserscriptName}]: WeakMap.prototype.set: Check too expensive:`, ThisArg, Args)
+        break
+      case 'unsafe-object':
+        console.warn(`[${UserscriptName}]: WeakMap.prototype.set: Unsafe object:`, ThisArg, Args, CheckResult.Reason)
+        break
     }
 
     return Reflect.apply(Target, ThisArg, Args)
