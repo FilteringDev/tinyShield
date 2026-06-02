@@ -60,21 +60,28 @@ BrowserWindow.Map.prototype.get = new Proxy(BrowserWindow.Map.prototype.get, {
   }
 })
 
-const ASReinsertedAdvInvenPositiveRegExps: RegExp[][] = [[
-  /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/,
-  /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/,
-  /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/
-], [
-  /[a-z0-9A-Z]+\.setAttribute\( *('|")onload('|") *, *('|")! *async *function\( *\) *\{ *let */,
-  /confirm\( *[A-Za-z0-9]+ *\) *\) *{ *const *[A-Za-z0-9]+ *= *new *[A-Za-z0-9]+\.URL\(('|")https:\/\/report\.error-report\.com\//,
-  /\.forEach *\( *\( *[A-Za-z0-9]+ *=> *[A-Za-z0-9]+\.remove *\( *\) *\) *\) *\) *, *[0-9a-f]+ *\) *; *const *[A-Za-z0-9]+ *= *await *\( *await *fetch *\(/
-]]
+type ASReinsertedAdvInvenPossibleArgsType = { Key: 'string' | 'number' | 'function', Value: 'string' | 'number' | 'function' }
+const ASReinsertedAdvInvenPositiveRegExps: { Search: RegExp[], ArgsType: ASReinsertedAdvInvenPossibleArgsType }[] = [{
+  Search: [
+    /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/,
+    /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/,
+    /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/
+  ],
+  ArgsType: { Key: 'string', Value: 'string' }
+}, {
+  Search: [
+    /[a-z0-9A-Z]+\.setAttribute\( *('|")onload('|") *, *('|")! *async *function\( *\) *\{ *let */,
+    /confirm\( *[A-Za-z0-9]+ *\) *\) *{ *const *[A-Za-z0-9]+ *= *new *[A-Za-z0-9]+\.URL\(('|")https:\/\/report\.error-report\.com\//,
+    /\.forEach *\( *\( *[A-Za-z0-9]+ *=> *[A-Za-z0-9]+\.remove *\( *\) *\) *\) *\) *, *[0-9a-f]+ *\) *; *const *[A-Za-z0-9]+ *= *awai,t *\( *await *fetch *\(/
+  ],
+  ArgsType: { Key: 'string', Value: 'function' }
+}]
 BrowserWindow.Map.prototype.set = new Proxy(BrowserWindow.Map.prototype.set, {
   apply(Target: (key: unknown, value: unknown) => Map<unknown, unknown>, ThisArg: Map<unknown, unknown>, Args: [unknown, unknown]) {
     let ArgText = ''
     ArgText = SafeArrayToString(Args, { OriginalArrayMap, OriginalString, OriginalArrayJoin, OriginalObjectGetPrototypeOf })
     
-    if (!ShouldSkipRegExpTest(ArgText) && ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 3).length === 1) {
+    if (!ShouldSkipRegExpTest(ArgText) && ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.Search.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 3).length === 1) {
       console.debug(`[${UserscriptName}]: Map.prototype.set:`, ThisArg, Args)
       throw new Error()
     }
