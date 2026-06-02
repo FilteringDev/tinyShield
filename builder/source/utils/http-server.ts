@@ -8,12 +8,14 @@ function IsLoopBack(IP?: string) {
   return IP === '127.0.0.1' || IP === '::1' || IP === '::ffff:127.0.0.1'
 }
 
-export function RunDebugServer(Port: number, FileName: string[], ShouldPreventHTTPResponse: boolean) {
+export function RunDebugServer(Port: number, FileName: string[], GetActiveBuildSignal: () => AbortSignal | null) {
   const HTTPServer = HTTP.createServer((Req, Res) => {
     let ProjectRoot = SafeInitCwd({ Cwd: Process.cwd(), InitCwd: Process.env.INIT_CWD })
     const RequestPath = Req.url?.substring(1) || ''
     const ResolvedPath = Path.resolve(ProjectRoot + '/dist', RequestPath)
     const RelativePath = Path.relative(ProjectRoot + '/dist', ResolvedPath)
+    const ActiveBuildSignal = GetActiveBuildSignal()
+    const ShouldPreventHTTPResponse = ActiveBuildSignal !== null && !ActiveBuildSignal.aborted
 
     // Ensure the resolved path stays within the dist root to prevent directory traversal
     if (RelativePath.startsWith('..') || Path.isAbsolute(RelativePath)) {
