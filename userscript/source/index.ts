@@ -60,28 +60,48 @@ BrowserWindow.Map.prototype.get = new Proxy(BrowserWindow.Map.prototype.get, {
   }
 })
 
-type ASReinsertedAdvInvenPossibleArgsType = { Key: 'string' | 'number' | 'function', Value: 'string' | 'number' | 'function' }
+type ASReinsertedAdvInvenPossibleArgsType = { Key: 'string' | 'number' | 'function', Value: ['string', 'number', 'function'][number][] }
 const ASReinsertedAdvInvenPositiveRegExps: { Search: RegExp[], ArgsType: ASReinsertedAdvInvenPossibleArgsType }[] = [{
   Search: [
     /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/,
     /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/,
     /inventory_id,[a-zA-Z0-9-]+\/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/
   ],
-  ArgsType: { Key: 'string', Value: 'string' }
+  ArgsType: { Key: 'string', Value: ['string'] }
 }, {
   Search: [
     /[a-z0-9A-Z]+\.setAttribute\( *('|")onload('|") *, *('|")! *async *function\( *\) *\{ *let */,
     /confirm\( *[A-Za-z0-9]+ *\) *\) *{ *const *[A-Za-z0-9]+ *= *new *[A-Za-z0-9]+\.URL\(('|")https:\/\/report\.error-report\.com\//,
     /\.forEach *\( *\( *[A-Za-z0-9]+ *=> *[A-Za-z0-9]+\.remove *\( *\) *\) *\) *\) *, *[0-9a-f]+ *\) *; *const *[A-Za-z0-9]+ *= *awai,t *\( *await *fetch *\(/
   ],
-  ArgsType: { Key: 'string', Value: 'function' }
+  ArgsType: { Key: 'string', Value: ['function'] }
 }]
+
+function IsASReinsertedAdvInvenArgsTypeMatched(Args: [unknown, unknown], ArgsType: ASReinsertedAdvInvenPossibleArgsType): boolean {
+  const KeyType = typeof Args[0]
+  const ValueType = typeof Args[1]
+
+  if (KeyType !== ArgsType.Key) {
+    return false
+  }
+
+  return ArgsType.Value.includes(ValueType as ['string', 'number', 'function'][number])
+}
+
 BrowserWindow.Map.prototype.set = new Proxy(BrowserWindow.Map.prototype.set, {
   apply(Target: (key: unknown, value: unknown) => Map<unknown, unknown>, ThisArg: Map<unknown, unknown>, Args: [unknown, unknown]) {
     let ArgText = ''
+
+    const ArgsTypeMatchedRegExps = ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp =>
+      IsASReinsertedAdvInvenArgsTypeMatched(Args, ASReinsertedAdvInvenPositiveRegExp.ArgsType),
+    )
+    if (ArgsTypeMatchedRegExps.length === 0) {
+      return Reflect.apply(Target, ThisArg, Args)
+    }
+
     ArgText = SafeArrayToString(Args, { OriginalArrayMap, OriginalString, OriginalArrayJoin, OriginalObjectGetPrototypeOf })
     
-    if (!ShouldSkipRegExpTest(ArgText) && ASReinsertedAdvInvenPositiveRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.Search.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 3).length === 1) {
+    if (!ShouldSkipRegExpTest(ArgText) && ArgsTypeMatchedRegExps.filter(ASReinsertedAdvInvenPositiveRegExp => ASReinsertedAdvInvenPositiveRegExp.Search.filter(Index => OriginalRegExpTest.call(Index, ArgText) as boolean).length >= 3).length === 1) {
       console.debug(`[${UserscriptName}]: Map.prototype.set:`, ThisArg, Args)
       throw new Error()
     }
