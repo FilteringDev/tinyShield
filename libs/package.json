@@ -20,6 +20,10 @@
       "import": "./dist/references/index.js"
     }
   },
+  "license": "MPL-2.0",
+  "keywords": [
+    "Ad-Shield"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FilteringDev/tinyShield.git"
