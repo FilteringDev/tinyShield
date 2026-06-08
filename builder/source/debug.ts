@@ -9,7 +9,7 @@ import { Build } from './build-core.js'
 
 let ProjectRoot = SafeInitCwd({ Cwd: Process.cwd(), InitCwd: Process.env.INIT_CWD })
 const WatchingGlob: string[] = []
-for (const Dir of ['builder/', 'userscript/', '']) {
+for (const Dir of ['builder/', 'userscript/', 'libs/', '']) {
   WatchingGlob.push(...Fs.globSync(`${ProjectRoot}/${Dir}source/**/*.ts`))
   WatchingGlob.push(...Fs.globSync(`${ProjectRoot}/${Dir}source/**/*.json`))
   WatchingGlob.push(...Fs.globSync(`${ProjectRoot}/${Dir}source/**/*.txt`))

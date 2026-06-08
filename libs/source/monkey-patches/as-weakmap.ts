@@ -8,16 +8,18 @@
  *   - See Git history at https://github.com/FilteringDev/tinyShield for detailed authorship information.
  */
 
-import { OriginalRegExpTest } from './index.js'
+export type CheckDepthResult =
+  { Status: 'matched' } |
+  { Status: 'not-matched' } |
+  { Status: 'too-expensive' } |
+  { Status: 'unsafe-object'; Reason: unknown }
 
-type CheckDepthResult = { Status: 'matched' } | { Status: 'not-matched' } | { Status: 'too-expensive' } | { Status: 'unsafe-object'; Reason: unknown }
-
-type CheckBudget = {
-  MaxTopLevelKeys: number;
-  MaxArrayItems: number;
-  MaxInnerKeysPerObject: number;
-  MaxOperations: number;
-};
+export type CheckBudget = {
+  MaxTopLevelKeys: number
+  MaxArrayItems: number
+  MaxInnerKeysPerObject: number
+  MaxOperations: number
+}
 
 const DefaultBudget: CheckBudget = {
   MaxTopLevelKeys: 300,
@@ -48,6 +50,7 @@ function CountCommonKnownKeys(Obj: object): number {
 export function CheckDepthInASWeakMapBudgeted(
   Args: [object, unknown],
   Budget: CheckBudget = DefaultBudget,
+  OriginalRegExpTest: typeof RegExp.prototype.test = RegExp.prototype.test,
 ): CheckDepthResult {
   let Operations = 0
 
@@ -133,7 +136,7 @@ export function CheckDepthInASWeakMapBudgeted(
     }
 
     return { Status: 'not-matched' }
-  } catch (error) {
-    return { Status: 'unsafe-object', Reason: error }
+  } catch (Error) {
+    return { Status: 'unsafe-object', Reason: Error }
   }
 }

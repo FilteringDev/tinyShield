@@ -1,0 +1,66 @@
+{
+  "name": "@filteringdev/tinyshield-lib",
+  "version": "0.0.0",
+  "description": "Library APIs for tinyShield userscript monkey patches and reference domain loading.",
+  "type": "module",
+  "files": [
+    "dist/**/*"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./monkey-patches": {
+      "types": "./dist/monkey-patches/index.d.ts",
+      "import": "./dist/monkey-patches/index.js"
+    },
+    "./references": {
+      "types": "./dist/references/index.d.ts",
+      "import": "./dist/references/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FilteringDev/tinyShield.git"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "tsc --noEmit && eslint source/**/*.ts test/**/*.ts",
+    "test": "npm run build && ava test/**/*.test.ts"
+  },
+  "dependencies": {
+    "@adguard/agtree": "^4.1.1",
+    "@typescriptprime/securereq": "^2.0.0",
+    "tldts": "^7.0.30",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@ava/typescript": "^7.0.0",
+    "@types/node": "^24.12.2",
+    "@types/web": "^0.0.349",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
+    "ava": "^8.0.0",
+    "eslint": "^10.3.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.2"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.test.ts"
+    ],
+    "nodeArguments": [
+      "--import=tsx"
+    ],
+    "workerThreads": false,
+    "typescript": {
+      "compile": false,
+      "rewritePaths": {
+        "source/": "dist/"
+      }
+    }
+  }
+}

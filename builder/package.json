@@ -6,11 +6,12 @@
     "lint": "tsc --noEmit && eslint **/*.ts",
     "build": "tsx source/buildci.ts",
     "debug": "tsx source/debug.ts",
-    "test": "npm run test:utils",
-    "test:utils": "ava test/utils/**/*.test.ts"
+    "test": "echo \"Builder tests moved to @filteringdev/tinyshield-lib.\"",
+    "test:utils": "echo \"Builder utility tests moved to @filteringdev/tinyshield-lib.\""
   },
   "dependencies": {
-    "@types/node": "^24.12.2"
+    "@types/node": "^24.12.2",
+    "@filteringdev/tinyshield-lib": "workspace:*"
   },
   "ava": {
     "files": [
@@ -28,20 +29,15 @@
     }
   },
   "devDependencies": {
-    "@adguard/agtree": "^4.1.1",
-    "@ava/typescript": "^7.0.0",
     "@npmcli/package-json": "^8.0.0",
     "@types/npmcli__package-json": "^4.0.4",
     "@typescript-eslint/eslint-plugin": "^8.59.2",
     "@typescript-eslint/parser": "^8.59.2",
     "@typescriptprime/parsing": "^2.0.1",
-    "@typescriptprime/securereq": "^2.0.0",
-    "ava": "^8.0.0",
     "chokidar": "^5.0.0",
     "esbuild": "^0.28.0",
     "eslint": "^10.3.0",
     "piscina": "^5.1.4",
-    "tldts": "^7.0.30",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.2",

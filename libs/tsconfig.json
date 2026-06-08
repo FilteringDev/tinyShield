@@ -4,9 +4,10 @@
     "source/**/*.ts"
   ],
   "compilerOptions": {
-    "outDir": "../dist/",
+    "rootDir": "./source",
+    "outDir": "./dist",
     "declaration": true,
-    "skipLibCheck": true,
-    "rootDir": ".."
+    "declarationMap": true,
+    "skipLibCheck": true
   }
 }

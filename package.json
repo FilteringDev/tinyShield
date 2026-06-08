@@ -4,11 +4,12 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build:userscript": "npm run build -w builder -- --minify true --build-type production --SubscriptionUrl https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js",
+    "build:libs": "npm run build -w libs",
+    "build:userscript": "npm run build:libs && npm run build -w builder -- --minify true --build-type production --SubscriptionUrl https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js",
     "build": "npm run build:userscript",
     "debug": "npm run debug -w builder",
-    "lint": "npm run lint -w builder && npm run lint -w userscript",
-    "test": "npm run test -w builder"
+    "lint": "npm run lint -w libs && npm run lint -w builder && npm run lint -w userscript",
+    "test": "npm run test -w libs"
   },
   "keywords": [
     "Ad-Shield"
@@ -22,6 +23,7 @@
   },
   "license": "MPL-2.0",
   "workspaces": [
+    "libs",
     "userscript",
     "builder"
   ],

@@ -6,10 +6,30 @@
     "removeComments": false,
     "skipLibCheck": true,
     "paths": {
-      "@builder/*": ["./builder/source/*"],
-      "@userscript/*": ["./userscript/source/*"],
-      "@root/*": ["./source/*"],
-      "@reporoot/*": ["./*"]
+      "@builder/*": [
+        "./builder/source/*"
+      ],
+      "@userscript/*": [
+        "./userscript/source/*"
+      ],
+      "@root/*": [
+        "./source/*"
+      ],
+      "@reporoot/*": [
+        "./*"
+      ],
+      "@filteringdev/tinyshield-lib": [
+        "./libs/source/index.ts"
+      ],
+      "@filteringdev/tinyshield-lib/monkey-patches": [
+        "./libs/source/monkey-patches/index.ts"
+      ],
+      "@filteringdev/tinyshield-lib/references": [
+        "./libs/source/references/index.ts"
+      ],
+      "@filteringdev/tinyshield-lib/*": [
+        "./libs/source/*"
+      ]
     }
   }
 }
