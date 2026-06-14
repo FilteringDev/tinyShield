@@ -6,7 +6,6 @@ type OriginalAPI = {
 }
 
 export function SafeArrayToString(This: unknown[], OriginalAPI: OriginalAPI): string {
-
   const Mapped = OriginalAPI.OriginalArrayMap.call(
     This,
     (Value: unknown) => {

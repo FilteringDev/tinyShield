@@ -1,5 +1,5 @@
 import Test from 'ava'
-import { RegroupDomainTldLevel } from '@builder/utils/regroup-domain-tldlevel.js'
+import { RegroupDomainTldLevel } from '@filteringdev/tinyshield-lib/references'
 
 Test('RegroupDomainTldLevel discard subdomain elements only if their parent domain exists', T => {
   const Origin = new Set(['duckduckgo.com', 'access.duckduckgo.com', 'google.com', 'www.google.com'])

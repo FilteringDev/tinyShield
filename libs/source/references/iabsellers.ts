@@ -1,7 +1,6 @@
 import * as Zod from 'zod'
 import { SimpleSecureReq } from '@typescriptprime/securereq'
 
-
 const IABSellersJsonURL = 'https://info.ad-shield.io/sellers.json'
 
 export async function FetchIABSellersJsonData(): Promise<string[]> {

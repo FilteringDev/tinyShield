@@ -1,4 +1,5 @@
 packages:
+  - "libs"
   - "builder"
   - "userscript"
 

@@ -1,12 +1,26 @@
 import * as TLD from 'tldts'
+import { CustomDefinedMatches, CustomExcludeMatches } from './custom-defined.js'
 import { FetchAdShieldDomainsFromFiltersLists } from './filterslists.js'
 import { FetchIABSellersJsonData } from './iabsellers.js'
-import { DiscardResolvedDupWildcard } from '@builder/utils/discard-resolved-dup-wildcard.js'
-import { RegroupDomainTldLevel } from '@builder/utils/regroup-domain-tldlevel.js'
-import { ConvertWildcardSuffixToRegexPattern } from '@builder/utils/wildcard-suffix-converter.js'
-import { CustomDefinedMatches, CustomExcludeMatches } from './custom-defined.js'
+import { DiscardResolvedDupWildcard } from './utils/discard-resolved-dup-wildcard.js'
+import { RegroupDomainTldLevel } from './utils/regroup-domain-tldlevel.js'
+import { ConvertWildcardSuffixToRegexPattern } from './utils/wildcard-suffix-converter.js'
 
-export type TASDomainContainer = Map<'Normal', Set<string>> & Map<'Full', Set<string>> & Map<'EachDomain', Set<Set<string>>> & Map<'EachDomainFull', Set<Set<string>>>
+export { CustomDefinedMatches, CustomExcludeMatches } from './custom-defined.js'
+export { FetchAdShieldDomainsFromFiltersLists } from './filterslists.js'
+export { FetchIABSellersJsonData } from './iabsellers.js'
+export { IndexAdShieldDomainsFromAG } from './filterslists/ADG.js'
+export { IndexAdShieldDomainsFromUBO } from './filterslists/uBO.js'
+export { AdShieldCDNDomains, IsAdShieldCDNDomain } from './filterslists/keywords.js'
+export { DiscardResolvedDupWildcard } from './utils/discard-resolved-dup-wildcard.js'
+export { RegroupDomainTldLevel } from './utils/regroup-domain-tldlevel.js'
+export { ConvertWildcardSuffixToRegexPattern, PublicSuffixList } from './utils/wildcard-suffix-converter.js'
+
+export type TASDomainContainer =
+  Map<'Normal', Set<string>> &
+  Map<'Full', Set<string>> &
+  Map<'EachDomain', Set<Set<string>>> &
+  Map<'EachDomainFull', Set<Set<string>>>
 
 function ConvertToFlatFullDomains(Origin: Set<string>): Set<string> {
   return new Set<string>([...Origin].flatMap(Domain => ConvertWildcardSuffixToRegexPattern(Domain)))

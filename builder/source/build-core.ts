@@ -1,6 +1,6 @@
 import * as Zod from 'zod'
 import * as Process from 'node:process'
-import { FetchAdShieldDomains, type TASDomainContainer } from './references/index.js'
+import { FetchAdShieldDomains, type TASDomainContainer } from '@filteringdev/tinyshield-lib/references'
 import { SafeInitCwd } from './utils/safe-init-cwd.js'
 
 export type BuildOptions = {

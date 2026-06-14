@@ -2,26 +2,26 @@ import { SimpleSecureReq } from '@typescriptprime/securereq'
 import * as AGTree from '@adguard/agtree'
 import { AdShieldCDNDomains } from './keywords.js'
 
-const UBOFilterListSpecificURL = 'https://ublockorigin.github.io/uAssets/filters/filters.min.txt'
-const UBOFilterListAdShieldKeys = {
-  Starting: '! SECTION: Ad-Shield',
-  Ending: '! !SECTION: Ad-Shield'
+const AGBaseFilterListSpecificURL = 'https://adguardteam.github.io/AdguardFilters/BaseFilter/sections/specific.txt'
+const AGBaseFilterListAdShieldKeys = {
+  Starting: 'START: Ad-Shield ad reinsertion',
+  Ending: 'END: Ad-Shield ad reinsertion'
 }
 
-export async function IndexAdShieldDomainsFromUBO(): Promise<Set<string>> {
-  const FiltersListContent = await SimpleSecureReq.Request(new URL(UBOFilterListSpecificURL), { ExpectedAs: 'String' })
+export async function IndexAdShieldDomainsFromAG(): Promise<Set<string>> {
+  const FiltersListContent = await SimpleSecureReq.Request(new URL(AGBaseFilterListSpecificURL), { ExpectedAs: 'String' })
   const AGTreeFiltersList = AGTree.FilterListParser.parse(FiltersListContent.Body)
   let StartingLine = -1
   let EndingLine = -1
   for (const [Index, Filter] of AGTreeFiltersList.children.entries()) {
-    if (Filter.category === 'Comment' && typeof Filter.raws?.text === 'string' && Filter.raws.text.includes(UBOFilterListAdShieldKeys.Starting)) {
+    if (Filter.category === 'Comment' && typeof Filter.raws?.text === 'string' && Filter.raws?.text.includes(AGBaseFilterListAdShieldKeys.Starting)) {
       StartingLine = Index
-    } else if (Filter.category === 'Comment' && typeof Filter.raws?.text === 'string' && Filter.raws.text.includes(UBOFilterListAdShieldKeys.Ending)) {
+    } else if (Filter.category === 'Comment' && typeof Filter.raws?.text === 'string' && Filter.raws?.text.includes(AGBaseFilterListAdShieldKeys.Ending)) {
       EndingLine = Index
     } else if (StartingLine !== -1 && EndingLine !== -1) {
       break
     } else if (Index === AGTreeFiltersList.children.length - 1) {
-      throw new Error('Could not find Ad-Shield ad reinsertion section in ' + UBOFilterListSpecificURL)
+      throw new Error('Could not find Ad-Shield ad reinsertion section in ' + AGBaseFilterListSpecificURL)
     }
   }
   const AdShieldFilters = AGTreeFiltersList.children.filter((Filter, Index) => Index > StartingLine && Index < EndingLine)
@@ -42,7 +42,7 @@ export async function IndexAdShieldDomainsFromUBO(): Promise<Set<string>> {
     }
   }
 
-  let FilteredDomains = [...AdShieldDomains].filter(Domain => {
+  const FilteredDomains = [...AdShieldDomains].filter(Domain => {
     try {
       new URLPattern(`https://${Domain}/`)
     } catch {
