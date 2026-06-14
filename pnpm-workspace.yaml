@@ -5,3 +5,7 @@ packages:
 
 allowBuilds:
   esbuild: true
+
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - '@typescriptprime/*'
