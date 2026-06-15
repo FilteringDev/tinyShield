@@ -87,6 +87,26 @@ const TinyShieldPatchIdSet: ReadonlySet<string> = new Set(TinyShieldPatchIds)
 const WindowStates = new WeakMap<TinyShieldWindow, TinyShieldState>()
 const ProtectedFunctionStrings: ReadonlySet<string> = new Set(['toString', 'get', 'set'])
 const FunctionNameProperty = 'name'
+const OriginalMapGet = Map.prototype.get as (Key: unknown) => unknown
+const OriginalMapSet = Map.prototype.set as (Key: unknown, Value: unknown) => Map<unknown, unknown>
+const OriginalWeakMapGet = WeakMap.prototype.get as (Key: object) => unknown
+const OriginalWeakMapSet = WeakMap.prototype.set as (Key: object, Value: unknown) => WeakMap<object, unknown>
+
+function ApplyMapGet<K, V>(Target: Map<K, V>, Key: K): V | undefined {
+  return Reflect.apply(OriginalMapGet, Target as unknown as Map<unknown, unknown>, [Key]) as V | undefined
+}
+
+function ApplyMapSet<K, V>(Target: Map<K, V>, Key: K, Value: V): Map<K, V> {
+  return Reflect.apply(OriginalMapSet, Target as unknown as Map<unknown, unknown>, [Key, Value]) as Map<K, V>
+}
+
+function ApplyWeakMapGet<K extends object, V>(Target: WeakMap<K, V>, Key: K): V | undefined {
+  return Reflect.apply(OriginalWeakMapGet, Target as unknown as WeakMap<object, unknown>, [Key]) as V | undefined
+}
+
+function ApplyWeakMapSet<K extends object, V>(Target: WeakMap<K, V>, Key: K, Value: V): WeakMap<K, V> {
+  return Reflect.apply(OriginalWeakMapSet, Target as unknown as WeakMap<object, unknown>, [Key, Value]) as WeakMap<K, V>
+}
 
 const ASInitPositiveRegExps: RegExp[][] = [[
   /[a-zA-Z0-9]+ *=> *{ *const *[a-zA-Z0-9]+ *= *[a-zA-Z0-9]+ *; *if/,
@@ -146,7 +166,7 @@ class TinyShieldControllerImpl implements TinyShieldController {
   }
 
   GetPatch(PatchId: TinyShieldPatchId): TinyShieldPatchController {
-    const Patch = this.State.Patches.get(PatchId)
+    const Patch = ApplyMapGet(this.State.Patches, PatchId)
 
     if (typeof Patch === 'undefined') {
       throw new Error(`Unknown tinyShield patch id: ${PatchId}`)
@@ -181,7 +201,7 @@ function ResolveBrowserWindow(WindowOption?: TinyShieldWindow): TinyShieldWindow
 
 function GetTinyShieldState(Options: TinyShieldControllerOptions): TinyShieldState {
   const BrowserWindow = ResolveBrowserWindow(Options.Window)
-  const ExistingState = WindowStates.get(BrowserWindow)
+  const ExistingState = ApplyWeakMapGet(WindowStates, BrowserWindow)
 
   if (typeof ExistingState !== 'undefined') {
     if (typeof Options.UserscriptName !== 'undefined') {
@@ -202,14 +222,14 @@ function GetTinyShieldState(Options: TinyShieldControllerOptions): TinyShieldSta
     Patches: new Map()
   }
 
-  State.Patches.set('FunctionToString', CreatePatchState('FunctionToString', () => InstallFunctionToStringPatch(State)))
-  State.Patches.set('MapGet', CreatePatchState('MapGet', () => InstallMapGetPatch(State)))
-  State.Patches.set('MapSet', CreatePatchState('MapSet', () => InstallMapSetPatch(State)))
-  State.Patches.set('WeakMapSet', CreatePatchState('WeakMapSet', () => InstallWeakMapSetPatch(State)))
-  State.Patches.set('SetTimeout', CreatePatchState('SetTimeout', () => InstallSetTimeoutPatch(State)))
-  State.Patches.set('SetInterval', CreatePatchState('SetInterval', () => InstallSetIntervalPatch(State)))
+  ApplyMapSet(State.Patches, 'FunctionToString', CreatePatchState('FunctionToString', () => InstallFunctionToStringPatch(State)))
+  ApplyMapSet(State.Patches, 'MapGet', CreatePatchState('MapGet', () => InstallMapGetPatch(State)))
+  ApplyMapSet(State.Patches, 'MapSet', CreatePatchState('MapSet', () => InstallMapSetPatch(State)))
+  ApplyMapSet(State.Patches, 'WeakMapSet', CreatePatchState('WeakMapSet', () => InstallWeakMapSetPatch(State)))
+  ApplyMapSet(State.Patches, 'SetTimeout', CreatePatchState('SetTimeout', () => InstallSetTimeoutPatch(State)))
+  ApplyMapSet(State.Patches, 'SetInterval', CreatePatchState('SetInterval', () => InstallSetIntervalPatch(State)))
 
-  WindowStates.set(BrowserWindow, State)
+  ApplyWeakMapSet(WindowStates, BrowserWindow, State)
   return State
 }
 
@@ -251,7 +271,7 @@ function NormalizePatchIds(PatchIds: Iterable<TinyShieldPatchId>): TinyShieldPat
 }
 
 function IsPatchEnabled(State: TinyShieldState, PatchId: TinyShieldPatchId): boolean {
-  return State.Patches.get(PatchId)?.IsEnabled() === true
+  return ApplyMapGet(State.Patches, PatchId)?.IsEnabled() === true
 }
 
 function InstallFunctionToStringPatch(State: TinyShieldState): void {
