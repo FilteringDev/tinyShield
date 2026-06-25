@@ -22,7 +22,7 @@ jobs:
       - name: Update npm package manager
         run: npm install -g npm@latest
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install pnpm
         run: npm install -g pnpm
       - name: Set pnpm store-dir path
@@ -57,7 +57,7 @@ jobs:
       - name: Update npm package manager
         run: npm install -g npm@latest
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install pnpm
         run: npm install -g pnpm
       - name: Set pnpm store-dir path
@@ -92,7 +92,7 @@ jobs:
       - name: Update npm package manager
         run: npm install -g npm@latest
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install pnpm
         run: npm install -g pnpm
       - name: Set pnpm store-dir path

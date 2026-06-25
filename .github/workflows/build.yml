@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 'lts/*'
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install pnpm
         run: npm install -g pnpm
       - name: Set pnpm store-dir path
@@ -40,7 +40,7 @@ jobs:
         with:
           node-version: 'lts/*'
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install pnpm
         run: npm install -g pnpm
       - name: Set pnpm store-dir path
@@ -60,7 +60,7 @@ jobs:
         with:
           node-version: 'lts/*'
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install pnpm
         run: npm install -g pnpm
       - name: Set pnpm store-dir path
