@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@ava/typescript": "^7.0.0",
-    "@types/node": "^24.12.2",
+    "@types/node": "^26.1.0",
     "@types/web": "^0.0.349",
     "@typescript-eslint/eslint-plugin": "^8.59.2",
     "@typescript-eslint/parser": "^8.59.2",
