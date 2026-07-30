@@ -10,7 +10,7 @@
     "test:utils": "echo \"Builder utility tests moved to @filteringdev/tinyshield-lib.\""
   },
   "dependencies": {
-    "@types/node": "^24.12.2",
+    "@types/node": "^26.1.2",
     "@filteringdev/tinyshield-lib": "workspace:*"
   },
   "ava": {
