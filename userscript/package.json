@@ -6,7 +6,7 @@
     "lint": "tsc --noEmit && oxlint --type-aware **/*.ts"
   },
   "devDependencies": {
-    "@types/web": "^0.0.349",
+    "@types/web": "^0.0.354",
     "oxlint": "^1.79.0",
     "oxlint-tsgolint": "^7.0.2001"
   },
