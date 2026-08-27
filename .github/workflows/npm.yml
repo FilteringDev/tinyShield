@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-lockfile
       - name: Bump @filteringdev/tinyshield package.json version from tag
-        uses: TypescriptPrime/bump-packagejson-version@72720c4d073ed0c5b9e9393d7334abfe3fabb47c
+        uses: TypescriptPrime/bump-packagejson-version@8b461d950090eae85d58d8a0085bfc993abdea0d
       - name: Bump @filteringdev/tinyshield-lib package.json version from tag
         run: npm pkg set version="${GITHUB_REF_NAME#v}" -w libs
       - name: Build
@@ -65,7 +65,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-lockfile
       - name: Bump @filteringdev/tinyshield package.json version from tag
-        uses: TypescriptPrime/bump-packagejson-version@72720c4d073ed0c5b9e9393d7334abfe3fabb47c
+        uses: TypescriptPrime/bump-packagejson-version@8b461d950090eae85d58d8a0085bfc993abdea0d
       - name: Bump @filteringdev/tinyshield-lib package.json version from tag
         run: npm pkg set version="${GITHUB_REF_NAME#v}" -w libs
       - name: Build
@@ -100,7 +100,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-lockfile
       - name: Bump @filteringdev/tinyshield package.json version from tag
-        uses: TypescriptPrime/bump-packagejson-version@72720c4d073ed0c5b9e9393d7334abfe3fabb47c
+        uses: TypescriptPrime/bump-packagejson-version@8b461d950090eae85d58d8a0085bfc993abdea0d
       - name: Bump @filteringdev/tinyshield-lib package.json version from tag
         run: npm pkg set version="${GITHUB_REF_NAME#v}" -w libs
       - name: Build
