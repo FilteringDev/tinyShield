@@ -3,17 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "tsc --noEmit && eslint **/*.ts"
+    "lint": "tsc --noEmit && oxlint --type-aware **/*.ts"
   },
   "devDependencies": {
     "@types/web": "^0.0.349",
-    "@typescript-eslint/eslint-plugin": "^8.59.2",
-    "@typescript-eslint/parser": "^8.59.2",
-    "eslint": "^10.3.0",
-    "typescript-eslint": "^8.59.2"
+    "oxlint": "^1.79.0",
+    "oxlint-tsgolint": "^7.0.2001"
   },
   "dependencies": {
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "@filteringdev/tinyshield-lib": "workspace:*"
   }
 }

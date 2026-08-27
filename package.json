@@ -4,12 +4,12 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build:libs": "npm run build -w libs",
-    "build:userscript": "npm run build:libs && npm run build -w builder -- --minify true --build-type production --SubscriptionUrl https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js",
-    "build": "npm run build:userscript",
-    "debug": "npm run debug -w builder",
-    "lint": "npm run lint -w libs && npm run lint -w builder && npm run lint -w userscript",
-    "test": "npm run test -w libs"
+    "build:libs": "pnpm --filter @filteringdev/tinyshield-lib run build",
+    "build:userscript": "pnpm run build:libs && pnpm --filter @filteringdev/tinyshield-builder run build --minify true --build-type production --SubscriptionUrl https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js",
+    "build": "pnpm run build:userscript",
+    "debug": "pnpm --filter @filteringdev/tinyshield-builder run debug",
+    "lint": "pnpm --filter @filteringdev/tinyshield-lib run lint && pnpm --filter @filteringdev/tinyshield-builder run lint && pnpm --filter @filteringdev/tinyshield-userscript run lint",
+    "test": "pnpm --filter @filteringdev/tinyshield-lib run test"
   },
   "keywords": [
     "Ad-Shield"
@@ -28,9 +28,7 @@
     "builder"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.59.2",
-    "@typescript-eslint/parser": "^8.59.2",
-    "eslint": "^10.3.0",
-    "typescript-eslint": "^8.59.2"
+    "oxlint": "^1.79.0",
+    "oxlint-tsgolint": "^7.0.2001"
   }
 }

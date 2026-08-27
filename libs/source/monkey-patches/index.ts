@@ -12,7 +12,7 @@ import { CheckDepthInASWeakMapBudgeted } from './as-weakmap.js'
 import { ShouldSkipRegExpTest } from './regexp-cheap-guard.js'
 import { SafeArrayToString } from './safe-array-to-string.js'
 
-/* eslint-disable @typescript-eslint/naming-convention */
+/* oxlint-disable tinyshield/pascal-case */
 export type TinyShieldWindow = {
   RegExp: RegExpConstructor
   Array: ArrayConstructor
@@ -24,9 +24,9 @@ export type TinyShieldWindow = {
   setTimeout: typeof globalThis.setTimeout
   setInterval: typeof globalThis.setInterval
 }
-/* eslint-enable @typescript-eslint/naming-convention */
+/* oxlint-enable tinyshield/pascal-case */
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
+// oxlint-disable-next-line tinyshield/pascal-case
 declare const unsafeWindow: TinyShieldWindow | undefined
 
 export const TinyShieldPatchIds = [

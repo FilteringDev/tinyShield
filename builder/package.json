@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint": "tsc --noEmit && eslint **/*.ts",
+    "lint": "tsc --noEmit && oxlint --type-aware **/*.ts",
     "build": "tsx source/buildci.ts",
     "debug": "tsx source/debug.ts",
     "test": "echo \"Builder tests moved to @filteringdev/tinyshield-lib.\"",
@@ -31,16 +31,14 @@
   "devDependencies": {
     "@npmcli/package-json": "^8.0.0",
     "@types/npmcli__package-json": "^4.0.4",
-    "@typescript-eslint/eslint-plugin": "^8.59.2",
-    "@typescript-eslint/parser": "^8.59.2",
     "@typescriptprime/parsing": "^2.0.1",
     "chokidar": "^5.0.0",
     "esbuild": "^0.28.0",
-    "eslint": "^10.3.0",
+    "oxlint": "^1.79.0",
+    "oxlint-tsgolint": "^7.0.2001",
     "piscina": "^5.1.4",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.2",
+    "typescript": "^7.0.2",
     "zod": "^4.4.3"
   }
 }

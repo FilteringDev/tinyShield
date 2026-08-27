@@ -6,15 +6,15 @@ const IABSellersJsonURL = 'https://info.ad-shield.io/sellers.json'
 export async function FetchIABSellersJsonData(): Promise<string[]> {
   const IABSellersJsonResponse = await SimpleSecureReq.Request(new URL(IABSellersJsonURL), { ExpectedAs: 'JSON' })
   let IABSellersJsonData = IABSellersJsonResponse.Body as {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
+    // oxlint-disable-next-line tinyshield/pascal-case
     sellers: Array<{
-      // eslint-disable-next-line @typescript-eslint/naming-convention
+      // oxlint-disable-next-line tinyshield/pascal-case
       seller_id: number,
-      // eslint-disable-next-line @typescript-eslint/naming-convention
+      // oxlint-disable-next-line tinyshield/pascal-case
       seller_type: string,
-      // eslint-disable-next-line @typescript-eslint/naming-convention
+      // oxlint-disable-next-line tinyshield/pascal-case
       name: string,
-      // eslint-disable-next-line @typescript-eslint/naming-convention
+      // oxlint-disable-next-line tinyshield/pascal-case
       domain: string
     }>
   }
