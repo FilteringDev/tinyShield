@@ -43,7 +43,7 @@
   "devDependencies": {
     "@ava/typescript": "^7.0.0",
     "@types/node": "^24.12.2",
-    "@types/web": "^0.0.349",
+    "@types/web": "^0.0.354",
     "ava": "^8.0.0",
     "oxlint": "^1.79.0",
     "oxlint-tsgolint": "^7.0.2001",
