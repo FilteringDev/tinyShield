@@ -7,11 +7,11 @@
   },
   "devDependencies": {
     "@types/web": "^0.0.349",
-    "oxlint": "^1.79.0",
+    "oxlint": "^1.80.0",
     "oxlint-tsgolint": "^7.0.2001"
   },
   "dependencies": {
-    "typescript": "^7.0.2",
-    "@filteringdev/tinyshield-lib": "workspace:*"
+    "@filteringdev/tinyshield-lib": "workspace:*",
+    "typescript": "^7.0.2"
   }
 }

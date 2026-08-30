@@ -35,17 +35,17 @@
     "test": "pnpm run build && vitest run"
   },
   "dependencies": {
-    "@adguard/agtree": "^4.1.1",
-    "@typescriptprime/securereq": "^2.0.0",
-    "tldts": "^7.0.30",
-    "zod": "^4.4.3"
+    "@adguard/agtree": "^4.2.1",
+    "@typescriptprime/securereq": "^2.1.0",
+    "tldts": "^7.4.11",
+    "zod": "^4.5.2"
   },
   "devDependencies": {
-    "@types/node": "^24.12.2",
+    "@types/node": "^24.13.3",
     "@types/web": "^0.0.349",
-    "oxlint": "^1.79.0",
+    "oxlint": "^1.80.0",
     "oxlint-tsgolint": "^7.0.2001",
     "typescript": "^7.0.2",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.7"
   }
 }
