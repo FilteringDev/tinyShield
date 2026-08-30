@@ -1,23 +1,30 @@
-import Test from 'ava'
+import { test, expect } from 'vitest'
 import { RegroupDomainTldLevel } from '@filteringdev/tinyshield-lib/references'
 
-Test('RegroupDomainTldLevel discard subdomain elements only if their parent domain exists', T => {
+test('RegroupDomainTldLevel discard subdomain elements only if their parent domain exists', () => {
   const Origin = new Set(['duckduckgo.com', 'access.duckduckgo.com', 'google.com', 'www.google.com'])
   const Expected = new Set([new Set(['duckduckgo.com']), new Set(['google.com'])])
   const Actual = RegroupDomainTldLevel(Origin)
-  return T.deepEqual(Actual, Expected)
+  return expect(Actual).toEqual(Expected)
 })
 
-Test('RegroupDomainTldLevel keep subdomain elements if their parent domain does not exist', T => {
+test('RegroupDomainTldLevel keep subdomain elements if their parent domain does not exist', () => {
   const Origin = new Set(['access.duckduckgo.com', 'token.duckduckgo.com', 'www.google.com', 'accounts.google.com'])
   const Expected = new Set([new Set(['access.duckduckgo.com', 'token.duckduckgo.com']), new Set(['www.google.com', 'accounts.google.com'])])
   const Actual = RegroupDomainTldLevel(Origin)
-  return T.deepEqual(Actual, Expected)
+  return expect(Actual).toEqual(Expected)
 })
 
-Test('RegroupDomainTldLevel throw error if multiple domains with the same TLD level exist', T => {
+test('RegroupDomainTldLevel throw error if multiple domains with the same TLD level exist', () => {
   const Origin = new Set(['duckduckgo.com', 'duckduckgo.co.kr', 'duckduckgo.co.jp'])
-  const ErrorInstance = T.throws(() => RegroupDomainTldLevel(Origin))
+  let ErrorInstance: Error | undefined
+
+  try {
+    RegroupDomainTldLevel(Origin)
+  } catch (Error_) {
+    ErrorInstance = Error_ as Error
+  }
+
   const Message = 'RegroupDomainTldLevel: Found multiple domains with the same TLD level. Use DiscardResolvedDupWildcard func first before using RegroupDomainTldLevel.'
-  return T.is(ErrorInstance?.message, Message)
+  return expect(ErrorInstance?.message).toBe(Message)
 })
