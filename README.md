@@ -18,6 +18,12 @@ If you believe this userscript is causing issues while in use, please use GitHub
 >
 > Supporting other adblockers is not guaranteed and even if requested, it may be rejected.
 
+## Receive Update Notifications via Discord/Telegram
+
+[Discord Bot](https://discord.com/oauth2/authorize?client_id=1543001264776814723) or Telegram `@filteringdev_noti_bot` can be used to receive update notifications.
+
+## Start
+
 ### Quick Start
 Just click the following URL to detect this userscript.
 
