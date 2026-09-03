@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@filteringdev/tinyshield-lib": "workspace:*",
-    "@types/node": "^24.13.3"
+    "@types/node": "^26.4.0"
   },
   "ava": {
     "files": [
