@@ -37,15 +37,15 @@
   "dependencies": {
     "@adguard/agtree": "^4.2.1",
     "@typescriptprime/securereq": "^2.1.0",
-    "tldts": "^7.4.11",
-    "zod": "^4.5.4"
+    "tldts": "^7.4.15",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@types/node": "^24.13.3",
-    "@types/web": "^0.0.354",
-    "oxlint": "^1.81.0",
-    "oxlint-tsgolint": "^7.0.2001",
+    "@types/node": "^24.19.0",
+    "@types/web": "^0.0.357",
+    "oxlint": "^1.85.0",
+    "oxlint-tsgolint": "^7.0.2003",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.2"
   }
 }

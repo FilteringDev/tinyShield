@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@filteringdev/tinyshield-lib": "workspace:*",
-    "@types/node": "^24.13.3"
+    "@types/node": "^24.19.0"
   },
   "ava": {
     "files": [
@@ -34,11 +34,11 @@
     "@typescriptprime/parsing": "^2.0.2",
     "chokidar": "^5.0.0",
     "esbuild": "^0.28.2",
-    "oxlint": "^1.81.0",
-    "oxlint-tsgolint": "^7.0.2001",
+    "oxlint": "^1.85.0",
+    "oxlint-tsgolint": "^7.0.2003",
     "piscina": "^5.3.2",
-    "tsx": "^4.23.13",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "zod": "^4.5.4"
+    "zod": "^4.6.5"
   }
 }
