@@ -28,7 +28,7 @@
     "builder"
   ],
   "devDependencies": {
-    "oxlint": "^1.85.0",
-    "oxlint-tsgolint": "^7.0.2003"
+    "oxlint": "^1.90.0",
+    "oxlint-tsgolint": "^7.0.2005"
   }
 }

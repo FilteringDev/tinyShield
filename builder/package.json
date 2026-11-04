@@ -10,8 +10,7 @@
     "test:utils": "echo \"Builder utility tests moved to @filteringdev/tinyshield-lib.\""
   },
   "dependencies": {
-    "@filteringdev/tinyshield-lib": "workspace:*",
-    "@types/node": "^24.19.0"
+    "@filteringdev/tinyshield-lib": "workspace:*"
   },
   "ava": {
     "files": [
@@ -30,15 +29,16 @@
   },
   "devDependencies": {
     "@npmcli/package-json": "^8.0.0",
+    "@types/node": "^26.6.6",
     "@types/npmcli__package-json": "^4.0.4",
     "@typescriptprime/parsing": "^2.0.2",
-    "chokidar": "^5.0.0",
+    "chokidar": "^6.0.0",
     "esbuild": "^0.28.2",
-    "oxlint": "^1.85.0",
-    "oxlint-tsgolint": "^7.0.2003",
+    "oxlint": "^1.90.0",
+    "oxlint-tsgolint": "^7.0.2005",
     "piscina": "^5.3.2",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "zod": "^4.6.5"
+    "zod": "^4.6.7"
   }
 }
