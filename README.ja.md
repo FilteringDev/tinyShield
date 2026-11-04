@@ -6,7 +6,7 @@
 
 tinyShieldは、Ad-Shieldで保護された広告のブロックと仮想整合性レイヤーのバイパスをします。
 
-tinyShieldスクリプトは、AdblockコミュニティとAdGuardによって管理されています。
+tinyShieldスクリプトは、Adblockコミュニティによって管理されています。
 
 > [!IMPORTANT]
 > tinyShieldユーザースクリプトのメンテナは、tinyShieldユーザースクリプトといずれかの広告ブロッカーを使用することを推奨します:

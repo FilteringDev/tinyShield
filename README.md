@@ -6,7 +6,7 @@
 
 tinyShield blocks Ad-Shield reinstable advertisements and bypasses Ad-Shield's virtual integrity layer.
 
-tinyShield userscript is managed by the adblock community and AdGuard.
+tinyShield userscript is managed by the adblock community.
 
 If you need help or have any questions during installation or usage, please use GitHub Discussions.  
 If you believe this userscript is causing issues while in use, please use GitHub Issues.  
