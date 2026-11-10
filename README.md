@@ -47,7 +47,9 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
 This domain-group split is intended to reduce the impact scope of https://github.com/FilteringDev/tinyShield/issues/38 as much as possible.
 
 ### How to install
-- [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/) (Recommended if you cannot access AdGuard Premium) - Browser extension
+**Violentmonkey** is recommended for Firefox and Chromium-based browsers. **wBlock** is recommended for Safari on macOS, iOS, and iPadOS. **Tampermonkey is not recommended.**
+
+- [Violentmonkey](https://violentmonkey.github.io/get-it/) (Recommended) - Firefox and Chromium-based browser extension
     1. Open `Dashboard`.
     2. Click `New` button.
     3. Click `Install from URL` button.
@@ -59,25 +61,14 @@ This domain-group split is intended to reduce the impact scope of https://github
     6. Confirm metadata of the userscript and click `Confirm installation`.
     7. Return to a tab opening the website protected by Ad-Shield and reload the tab by pressing <kbd>F5</kbd> or <kbd>Ctrl</kbd> + <kbd>R</kbd> or clicking the reload button.
 
-- [Tampermonkey](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/) - Browser extension
-    1. Open settings of Tampermonkey.
-    2. Go to `Utilities` tab.
-    3. Input the following URL into `Install from URL`:
-        ```
-        https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
-        ```
-    4. Click `Install` button.
-    5. Confirm metadata of the userscript and click `Install`.
-    6. Return to a tab opening the website protected by Ad-Shield and reload the tab by pressing <kbd>F5</kbd> or <kbd>Ctrl</kbd> + <kbd>R</kbd> or clicking the reload button.
-
     <details>
     <summary>Compatibility Table</summary>
 
-    Browser Extension | License | Status
-    ----------------- | ------ | -------
-    [Tampermonkey](https://www.tampermonkey.net/) | Proprietary (Donationware) | ✔
-    [Greasemonkey](https://www.greasespot.net/) | MIT | ✘
-    [Violentmonkey](https://violentmonkey.github.io/) | MIT | ✔
+    Browser Extension | License | Compatibility | Recommendation
+    ----------------- | ------ | ------------- | --------------
+    [Tampermonkey](https://www.tampermonkey.net/) | Proprietary (Donationware) | ✔ | Not recommended
+    [Greasemonkey](https://www.greasespot.net/) | MIT | ✘ | Not recommended
+    [Violentmonkey](https://violentmonkey.github.io/get-it/) | MIT | ✔ | Recommended
 
     </details>
     
@@ -106,31 +97,20 @@ This domain-group split is intended to reduce the impact scope of https://github
     6. Return to a tab opening the website protected by Ad-Shield and reload the tab by touching the reload button.
 
 
- - AdGuard for iOS
-
-    Userscript is not supported currently on AdGuard for iOS.
-    However, It will be supported in the future.[^1]
-    
-    Of course, you can use an alternative temporally.[^2][^3]
+- [wBlock](https://apps.apple.com/app/wblock/id6746388723) (Recommended) - Safari on macOS, iOS, and iPadOS
 
     <details>
-    <summary>Detailed description for iOS users</summary>
+    <summary>Installing with wBlock in Safari</summary>
 
-    1. Install [**Usercripts**](https://apps.apple.com/us/app/userscripts/id1463298887) app
-    2. Enable **Usercripts** extension in Safari settings
-        * iOS 18+: `System settings` => `Apps` => `Safari` => `Extensions`
-        * iOS 17 and older: `System settings` => `Safari` => `Extensions`
-        Find **Usercripts**, enable it and allow `On other sites` permission
-    3. Open `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/` in browser, move to the `<initial>/` subdirectory, and select your grouped userscript URL (`tinyShield-<domain-group>.user.js`)
-    4. Press the extensions icon in the address bar of Safari and select Userscripts 
-    5. Tap to install
-    5. In opened popup, scroll down and press Install button
-    7. Done.
+    1. Install and open wBlock, then follow its initial setup instructions.
+    2. Enable **wBlock Scripts** in Safari's extension settings and allow it to run on all websites.
+        - macOS: `Safari` > `Settings` > `Extensions`
+        - iOS/iPadOS 18+: `Settings` > `Apps` > `Safari` > `Extensions`
+        - iOS/iPadOS 17 and older: `Settings` > `Safari` > `Extensions`
+    3. Follow the domain group subscription guide above to choose your grouped script URL (`tinyShield-<domain-group>.user.js`) and check its `@match` metadata.
+    4. In the wBlock app's `Userscripts` screen, disable the built-in tinyShield entry to avoid running it alongside the grouped script.
+    5. On the same screen, open the add menu (`+`) > `Userscript` > `URL` > `Single URL` and enter the grouped script URL. Do not use the full script URL from Quick Start.
+    6. Select `Next`, review the metadata, then select `Add` to add and enable the grouped script.
+    7. Return to your target website's tab in Safari and reload it.
 
     </details>
-
-
-
-[^1]: https://github.com/AdguardTeam/AdguardForiOS/issues/1542
-[^2]: https://github.com/quoid/userscripts
-[^3]: https://apps.apple.com/us/app/userscripts/id1463298887

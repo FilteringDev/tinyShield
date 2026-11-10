@@ -38,7 +38,9 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
 このドメイングループ分割は、https://github.com/FilteringDev/tinyShield/issues/38 の影響範囲を可能な限り最小化することを目的としています。
 
 ### インストールのやり方
-- [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/) (AdGuard Premiumにアクセスできない場合に推奨) - ブラウザー拡張
+Firefox および Chromium ベースのブラウザーでは **Violentmonkey** を、macOS・iOS・iPadOS の Safari では **wBlock** を推奨します。**Tampermonkey は推奨しません。**
+
+- [Violentmonkey](https://violentmonkey.github.io/get-it/) (推奨) - Firefox および Chromium ベースのブラウザー拡張
     1. `ダッシュボード`を開きます。
     2. `新規作成`をクリックします。
     3. `URLからインストール`ボタンをクリックします。
@@ -50,25 +52,14 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
     6. メタデータの内容を確認後に`インストール`ボタンをクリックします。
     7. Ad-Shieldで保護されたWebサイトを開いているタブに戻り、<kbd>F5</kbd> または <kbd>Ctrl</kbd> + <kbd>R</kbd>を押すか、再読み込みボタンをクリックしてタブを再読み込みします。
 
-- [Tampermonkey](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/) - ブラウザー拡張
-    1. Tampermonkeyの設定を開きます。
-    2. `ユーティリティ`のタブを開きます。
-    3. `URLからインストール`で以下のURLを入力します:
-        ```
-        https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
-        ```
-    4. `インストール`をクリック。
-    5. メタデータとユーザースクリプトを確認後に`インストール`をクリック。
-    6. Ad-Shieldで保護されたWebサイトを開いているタブに戻り、<kbd>F5</kbd> または <kbd>Ctrl</kbd> + <kbd>R</kbd>を押すか、再読み込みボタンをクリックしてタブを再読み込みします。
-
     <details>
     <summary>互換性のテーブル</summary>
 
-    ブラウザー拡張 | ライセンス | ステータス
-    ----------------- | ------ | -------
-    [Tampermonkey](https://www.tampermonkey.net/) | プロプライエタリ (ドネーションウェア) | ✔
-    [Greasemonkey](https://www.greasespot.net/) | MIT | ✘
-    [Violentmonkey](https://violentmonkey.github.io/) | MIT | ✔
+    ブラウザー拡張 | ライセンス | 互換性 | 推奨状況
+    ----------------- | ------ | ------- | -------
+    [Tampermonkey](https://www.tampermonkey.net/) | プロプライエタリ (ドネーションウェア) | ✔ | 非推奨
+    [Greasemonkey](https://www.greasespot.net/) | MIT | ✘ | 非推奨
+    [Violentmonkey](https://violentmonkey.github.io/get-it/) | MIT | ✔ | 推奨
 
     </details>
     
@@ -97,31 +88,20 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
     6. Ad-Shieldで保護されたWebサイトを開いているタブに戻り、再読み込みボタンをタッチでタブを再読み込みします。
 
 
- - AdGuard for iOS
-
-    現在、AdGuard for iOSではユーザースクリプト機能はサポートされていません。
-    ただし、将来的にサポートされる予定です。[^1]
-    
-    もちろんですが、一時的な代替手段を使用することも可能です。[^2][^3]
+- [wBlock](https://apps.apple.com/app/wblock/id6746388723) (推奨) - macOS・iOS・iPadOS の Safari
 
     <details>
-    <summary>iOSユーザー向けの詳細な説明</summary>
+    <summary>Safari で wBlock を使ってインストールする</summary>
 
-    1. [**Usercripts**](https://apps.apple.com/us/app/userscripts/id1463298887)アプリをインストール
-    2. **Usercripts**の拡張機能をSafariの設定から有効化します
-        * iOS 18+: `システム設定` => `アプリ` => `Safari` => `拡張機能`
-        * iOS 17 とそれ以下: `システム設定` => `Safari` => `拡張機能`
-        **Usercripts**を見つけて有効化後に`他のサイト`の権限を許可します。
-    4. `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/` をブラウザで開き、`<initial>/` サブディレクトリに移動してから、対象ドメインに対応するグループスクリプトURL (`tinyShield-<domain-group>.user.js`) を選択します。
-    5. Safariのアドレスバーにある拡張機能アイコンを押して、Userscriptsを選択します。
-    6. タップでインストールします。
-    7. 開いたポップアップを下にスクロールでインストールボタンを押します。
-    8. 完了です。
+    1. wBlock アプリをインストールして起動し、初期設定の案内に従います。
+    2. Safari の拡張機能設定で **wBlock Scripts** を有効にし、すべての Web サイトでの実行を許可します。
+        - macOS: `Safari` > `設定` > `機能拡張`
+        - iOS・iPadOS 18 以降: `設定` > `アプリ` > `Safari` > `機能拡張`
+        - iOS・iPadOS 17 以前: `設定` > `Safari` > `機能拡張`
+    3. 上記のドメイングループ購読ガイドに従ってグループスクリプトURL (`tinyShield-<domain-group>.user.js`) を選択し、`@match` を確認します。
+    4. wBlock アプリの `Userscripts` 画面で、標準搭載の tinyShield を無効にしてグループスクリプトとの重複実行を防ぎます。
+    5. 同じ画面の追加メニュー (`+`) > `Userscript` > `URL` > `Single URL` を選択し、グループスクリプトURLを入力します。クイックスタートの全体スクリプトURLは使用しないでください。
+    6. `Next` を選択してメタデータを確認し、`Add` を選択してグループスクリプトを追加・有効化します。
+    7. Safari で対象サイトのタブに戻り、再読み込みします。
 
     </details>
-
-
-
-[^1]: https://github.com/AdguardTeam/AdguardForiOS/issues/1542
-[^2]: https://github.com/quoid/userscripts
-[^3]: https://apps.apple.com/us/app/userscripts/id1463298887
