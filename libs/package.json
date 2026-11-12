@@ -37,14 +37,14 @@
   "dependencies": {
     "@adguard/agtree": "^4.3.0",
     "@typescriptprime/securereq": "^2.1.0",
-    "tldts": "^7.4.19",
+    "tldts": "^7.4.21",
     "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
     "@types/web": "^0.0.359",
-    "oxlint": "^1.90.0",
-    "oxlint-tsgolint": "^7.0.2005",
+    "oxlint": "^1.93.0",
+    "oxlint-tsgolint": "^7.0.2006",
     "typescript": "^7.0.2",
     "vitest": "^5.1.0"
   }
