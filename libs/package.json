@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
-    "@types/web": "^0.0.359",
+    "@types/web": "^0.0.363",
     "oxlint": "^1.93.0",
     "oxlint-tsgolint": "^7.0.2006",
     "typescript": "^7.0.2",
