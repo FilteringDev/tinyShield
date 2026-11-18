@@ -20,10 +20,16 @@ export class GroupedBuild extends Build {
   private GetGroups(): Map<Set<string>, Set<string>> {
     const Groups = this.FetchedDomains.get('Groups')
     if (!Groups) throw new Error('Domain groups are not initialized.')
-    return new Map([...Groups].map(([Names, Domains]) => [
-      new Set([...Names].map(Domain => Domain.endsWith('.*') ? Domain.slice(0, -2) + '.tld' : Domain)),
-      Domains
-    ]))
+    const Result = new Map<Set<string>, Set<string>>()
+    for (const [Names, Domains] of Groups) {
+      const MatchingDomains = new Set([...Domains].filter(Domain => !Domain.endsWith('.*')))
+      if (MatchingDomains.size === 0) continue
+      Result.set(
+        new Set([...Names].map(Domain => Domain.endsWith('.*') ? Domain.slice(0, -2) + '.tld' : Domain)),
+        MatchingDomains
+      )
+    }
+    return Result
   }
 
   async MakeGroupMetadata() {
@@ -50,6 +56,7 @@ export class GroupedBuild extends Build {
       }
     }
     
+    await Fs.promises.mkdir(`${this.ProjectRoot}/dist/grouped`, { recursive: true })
     await Fs.promises.writeFile(`${this.ProjectRoot}/dist/grouped/metadata.json`, JSON.stringify(MetadataObj, null, 2), 'utf-8')
   }
   

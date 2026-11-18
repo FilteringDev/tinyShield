@@ -27,7 +27,7 @@ tinyShield 유저스크립트는 애드블록 커뮤니티에 의해 관리되�
 ### 빠른 시작
 아래 URL를 클릭하여 설치해주세요:
 
-생성된 스크립트에는 정규식 `@include`를 지원하는 실행기가 필요합니다. Violentmonkey는 이 기능을 문서화하고 있으며, AdGuard 유저스크립트 기능과 wBlock에서의 호환성은 아직 확인되지 않았습니다.
+생성된 스크립트는 표준 `@match`를 사용합니다. 원본의 `.*` 패턴은 구체적인 도메인이 함께 수집되지 않으면 제외됩니다.
 
 https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
@@ -43,15 +43,15 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
   1. `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/`를 엽니다.
   2. 대상 그룹 파일명 첫 글자와 같은 `<initial>/` 하위 디렉터리로 이동합니다.
   3. 사용하는 웹 사이트에 맞는 `tinyShield-<domain-group>.user.js` 파일 하나를 선택합니다.
-  4. 해당 파일을 한 번 열어 메타데이터 `@include`에 대상 도메인이 포함되어 있는지 확인합니다.
+  4. 해당 파일을 한 번 열어 메타데이터 `@match`에 대상 도메인이 포함되어 있는지 확인합니다.
   5. Safari 유저스크립트 확장에 그 파일 URL을 그대로 구독 URL로 등록합니다.
 
 이 도메인 그룹 분리는 https://github.com/FilteringDev/tinyShield/issues/38 의 영향 범위를 가능한 한 최소화하기 위한 목적입니다.
 
-`metadata.json`은 수집된 도메인과 원본 접미사 와일드카드를 그룹 파일명에 연결합니다. 소비자는 `.*`로 끝나는 키를 처리해야 하며, `example.tld` 같은 그룹 이름이 모든 접미사의 실행을 허용하는 것은 아닙니다. 도메인 그룹이 바뀌면 그룹 파일명도 바뀔 수 있습니다. `SHA386`은 대문자 SHA-384 해시입니다.
+`metadata.json`은 수집된 구체 도메인을 그룹 파일명에 연결합니다. `example.tld` 같은 그룹 이름이 모든 접미사의 실행을 허용하는 것은 아닙니다. 도메인 그룹이 바뀌면 그룹 파일명도 바뀔 수 있습니다. `SHA386`은 대문자 SHA-384 해시입니다.
 
 ### 설치하는 법
-Firefox 및 Chromium 기반 브라우저에서는 **Violentmonkey**를 권장합니다. Safari의 **wBlock** 설치 안내는 아래에 유지하지만 정규식 `@include` 호환성은 확인되지 않았습니다. **Tampermonkey는 권장하지 않습니다.**
+Firefox 및 Chromium 기반 브라우저에서는 **Violentmonkey**를, macOS·iOS·iPadOS의 Safari에서는 **wBlock**을 권장합니다. **Tampermonkey는 권장하지 않습니다.**
 
 - [Violentmonkey](https://violentmonkey.github.io/get-it/) (권장) - Firefox 및 Chromium 기반 브라우저 확장
   1. `Dashboard`를 엽니다.
@@ -71,7 +71,7 @@ Firefox 및 Chromium 기반 브라우저에서는 **Violentmonkey**를 권장합
 - AdGuard for Android
   1. 빠른 시작 세션에 있는 URL를 클릭하여 설치하십시오.
 
-- [wBlock](https://apps.apple.com/app/wblock/id6746388723) (미검증) - macOS·iOS·iPadOS Safari
+- [wBlock](https://apps.apple.com/app/wblock/id6746388723) (권장) - macOS·iOS·iPadOS Safari
 
   <details>
   <summary>Safari에서 wBlock으로 설치하기</summary>
@@ -81,7 +81,7 @@ Firefox 및 Chromium 기반 브라우저에서는 **Violentmonkey**를 권장합
      - macOS: `Safari` > `설정` > `확장 프로그램`
      - iOS·iPadOS 18 이상: `설정` > `앱` > `Safari` > `확장 프로그램`
      - iOS·iPadOS 17 이하: `설정` > `Safari` > `확장 프로그램`
-  3. 위 도메인 그룹 구독 가이드에 따라 대상 도메인의 그룹 스크립트 URL(`tinyShield-<domain-group>.user.js`)을 선택하고 `@include`를 확인하십시오.
+  3. 위 도메인 그룹 구독 가이드에 따라 대상 도메인의 그룹 스크립트 URL(`tinyShield-<domain-group>.user.js`)을 선택하고 `@match`를 확인하십시오.
   4. wBlock 앱의 `Userscripts` 화면에서 기본 제공되는 tinyShield 항목을 비활성화하여 그룹 스크립트와 중복 실행되지 않게 하십시오.
   5. 같은 화면의 추가 메뉴(`+`) > `Userscript` > `URL` > `Single URL`을 선택하고 그룹 스크립트 URL을 입력하십시오. 빠른 시작의 전체 스크립트 URL은 사용하지 마십시오.
   6. `Next`를 누르고 메타데이터를 확인한 뒤 `Add`를 눌러 그룹 스크립트를 추가하고 활성화하십시오.
