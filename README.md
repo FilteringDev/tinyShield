@@ -27,6 +27,8 @@ If you believe this userscript is causing issues while in use, please use GitHub
 ### Quick Start
 Just click the following URL to detect this userscript.
 
+The generated scripts use standard `@match` rules. Source patterns ending in `.*` are excluded unless concrete domains are also collected.
+
 https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
 ### Domain Group Subscription Guide (Apple Safari Extension Only)
@@ -45,6 +47,8 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
     5. Subscribe to that exact grouped file URL in your Safari userscript extension.
 
 This domain-group split is intended to reduce the impact scope of https://github.com/FilteringDev/tinyShield/issues/38 as much as possible.
+
+`metadata.json` maps collected concrete domains to group filenames. Generated group names such as `example.tld` do not themselves authorize every suffix. Group filenames may change when the domain groups change. `SHA386` contains the uppercase SHA-384 digest.
 
 ### How to install
 **Violentmonkey** is recommended for Firefox and Chromium-based browsers. **wBlock** is recommended for Safari on macOS, iOS, and iPadOS. **Tampermonkey is not recommended.**

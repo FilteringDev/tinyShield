@@ -18,6 +18,8 @@ tinyShieldスクリプトは、Adblockコミュニティによって管理され
 ### クイックスタート
 このユーザースクリプトを検出するには、次のURLをクリックしてください。
 
+生成されたスクリプトは標準の `@match` を使用します。元データの `.*` パターンは、具体的なドメインも収集されない限り除外されます。
+
 https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
 ### ドメイングループ購読ガイド (Apple Safari Extension ユーザー専用)

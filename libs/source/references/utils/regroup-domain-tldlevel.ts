@@ -1,5 +1,4 @@
 import * as TLDTS from 'tldts'
-import { PublicSuffixList } from './wildcard-suffix-converter.js'
 
 type ParsedEntry = {
   Entry: string
@@ -23,9 +22,6 @@ function ParseEntry(Entry: string): ParsedEntry {
   }
 
   const Parsed = TLDTS.parse(Entry)
-  if (Parsed.publicSuffix) {
-    PublicSuffixList.add(Parsed.publicSuffix)
-  }
 
   if (Parsed.hostname && Parsed.publicSuffix && Parsed.hostname.endsWith(`.${Parsed.publicSuffix}`)) {
     return {
@@ -45,6 +41,10 @@ function ParseEntry(Entry: string): ParsedEntry {
     PublicSuffix: Parsed.publicSuffix,
     WildcardSuffix: false
   }
+}
+
+export function GetDomainRootLabel(Entry: string): string {
+  return ParseEntry(Entry).RootLabel
 }
 
 function IsCoveredByParent(Child: ParsedEntry, Parent: ParsedEntry): boolean {

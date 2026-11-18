@@ -1,0 +1,31 @@
+import { expect, test } from 'vitest'
+import { CreateBanner } from '../../../builder/source/banner/index.js'
+
+test('banner uses match rules only for collected concrete domains', () => {
+  const Url = new URL('https://example.com/')
+  const Banner = CreateBanner({
+    Version: '1', BuildType: 'production', Domains: new Set(['example.com', 'example.net', 'wild.*']),
+    Author: 'author', Name: 'name', Namespace: 'namespace', HomepageURL: Url, SupportURL: Url,
+    UpdateURL: Url, DownloadURL: Url, License: 'license', Description: { en: 'description' }
+  })
+  expect(Banner.match(/^\/\/ @match\s+.*$/gm)).toEqual([
+    '// @match      *://example.com/*',
+    '// @match      *://*.example.com/*',
+    '// @match      *://example.net/*',
+    '// @match      *://*.example.net/*'
+  ])
+  expect(Banner).not.toContain('@include')
+  expect(Banner).not.toContain('wild.*')
+})
+
+test('banner rejects an empty or wildcard-only matching set', () => {
+  const Url = new URL('https://example.com/')
+  const Options = {
+    Version: '1', BuildType: 'production' as const, Domains: new Set<string>(),
+    Author: 'author', Name: 'name', Namespace: 'namespace', HomepageURL: Url, SupportURL: Url,
+    UpdateURL: Url, DownloadURL: Url, License: 'license', Description: { en: 'description' }
+  }
+  expect(() => CreateBanner(Options)).toThrow('No concrete domains')
+  Options.Domains.add('wild.*')
+  expect(() => CreateBanner(Options)).toThrow('No concrete domains')
+})

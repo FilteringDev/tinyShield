@@ -27,6 +27,8 @@ tinyShield 유저스크립트는 애드블록 커뮤니티에 의해 관리되�
 ### 빠른 시작
 아래 URL를 클릭하여 설치해주세요:
 
+생성된 스크립트는 표준 `@match`를 사용합니다. 원본의 `.*` 패턴은 구체적인 도메인이 함께 수집되지 않으면 제외됩니다.
+
 https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
 ### 도메인 그룹 구독 가이드 (Apple Safari Extension 사용자 전용)
@@ -45,6 +47,8 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
   5. Safari 유저스크립트 확장에 그 파일 URL을 그대로 구독 URL로 등록합니다.
 
 이 도메인 그룹 분리는 https://github.com/FilteringDev/tinyShield/issues/38 의 영향 범위를 가능한 한 최소화하기 위한 목적입니다.
+
+`metadata.json`은 수집된 구체 도메인을 그룹 파일명에 연결합니다. `example.tld` 같은 그룹 이름이 모든 접미사의 실행을 허용하는 것은 아닙니다. 도메인 그룹이 바뀌면 그룹 파일명도 바뀔 수 있습니다. `SHA386`은 대문자 SHA-384 해시입니다.
 
 ### 설치하는 법
 Firefox 및 Chromium 기반 브라우저에서는 **Violentmonkey**를, macOS·iOS·iPadOS의 Safari에서는 **wBlock**을 권장합니다. **Tampermonkey는 권장하지 않습니다.**
