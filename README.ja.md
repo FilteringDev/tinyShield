@@ -18,7 +18,7 @@ tinyShieldスクリプトは、Adblockコミュニティによって管理され
 ### クイックスタート
 このユーザースクリプトを検出するには、次のURLをクリックしてください。
 
-生成されたスクリプトは標準の `@match` を使用します。元データの `.*` パターンは、具体的なドメインも収集されない限り除外されます。
+生成されたスクリプトは元データの `.*` パターンを `@match` に保持します。このルールには、Violentmonkey のようにホスト末尾のワイルドカードに対応した実行環境が必要です。具体的なドメインには標準の `@match` を使用します。
 
 https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 

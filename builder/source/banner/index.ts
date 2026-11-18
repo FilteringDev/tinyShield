@@ -14,8 +14,7 @@ export interface BannerOptions {
 }
 
 export function CreateBanner(Options: BannerOptions): string {
-  const Domains = [...Options.Domains].filter(Domain => !Domain.endsWith('.*'))
-  if (Domains.length === 0) throw new Error('No concrete domains available for userscript matching.')
+  if (Options.Domains.size === 0) throw new Error('No domains available for userscript matching.')
 
   let BannerString: string = '// ==UserScript==\n'
   BannerString += `// @name         ${Options.BuildType === 'production' ? Options.Name : Options.Name + ' (Development)'}\n`
@@ -41,7 +40,7 @@ export function CreateBanner(Options: BannerOptions): string {
   }
   BannerString += '//\n'
 
-  for (const Domain of Domains) {
+  for (const Domain of Options.Domains) {
     BannerString += `// @match      *://${Domain}/*\n`
     BannerString += `// @match      *://*.${Domain}/*\n`
   }

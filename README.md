@@ -27,7 +27,7 @@ If you believe this userscript is causing issues while in use, please use GitHub
 ### Quick Start
 Just click the following URL to detect this userscript.
 
-The generated scripts use standard `@match` rules. Source patterns ending in `.*` are excluded unless concrete domains are also collected.
+The generated scripts preserve source patterns ending in `.*` as `@match` rules. These rules require a userscript manager that supports host suffix wildcards, such as Violentmonkey. Concrete domains still use standard `@match` rules.
 
 https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
@@ -48,7 +48,7 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
 
 This domain-group split is intended to reduce the impact scope of https://github.com/FilteringDev/tinyShield/issues/38 as much as possible.
 
-`metadata.json` maps collected concrete domains to group filenames. Generated group names such as `example.tld` do not themselves authorize every suffix. Group filenames may change when the domain groups change. `SHA386` contains the uppercase SHA-384 digest.
+`metadata.json` maps collected concrete domains and original `.*` patterns to group filenames. Generated group names such as `example.tld` do not themselves authorize every suffix. Group filenames may change when the domain groups change. `SHA386` contains the uppercase SHA-384 digest.
 
 ### How to install
 **Violentmonkey** is recommended for Firefox and Chromium-based browsers. **wBlock** is recommended for Safari on macOS, iOS, and iPadOS. **Tampermonkey is not recommended.**

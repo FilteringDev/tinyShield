@@ -22,11 +22,9 @@ export class GroupedBuild extends Build {
     if (!Groups) throw new Error('Domain groups are not initialized.')
     const Result = new Map<Set<string>, Set<string>>()
     for (const [Names, Domains] of Groups) {
-      const MatchingDomains = new Set([...Domains].filter(Domain => !Domain.endsWith('.*')))
-      if (MatchingDomains.size === 0) continue
       Result.set(
         new Set([...Names].map(Domain => Domain.endsWith('.*') ? Domain.slice(0, -2) + '.tld' : Domain)),
-        MatchingDomains
+        Domains
       )
     }
     return Result
