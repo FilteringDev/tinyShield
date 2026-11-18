@@ -1,5 +1,4 @@
 import * as TLDTS from 'tldts'
-import { PublicSuffixList } from './wildcard-suffix-converter.js'
 
 type ParsedEntry = {
   Entry: string
@@ -23,9 +22,6 @@ function ParseEntry(Entry: string): ParsedEntry {
   }
 
   const Parsed = TLDTS.parse(Entry)
-  if (Parsed.publicSuffix) {
-    PublicSuffixList.add(Parsed.publicSuffix)
-  }
 
   if (Parsed.hostname && Parsed.publicSuffix && Parsed.hostname.endsWith(`.${Parsed.publicSuffix}`)) {
     return {
@@ -48,7 +44,10 @@ function ParseEntry(Entry: string): ParsedEntry {
 }
 
 function IsCoveredByParent(Child: ParsedEntry, Parent: ParsedEntry): boolean {
-  if (Child.Stem === Parent.Stem || !Child.Stem.endsWith(`.${Parent.Stem}`)) {
+  if (Child.Stem === Parent.Stem) {
+    return Parent.WildcardSuffix && !Child.WildcardSuffix
+  }
+  if (!Child.Stem.endsWith(`.${Parent.Stem}`)) {
     return false
   }
 
@@ -61,23 +60,22 @@ function IsCoveredByParent(Child: ParsedEntry, Parent: ParsedEntry): boolean {
 
 export function DiscardResolvedDupWildcard(OriginSet: Set<string>): Set<string> {
   const ParsedEntries = [...OriginSet].map(ParseEntry)
-  const RootsWithWildcard = new Set(
-    ParsedEntries
-      .filter(Entry => Entry.WildcardSuffix)
-      .map(Entry => Entry.RootLabel)
-  )
 
-  const ConcreteStemCounts = new Map<string, number>()
+  const ConcreteSuffixes = new Map<string, Set<string>>()
   ParsedEntries
-    .filter(Entry => !Entry.WildcardSuffix)
-    .forEach(Entry => ConcreteStemCounts.set(Entry.Stem, (ConcreteStemCounts.get(Entry.Stem) ?? 0) + 1))
+    .filter(Entry => !Entry.WildcardSuffix && Entry.PublicSuffix)
+    .forEach(Entry => {
+      const Suffixes = ConcreteSuffixes.get(Entry.Stem) ?? new Set<string>()
+      Suffixes.add(Entry.PublicSuffix!)
+      ConcreteSuffixes.set(Entry.Stem, Suffixes)
+    })
 
   const NormalizedEntries = ParsedEntries.map(Entry => {
     if (Entry.WildcardSuffix) {
       return Entry
     }
 
-    if (RootsWithWildcard.has(Entry.RootLabel) || (ConcreteStemCounts.get(Entry.Stem) ?? 0) >= 2) {
+    if ((ConcreteSuffixes.get(Entry.Stem)?.size ?? 0) >= 2) {
       return ParseEntry(`${Entry.Stem}.*`)
     }
 

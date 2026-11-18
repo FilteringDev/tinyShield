@@ -3,8 +3,7 @@ import { CustomDefinedMatches, CustomExcludeMatches } from './custom-defined.js'
 import { FetchAdShieldDomainsFromFiltersLists } from './filterslists.js'
 import { FetchIABSellersJsonData } from './iabsellers.js'
 import { DiscardResolvedDupWildcard } from './utils/discard-resolved-dup-wildcard.js'
-import { RegroupDomainTldLevel } from './utils/regroup-domain-tldlevel.js'
-import { ConvertWildcardSuffixToRegexPattern } from './utils/wildcard-suffix-converter.js'
+import { GetDomainRootLabel, RegroupDomainTldLevel } from './utils/regroup-domain-tldlevel.js'
 
 export { CustomDefinedMatches, CustomExcludeMatches } from './custom-defined.js'
 export { FetchAdShieldDomainsFromFiltersLists } from './filterslists.js'
@@ -14,31 +13,35 @@ export { IndexAdShieldDomainsFromUBO } from './filterslists/uBO.js'
 export { AdShieldCDNDomains, IsAdShieldCDNDomain } from './filterslists/keywords.js'
 export { DiscardResolvedDupWildcard } from './utils/discard-resolved-dup-wildcard.js'
 export { RegroupDomainTldLevel } from './utils/regroup-domain-tldlevel.js'
-export { ConvertWildcardSuffixToRegexPattern, PublicSuffixList } from './utils/wildcard-suffix-converter.js'
 
 export type TASDomainContainer =
   Map<'Normal', Set<string>> &
   Map<'Full', Set<string>> &
   Map<'EachDomain', Set<Set<string>>> &
-  Map<'EachDomainFull', Set<Set<string>>>
+  Map<'EachDomainFull', Set<Set<string>>> &
+  Map<'Groups', Map<Set<string>, Set<string>>>
 
-function ConvertToFlatFullDomains(Origin: Set<string>): Set<string> {
-  return new Set<string>([...Origin].flatMap(Domain => ConvertWildcardSuffixToRegexPattern(Domain)))
-}
-
-function IsGroupedDomains(Origin: Set<string> | Set<Set<string>>): Origin is Set<Set<string>> {
-  const FirstValue = Origin.values().next().value
-  return typeof FirstValue !== 'string' && typeof FirstValue !== 'undefined'
-}
-
-function ConvertToFullDomains(Origin: Set<string>): Set<string>
-function ConvertToFullDomains(Origin: Set<Set<string>>): Set<Set<string>>
-function ConvertToFullDomains(Origin: Set<string> | Set<Set<string>>): Set<string> | Set<Set<string>> {
-  if (IsGroupedDomains(Origin)) {
-    return new Set<Set<string>>([...Origin].map(DomainGroup => ConvertToFlatFullDomains(DomainGroup)))
+export function CreateDomainViews(Domains: Set<string>): TASDomainContainer {
+  const FullDomains = new Set([...Domains].sort())
+  const NormalDomains = DiscardResolvedDupWildcard(FullDomains)
+  const EachDomain = RegroupDomainTldLevel(NormalDomains)
+  const MatchingGroups = new Map<string, Set<string>>()
+  for (const Domain of FullDomains) {
+    const Root = GetDomainRootLabel(Domain)
+    const Group = MatchingGroups.get(Root) ?? new Set<string>()
+    Group.add(Domain)
+    MatchingGroups.set(Root, Group)
   }
 
-  return ConvertToFlatFullDomains(Origin)
+  const Groups = new Map([...EachDomain].map(Group => [Group, MatchingGroups.get(GetDomainRootLabel(Group.values().next().value!))!] as const))
+  const EachDomainFull = new Set(Groups.values())
+  const Result: TASDomainContainer = new Map()
+  Result.set('Normal', NormalDomains)
+  Result.set('Full', FullDomains)
+  Result.set('EachDomain', EachDomain)
+  Result.set('EachDomainFull', EachDomainFull)
+  Result.set('Groups', Groups)
+  return Result
 }
 
 export async function FetchAdShieldDomains(): Promise<TASDomainContainer> {
@@ -54,16 +57,5 @@ export async function FetchAdShieldDomains(): Promise<TASDomainContainer> {
   })
   CustomDefinedMatches.forEach(Match => CombinedDomains.add(Match))
   CustomExcludeMatches.forEach(Match => CombinedDomains.delete(Match))
-  const Result: TASDomainContainer = new Map()
-  const NormalDomains = DiscardResolvedDupWildcard(CombinedDomains)
-  const FullDomains = ConvertToFullDomains(NormalDomains)
-  const EachDomain = RegroupDomainTldLevel(NormalDomains)
-  const EachDomainFull = ConvertToFullDomains(EachDomain)
-
-  Result.set('Normal', NormalDomains)
-  Result.set('Full', FullDomains)
-  Result.set('EachDomain', EachDomain)
-  Result.set('EachDomainFull', EachDomainFull)
-
-  return Result
+  return CreateDomainViews(CombinedDomains)
 }

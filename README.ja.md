@@ -18,6 +18,8 @@ tinyShieldスクリプトは、Adblockコミュニティによって管理され
 ### クイックスタート
 このユーザースクリプトを検出するには、次のURLをクリックしてください。
 
+生成されたスクリプトには正規表現の `@include` に対応した実行環境が必要です。Violentmonkey は対応を明記していますが、AdGuard のユーザースクリプト機能と wBlock での互換性は未確認です。
+
 https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
 ### ドメイングループ購読ガイド (Apple Safari Extension ユーザー専用)
@@ -32,13 +34,13 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
     1. `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/` を開きます。
     2. 対象グループのファイル名先頭文字に対応する `<initial>/` サブディレクトリを開きます。
     3. 利用しているサイトに対応する `tinyShield-<domain-group>.user.js` を1つ選びます。
-    4. そのファイルを一度開き、メタデータ `@match` に対象ドメインが含まれていることを確認します。
+    4. そのファイルを一度開き、メタデータ `@include` に対象ドメインが含まれていることを確認します。
     5. Safari のユーザースクリプト拡張には、そのファイルURLをそのまま購読URLとして登録します。
 
 このドメイングループ分割は、https://github.com/FilteringDev/tinyShield/issues/38 の影響範囲を可能な限り最小化することを目的としています。
 
 ### インストールのやり方
-Firefox および Chromium ベースのブラウザーでは **Violentmonkey** を、macOS・iOS・iPadOS の Safari では **wBlock** を推奨します。**Tampermonkey は推奨しません。**
+Firefox および Chromium ベースのブラウザーでは **Violentmonkey** を推奨します。Safari の **wBlock** の手順は以下に残していますが、正規表現の `@include` との互換性は未確認です。**Tampermonkey は推奨しません。**
 
 - [Violentmonkey](https://violentmonkey.github.io/get-it/) (推奨) - Firefox および Chromium ベースのブラウザー拡張
     1. `ダッシュボード`を開きます。
@@ -88,7 +90,7 @@ Firefox および Chromium ベースのブラウザーでは **Violentmonkey** �
     6. Ad-Shieldで保護されたWebサイトを開いているタブに戻り、再読み込みボタンをタッチでタブを再読み込みします。
 
 
-- [wBlock](https://apps.apple.com/app/wblock/id6746388723) (推奨) - macOS・iOS・iPadOS の Safari
+- [wBlock](https://apps.apple.com/app/wblock/id6746388723) (未確認) - macOS・iOS・iPadOS の Safari
 
     <details>
     <summary>Safari で wBlock を使ってインストールする</summary>
@@ -98,7 +100,7 @@ Firefox および Chromium ベースのブラウザーでは **Violentmonkey** �
         - macOS: `Safari` > `設定` > `機能拡張`
         - iOS・iPadOS 18 以降: `設定` > `アプリ` > `Safari` > `機能拡張`
         - iOS・iPadOS 17 以前: `設定` > `Safari` > `機能拡張`
-    3. 上記のドメイングループ購読ガイドに従ってグループスクリプトURL (`tinyShield-<domain-group>.user.js`) を選択し、`@match` を確認します。
+    3. 上記のドメイングループ購読ガイドに従ってグループスクリプトURL (`tinyShield-<domain-group>.user.js`) を選択し、`@include` を確認します。
     4. wBlock アプリの `Userscripts` 画面で、標準搭載の tinyShield を無効にしてグループスクリプトとの重複実行を防ぎます。
     5. 同じ画面の追加メニュー (`+`) > `Userscript` > `URL` > `Single URL` を選択し、グループスクリプトURLを入力します。クイックスタートの全体スクリプトURLは使用しないでください。
     6. `Next` を選択してメタデータを確認し、`Add` を選択してグループスクリプトを追加・有効化します。

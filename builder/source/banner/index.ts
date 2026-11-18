@@ -39,8 +39,10 @@ export function CreateBanner(Options: BannerOptions): string {
   BannerString += '//\n'
 
   for (const Domain of Options.Domains) {
-    BannerString += `// @match      *://${Domain}/*\n`
-    BannerString += `// @match      *://*.${Domain}/*\n`
+    const WildcardSuffix = Domain.endsWith('.*')
+    const Host = (WildcardSuffix ? Domain.slice(0, -2) : Domain).replaceAll(/[.*+?^${}()|[\]\\/]/g, '\\$&')
+    const Suffix = WildcardSuffix ? '(?:\\.[^.\\/:?#@]+)+' : ''
+    BannerString += `// @include    /^https?:\\/\\/(?:[^.\\/:?#@]+\\.)*${Host}${Suffix}\\.?(?::[0-9]+)?(?:[\\/?#]|$)/\n`
   }
   BannerString += '// ==/UserScript==\n\n'
   return BannerString

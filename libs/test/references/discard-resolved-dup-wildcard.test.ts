@@ -30,14 +30,14 @@ test('DiscardResolvedDupWildcard removes resolved duplicate wildcards with multi
 
 test('DiscardResolvedDupWildcard handles nested wildcard scenarios', () => {
   const Input = new Set(['token.google.*', 'access.google.*', 'tools.google.com', 'google.google.co.kr'])
-  const Expected = new Set(['token.google.*', 'access.google.*', 'tools.google.*', 'google.google.*'])
+  const Expected = Input
 
   return expect(DiscardResolvedDupWildcard(Input)).toEqual(Expected)
 })
 
 test('DiscardResolvedDupWildcard handles complex wildcard scenarios', () => {
   const Input = new Set(['token.google.*', 'access.google.*', 'tools.google.com', 'google.google.co.kr', 'example.*', 'example.com', 'rust-lang.org'])
-  const Expected = new Set(['token.google.*', 'access.google.*', 'tools.google.*', 'google.google.*', 'example.*', 'rust-lang.org'])
+  const Expected = new Set(['token.google.*', 'access.google.*', 'tools.google.com', 'google.google.co.kr', 'example.*', 'rust-lang.org'])
 
   return expect(DiscardResolvedDupWildcard(Input)).toEqual(Expected)
 })

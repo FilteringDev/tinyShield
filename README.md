@@ -27,6 +27,8 @@ If you believe this userscript is causing issues while in use, please use GitHub
 ### Quick Start
 Just click the following URL to detect this userscript.
 
+The generated scripts require regex `@include` support. Violentmonkey documents this support; compatibility with AdGuard's userscript manager and wBlock has not been verified for these rules.
+
 https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.user.js
 
 ### Domain Group Subscription Guide (Apple Safari Extension Only)
@@ -41,13 +43,15 @@ https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/tinyShield.use
     1. Open `https://cdn.jsdelivr.net/npm/@filteringdev/tinyshield@latest/dist/grouped/`.
     2. Open the `<initial>/` subdirectory that matches the first character of your target grouped file name.
     3. Select one `tinyShield-<domain-group>.user.js` file for the website you use.
-    4. Open that file once and confirm its metadata `@match` includes your target domain.
+    4. Open that file once and confirm its metadata `@include` includes your target domain.
     5. Subscribe to that exact grouped file URL in your Safari userscript extension.
 
 This domain-group split is intended to reduce the impact scope of https://github.com/FilteringDev/tinyShield/issues/38 as much as possible.
 
+`metadata.json` maps collected domains and original suffix-wildcard patterns to group filenames. Consumers must recognize keys ending in `.*`; generated group names such as `example.tld` do not themselves authorize every suffix. Group filenames may change when the domain groups change. `SHA386` contains the uppercase SHA-384 digest.
+
 ### How to install
-**Violentmonkey** is recommended for Firefox and Chromium-based browsers. **wBlock** is recommended for Safari on macOS, iOS, and iPadOS. **Tampermonkey is not recommended.**
+**Violentmonkey** is recommended for Firefox and Chromium-based browsers. The instructions for **wBlock** on Safari are retained below, but regex `@include` compatibility is unverified. **Tampermonkey is not recommended.**
 
 - [Violentmonkey](https://violentmonkey.github.io/get-it/) (Recommended) - Firefox and Chromium-based browser extension
     1. Open `Dashboard`.
@@ -97,7 +101,7 @@ This domain-group split is intended to reduce the impact scope of https://github
     6. Return to a tab opening the website protected by Ad-Shield and reload the tab by touching the reload button.
 
 
-- [wBlock](https://apps.apple.com/app/wblock/id6746388723) (Recommended) - Safari on macOS, iOS, and iPadOS
+- [wBlock](https://apps.apple.com/app/wblock/id6746388723) (Unverified) - Safari on macOS, iOS, and iPadOS
 
     <details>
     <summary>Installing with wBlock in Safari</summary>
@@ -107,7 +111,7 @@ This domain-group split is intended to reduce the impact scope of https://github
         - macOS: `Safari` > `Settings` > `Extensions`
         - iOS/iPadOS 18+: `Settings` > `Apps` > `Safari` > `Extensions`
         - iOS/iPadOS 17 and older: `Settings` > `Safari` > `Extensions`
-    3. Follow the domain group subscription guide above to choose your grouped script URL (`tinyShield-<domain-group>.user.js`) and check its `@match` metadata.
+    3. Follow the domain group subscription guide above to choose your grouped script URL (`tinyShield-<domain-group>.user.js`) and check its `@include` metadata.
     4. In the wBlock app's `Userscripts` screen, disable the built-in tinyShield entry to avoid running it alongside the grouped script.
     5. On the same screen, open the add menu (`+`) > `Userscript` > `URL` > `Single URL` and enter the grouped script URL. Do not use the full script URL from Quick Start.
     6. Select `Next`, review the metadata, then select `Add` to add and enable the grouped script.
